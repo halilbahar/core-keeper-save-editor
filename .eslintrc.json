@@ -17,8 +17,15 @@
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
-        "prettier"
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript"
       ],
+      "settings": {
+        "import/resolver": {
+          "typescript": {}
+        }
+      },
       "rules": {
         "@angular-eslint/directive-selector": [
           "error",
@@ -34,6 +41,46 @@
             "type": "element",
             "prefix": "app",
             "style": "kebab-case"
+          }
+        ],
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "..*"
+                ],
+                "message": "Usage of relative imports is not allowed."
+              }
+            ]
+          }
+        ],
+        "import/order": [
+          "error",
+          {
+            "newlines-between": "always",
+            "alphabetize": {
+              "order": "asc"
+            },
+            "pathGroups": [
+              {
+                "pattern": "~/**",
+                "group": "external",
+                "position": "after"
+              }
+            ],
+            "groups": [
+              "builtin",
+              "external",
+              "internal",
+              "unknown",
+              "parent",
+              "sibling",
+              "index",
+              "object",
+              "type"
+            ]
           }
         ]
       }
