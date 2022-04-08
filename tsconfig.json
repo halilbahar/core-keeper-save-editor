@@ -1,9 +1,22 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "paths": {
+      "~components/*": [
+        "./src/app/components/*"
+      ],
+      "~models": [
+        "./src/app/models/index.ts"
+      ],
+      "~services": [
+        "./src/app/services/index.ts"
+      ],
+      "~env": [
+        "./src/environments/environment.ts"
+      ]
+    },
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
