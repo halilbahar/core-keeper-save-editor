@@ -1,1 +1,7 @@
 <div class="text-2xl font-bold underline text-blue-600">Hello Core Keeper!</div>
+
+<input type="file" (change)="handleFileInput($event)" />
+
+<pre style="height: 700px; overflow: scroll">{{ character | json }}</pre>
+
+<button (click)="save()">save</button>
