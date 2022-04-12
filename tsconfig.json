@@ -17,12 +17,12 @@
         "./src/environments/environment.ts"
       ]
     },
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitOverride": true,
+    "forceConsistentCasingInFileNames": false,
+    "strict": false,
+    "noImplicitOverride": false,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": false,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -38,8 +38,8 @@
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictInjectionParameters": false,
+    "strictInputAccessModifiers": false,
+    "strictTemplates": false
   }
 }
