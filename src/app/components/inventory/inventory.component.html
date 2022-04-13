@@ -1,5 +1,3 @@
-<app-card class="flex">
-    <li *ngFor="let item of inventory">
-        <app-item [item]="item"></app-item>
-    </li>
+<app-card *ngIf="inventory" class="grid grid-cols-10">
+    <app-item *ngFor="let item of inventory" [item]="item"></app-item>
 </app-card>
