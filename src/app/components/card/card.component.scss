@@ -1,0 +1,28 @@
+.card {
+    position: relative;
+    padding: 10px;
+    background-color: #915b26;
+    border-radius: 2rem;
+    transition: 0.3s;
+}
+
+.card-corner {
+    position: absolute;
+    image-rendering: pixelated;
+    z-index: 10;
+    width: 30px;
+}
+
+.card-edge {
+    position: absolute;
+    image-rendering: pixelated;
+    object-fit: fill;
+}
+
+.card-edge-x {
+    height: 10px;
+}
+
+.card-edge-y {
+    width: 10px;
+}

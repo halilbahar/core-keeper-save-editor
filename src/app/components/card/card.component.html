@@ -1,1 +1,13 @@
-<p>card works!</p>
+<div class="card">
+    <ng-content></ng-content>
+    <!-- Corners -->
+    <img src="assets/card_frame_segments/tl.png" class="card-corner" style="top: 0; left: 0" />
+    <img src="assets/card_frame_segments/tr.png" class="card-corner" style="top: 0; right: 0" />
+    <img src="assets/card_frame_segments/bl.png" class="card-corner" style="bottom: 0; left: 0" />
+    <img src="assets/card_frame_segments/br.png" class="card-corner" style="bottom: 0; right: 0" />
+    <!-- Edges -->
+    <img src="assets/card_frame_segments/t.png" class="card-edge card-edge-x" style="top: 0; left: 1%; width: 98%" />
+    <img src="assets/card_frame_segments/b.png" class="card-edge card-edge-x" style="bottom: 0; left: 1%; width: 98%" />
+    <img src="assets/card_frame_segments/l.png" class="card-edge card-edge-y" style="left: 0; top: 1%; height: 98%" />
+    <img src="assets/card_frame_segments/r.png" class="card-edge card-edge-y" style="right: 0; top: 1%; height: 98%" />
+</div>
