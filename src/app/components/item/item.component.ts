@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { InventorySlot } from '~models';
+import { Component, Input, OnInit } from '@angular/core';
+import { InventorySlot, ItemData } from '~models';
+import { ItemDataService } from '~services';
 
 @Component({
   selector: 'app-item',
@@ -8,11 +9,15 @@ import { InventorySlot } from '~models';
 })
 export class ItemComponent implements OnInit {
 
-  item: InventorySlot
+  @Input() item: InventorySlot
+  itemData: ItemData
 
-  constructor() { }
+  constructor(private itemDataService: ItemDataService) { }
 
   ngOnInit(): void {
+    this.itemData = this.itemDataService.getData(this.item.objectID)
+    console.log(this.itemData);
+    
   }
 
 }
