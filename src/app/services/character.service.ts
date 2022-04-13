@@ -7,17 +7,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class CharacterService {
   
-  private character: BehaviorSubject<Character>
+  $character: BehaviorSubject<Character> = new BehaviorSubject<Character>(undefined)
 
-  constructor() { 
-    this.character = new BehaviorSubject<Character>(undefined)
-  }
+  constructor() {}
 
   setCharacter(character: Character) {
-    this.character.next(character)
-  }
-
-  getCharacter(): Observable<Character> {
-    return this.character.asObservable()
+    this.$character.next(character)
   }
 }

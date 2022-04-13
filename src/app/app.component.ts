@@ -22,7 +22,7 @@ export class AppComponent {
     if (file) {
       this.aes.decryptCharacterSaveFile(file, 1).then(character => {
         this.characterService.setCharacter(character)
-        this.characterService.getCharacter().subscribe(value => {
+        this.characterService.$character.subscribe(value => {
           this.character = value
         });
       });

@@ -14,9 +14,8 @@ export class InventoryComponent implements OnInit {
   constructor(private characterService: CharacterService) { }
 
   ngOnInit(): void {
-    this.characterService.getCharacter().subscribe(value => {
+    this.characterService.$character.subscribe(value => {
       this.inventory = value.inventory;
     })
   }
-
 }

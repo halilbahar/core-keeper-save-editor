@@ -125,6 +125,7 @@
   },
   "defaultProject": "core-keeper-save-editor",
   "cli": {
+    "analytics": false,
     "defaultCollection": "@angular-eslint/schematics"
   }
 }

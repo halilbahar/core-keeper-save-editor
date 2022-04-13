@@ -6,15 +6,14 @@ import { ItemData } from '~models';
   providedIn: 'root'
 })
 export class ItemDataService {
-
-  private items: ItemData[] = ItemDataJson
+  readonly items: ItemData[] = ItemDataJson;
 
   constructor() {}
 
   getData(objectID: number): ItemData {
     for (let item of this.items) {
-      if (Object.values(item)[0] === objectID) return item
+      if (Object.values(item)[0] === objectID) return item;
     }
-    return undefined
+    return null;
   }
 }

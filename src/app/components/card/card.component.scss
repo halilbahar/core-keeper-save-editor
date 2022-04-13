@@ -1,8 +1,6 @@
 :host {
-    position: relative;
-    padding: 10px;
+    @apply relative p-2 rounded-xl inline-block;
     background-color: #915b26;
-    border-radius: 2rem;
 }
 
 .card-corner {
