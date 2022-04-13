@@ -4,4 +4,5 @@ export * from './character';
 export * from './condition';
 export * from './character-name';
 export * from './inventory-slot';
+export * from './item-data';
 export * from './character-customization';
