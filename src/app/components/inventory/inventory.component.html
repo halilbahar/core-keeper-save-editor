@@ -1,1 +1,5 @@
-<p>inventory works!</p>
+<app-card class="flex">
+    <li *ngFor="let item of inventory">
+        <app-item [item]="item"></app-item>
+    </li>
+</app-card>
