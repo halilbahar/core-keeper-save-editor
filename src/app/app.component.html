@@ -2,6 +2,8 @@
 
 <input type="file" (change)="handleFileInput($event)" />
 
+<app-inventory></app-inventory>
+
 <pre style="height: 700px; overflow: scroll">{{ character | json }}</pre>
 
 <button (click)="save()">save</button>

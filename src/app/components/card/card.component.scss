@@ -1,0 +1,25 @@
+:host {
+    @apply relative p-2 rounded-xl inline-block;
+    background-color: #915b26;
+}
+
+.card-corner {
+    position: absolute;
+    image-rendering: pixelated;
+    z-index: 10;
+    width: 30px;
+}
+
+.card-edge {
+    position: absolute;
+    image-rendering: pixelated;
+    object-fit: fill;
+}
+
+.card-edge-x {
+    height: 10px;
+}
+
+.card-edge-y {
+    width: 10px;
+}

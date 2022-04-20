@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Character } from '~models';
-import { AesService } from '~services';
+import { AesService, CharacterService } from '~services';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +11,21 @@ import { AesService } from '~services';
 export class AppComponent {
   title = 'core-keeper-save-editor';
 
-  constructor(private aes: AesService) {}
+  constructor(private aes: AesService, private characterService: CharacterService) {}
 
-  character?: Character;
+  character? : Character
   handleFileInput(event: any): void {
     // TODO: use this code as an example and delete this method later
     const element = event.currentTarget;
     let fileList = element.files;
     const file = fileList?.item(0);
     if (file) {
-      this.aes.decryptCharacterSaveFile(file, 1).then(character => (this.character = character));
+      this.aes.decryptCharacterSaveFile(file, 1).then(character => {
+        this.characterService.setCharacter(character)
+        this.characterService.$character.subscribe(value => {
+          this.character = value
+        });
+      });
     }
   }
 
