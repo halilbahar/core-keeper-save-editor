@@ -13,7 +13,7 @@ export class AppComponent {
 
   constructor(private aes: AesService, private characterService: CharacterService) {}
 
-  character? : Character
+  character?: Character;
   handleFileInput(event: any): void {
     // TODO: use this code as an example and delete this method later
     const element = event.currentTarget;
@@ -21,9 +21,9 @@ export class AppComponent {
     const file = fileList?.item(0);
     if (file) {
       this.aes.decryptCharacterSaveFile(file, 1).then(character => {
-        this.characterService.setCharacter(character)
+        this.characterService.setCharacter(character);
         this.characterService.$character.subscribe(value => {
-          this.character = value
+          this.character = value;
         });
       });
     }
