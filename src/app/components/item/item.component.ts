@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
+
 import { InventorySlot, ItemData } from '~models';
 import { ItemDataService } from '~services';
 
