@@ -1,6 +1,6 @@
 <div
+  appFitToParent
   *ngIf="itemData"
   class="icon"
-  [style.background-position]="-itemData.iconIndex * elementRef.nativeElement.offsetHeight + 'px 0'"
-  [style.background-size]="itemCount+'00% 100%'"
-  ></div>
+  [style.background-position]="-itemData.iconIndex * 16 + 'px 0'"
+  [style.background-size]="itemCount + '00% 100%'"></div>
