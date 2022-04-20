@@ -1,3 +1,4 @@
 :host {
-  @apply h-full w-full block;
+  @apply h-full w-full grid grid-rows-2 p-2;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
 }
