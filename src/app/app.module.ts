@@ -11,6 +11,7 @@ import { ItemBrowserComponent } from './components/item-browser/item-browser.com
 import { ItemComponent } from './components/item/item.component';
 import { SelectionDetailComponent } from './components/selection-detail/selection-detail.component';
 import { SkillComponent } from './components/skill/skill.component';
+import { FitToParentDirective } from './directives/fit-to-parent.directive';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SkillComponent } from './components/skill/skill.component';
     EquipmentComponent,
     SkillComponent,
     SelectionDetailComponent,
-    CharacterComponent
+    CharacterComponent,
+    FitToParentDirective
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
