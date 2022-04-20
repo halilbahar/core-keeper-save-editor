@@ -1,0 +1,470 @@
+{
+  "version": 6,
+  "characterGuid": "",
+  "characterCustomization": {
+    "name": {
+      "utf8LengthInBytes": 0,
+      "bytes": {
+        "offset0000": {
+          "byte0000": 0,
+          "byte0001": 0,
+          "byte0002": 0,
+          "byte0003": 0,
+          "byte0004": 0,
+          "byte0005": 0,
+          "byte0006": 0,
+          "byte0007": 0,
+          "byte0008": 0,
+          "byte0009": 0,
+          "byte0010": 0,
+          "byte0011": 0,
+          "byte0012": 0,
+          "byte0013": 0,
+          "byte0014": 0,
+          "byte0015": 0
+        },
+        "byte0016": 0,
+        "byte0017": 0,
+        "byte0018": 0,
+        "byte0019": 0,
+        "byte0020": 0,
+        "byte0021": 0,
+        "byte0022": 0,
+        "byte0023": 0,
+        "byte0024": 0,
+        "byte0025": 0,
+        "byte0026": 0,
+        "byte0027": 0,
+        "byte0028": 0,
+        "byte0029": 0
+      }
+    },
+    "gender": 0,
+    "skinColor": 0,
+    "hair": 0,
+    "hairColor": 0,
+    "eyes": 0,
+    "eyesColor": 0,
+    "shirtColor": 0,
+    "shirtSkin": 0,
+    "pantsColor": 0,
+    "pantsSkin": 0,
+    "helm": 0,
+    "breastArmor": 0,
+    "pantsArmor": 0,
+    "role": 0
+  },
+  "discoveredObjects": [],
+  "servers": [],
+  "skills": [],
+  "activatedCrystals": [],
+  "inventory": [
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    },
+    {
+      "objectID": 0,
+      "amount": 0,
+      "variation": 0,
+      "variationUpdateCount": 0
+    }
+  ],
+  "conditionsList": [],
+  "hasUnlockedSouls": false,
+  "coinAmount": 0,
+  "collectedSouls": [],
+  "maxHealth": 100,
+  "serverConnectCount": 0,
+  "skillTalentTreeDatas": [],
+  "characterType": 0,
+  "discoveredBiomes": [],
+  "discoveredObjects2": [],
+  "disabledSoulPowers": []
+}
