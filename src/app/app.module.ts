@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardComponent } from './components/card/card.component';
+import { CharacterComponent } from './components/character/character.component';
 import { EquipmentComponent } from './components/equipment/equipment.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { ItemBrowserComponent } from './components/item-browser/item-browser.component';
@@ -20,7 +21,8 @@ import { SkillComponent } from './components/skill/skill.component';
     ItemBrowserComponent,
     EquipmentComponent,
     SkillComponent,
-    SelectionDetailComponent
+    SelectionDetailComponent,
+    CharacterComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
