@@ -3,6 +3,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 import { CardComponent } from '~components/card/card.component';
+import { ItemTooltipComponent } from '~components/item-tooltip/item-tooltip.component';
 import { ItemData } from '~models';
 
 @Directive({
@@ -24,17 +25,16 @@ export class ItemTooltipDirective {
         .withPositions([
           {
             originX: 'end',
-            originY: 'center',
-            overlayX: 'end',
-            overlayY: 'center'
+            originY: 'top',
+            overlayX: 'start',
+            overlayY: 'top'
           }
         ])
     });
 
-    console.log(this.tooltipItemData);
-
-    const portal = new ComponentPortal(CardComponent);
-    this.overlayRef.attach(portal);
+    const portal = new ComponentPortal(ItemTooltipComponent);
+    const componentRef = this.overlayRef.attach(portal);
+    componentRef.instance.item = this.tooltipItemData;
   }
 
   @HostListener('mouseleave', [])

@@ -10,6 +10,7 @@ import { CharacterComponent } from './components/character/character.component';
 import { EquipmentComponent } from './components/equipment/equipment.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { ItemBrowserComponent } from './components/item-browser/item-browser.component';
+import { ItemTooltipComponent } from './components/item-tooltip/item-tooltip.component';
 import { ItemComponent } from './components/item/item.component';
 import { SelectionDetailComponent } from './components/selection-detail/selection-detail.component';
 import { SkillComponent } from './components/skill/skill.component';
@@ -28,7 +29,8 @@ import { ItemTooltipDirective } from './directives/item-tooltip.directive';
     SelectionDetailComponent,
     CharacterComponent,
     FitToParentDirective,
-    ItemTooltipDirective
+    ItemTooltipDirective,
+    ItemTooltipComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, OverlayModule],
   providers: [],
