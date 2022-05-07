@@ -1,1 +1,15 @@
-<app-card>hello</app-card>
+<app-card class="!grid gap-5 !p-5">
+  <div>
+    <input type="text" [ngModel]="filterTerm" (input)="onFilterInput($event)" />
+    <select [ngModel]="selectedCategory" (ngModelChange)="onCategorySelect($event)">
+      <option value="-1">all</option>
+      <option *ngFor="let category of getCategoryNames()" value="{{ categories[category] }}">
+        {{ category }}
+      </option>
+    </select>
+  </div>
+
+  <div class="flex flex-wrap justify-start overflow-y-scroll">
+    <app-item class="m-2" *ngFor="let item of filteredItems" [item]="item"></app-item>
+  </div>
+</app-card>
