@@ -5,13 +5,24 @@
 @import '@angular/cdk/overlay-prebuilt.css';
 
 @font-face {
-  font-family: 'GNU Unifont Full';
-  src: url('assets/GnuUnifontFull-Pm9P.ttf') format('truetype');
+  font-family: 'default';
+  font-weight: 400;
+  src: url('assets/fonts/GnuUnifontFull-Pm9P.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'default';
+  font-weight: 700;
+  src: url('assets/fonts/LomoCopy-LT-Std-Mezzo_28688.ttf') format('truetype');
 }
 
 html, body {
   @apply h-screen w-screen text-white;
-  font-family: 'GNU Unifont Full', sans-serif;
+  font-family: 'default', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
 }
 
 ::-webkit-scrollbar {
