@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'GNU Unifont Full';
+  src: url('assets/GnuUnifontFull-Pm9P.ttf') format('truetype');
+}
+
 html, body {
-  @apply h-screen w-screen;
+  @apply h-screen w-screen text-white;
+  font-family: 'GNU Unifont Full', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b7793d;
+  border-radius: 2rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e3984f;
 }
