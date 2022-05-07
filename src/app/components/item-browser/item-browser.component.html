@@ -1,6 +1,6 @@
-<app-card class="!grid gap-5 !p-5">
-  <div>
-    <input type="text" [ngModel]="filterTerm" (input)="onFilterInput($event)" />
+<app-card class="!flex flex-col !p-5">
+  <div class="mb-5">
+    <input type="text" [ngModel]="filterTerm" (input)="onFilterInput($event)" placeholder="Search..." class="mr-5"/>
     <select [ngModel]="selectedCategory" (ngModelChange)="onCategorySelect($event)">
       <option value="-1">all</option>
       <option *ngFor="let category of getCategoryNames()" value="{{ categories[category] }}">
@@ -9,7 +9,7 @@
     </select>
   </div>
 
-  <div class="flex flex-wrap justify-start overflow-y-scroll">
-    <app-item class="m-2" *ngFor="let item of filteredItems" [item]="item"></app-item>
+  <div class="grid grid-cols-10 gap-2 overflow-x-hidden overflow-y-scroll pr-2">
+    <app-item *ngFor="let item of filteredItems" [item]="item"></app-item>
   </div>
 </app-card>
