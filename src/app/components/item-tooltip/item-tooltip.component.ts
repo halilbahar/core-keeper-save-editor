@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { ItemData } from '~models';
 
@@ -7,12 +7,10 @@ import { ItemData } from '~models';
   templateUrl: './item-tooltip.component.html',
   styleUrls: ['./item-tooltip.component.scss']
 })
-export class ItemTooltipComponent implements OnInit {
+export class ItemTooltipComponent {
   @Input() item: ItemData;
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   getRarityColor(): string {
     switch (this.item.rarity) {
