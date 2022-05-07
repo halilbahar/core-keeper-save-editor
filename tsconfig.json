@@ -9,6 +9,9 @@
       "~components/*": [
         "./src/app/components/*"
       ],
+      "~directives/*": [
+        "./src/app/directives/*"
+      ],
       "~models": [
         "./src/app/models/index.ts"
       ],
