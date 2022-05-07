@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { debounceTime, Subject, Subscription } from 'rxjs';
+
 import { ItemCategories } from 'src/app/enums/item-categories';
 import { InventorySlot, ItemData } from '~models';
 import { ItemDataService } from '~services';
@@ -14,7 +15,7 @@ export class ItemBrowserComponent implements OnInit {
   filteredItems: InventorySlot[] = [];
   categories = ItemCategories;
 
-  filterTerm: string = "";
+  filterTerm: string = '';
   selectedCategory: number = -1;
 
   private modelChanged: Subject<string> = new Subject<string>();
@@ -40,8 +41,6 @@ export class ItemBrowserComponent implements OnInit {
     this.filteredItems = [];
     let categorizedItems = [];
 
-    console.log(this.selectedCategory, typeof this.selectedCategory);
-    
     if (this.selectedCategory !== -1) {
       for (let item of this.items) {
         if (item.objectType == this.selectedCategory) {
@@ -51,7 +50,6 @@ export class ItemBrowserComponent implements OnInit {
     } else {
       categorizedItems = [...this.items];
     }
-
 
     for (let item of categorizedItems) {
       if (isNaN(Number(this.filterTerm)) || Number(this.filterTerm) == 0) {
@@ -73,7 +71,7 @@ export class ItemBrowserComponent implements OnInit {
           } as InventorySlot);
         }
       }
-    }  
+    }
   }
 
   getCategoryNames(): string[] {
@@ -84,5 +82,4 @@ export class ItemBrowserComponent implements OnInit {
     this.selectedCategory = +category;
     this.filterItems();
   }
-  
 }
