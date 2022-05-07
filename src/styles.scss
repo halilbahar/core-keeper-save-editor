@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '@angular/cdk/overlay-prebuilt.css';
+
 @font-face {
   font-family: 'GNU Unifont Full';
   src: url('assets/GnuUnifontFull-Pm9P.ttf') format('truetype');

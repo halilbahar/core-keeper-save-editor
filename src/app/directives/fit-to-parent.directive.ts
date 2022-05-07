@@ -26,13 +26,13 @@ export class FitToParentDirective implements OnInit {
     Promise.resolve().then(() => {
       const element = this.elementRef.nativeElement as HTMLElement;
       const parent = element.parentElement;
-  
+
       const scale = Math.min(
         (parent.clientWidth * 0.8) / element.clientWidth,
         (parent.clientHeight * 0.8) / element.clientHeight
       );
-  
+
       element.style.transform = `translate(-50%, -50%) scale(${scale})`;
-    })
+    });
   }
 }

@@ -1,5 +1,7 @@
 <div
   appFitToParent
+  appItemTooltip
+  [tooltipItemData]="itemData"
   *ngIf="itemData"
   class="icon"
   [style.background-position]="-itemData.iconIndex * 16 + 'px 0'"
