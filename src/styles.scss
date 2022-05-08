@@ -19,6 +19,7 @@
 html, body {
   @apply h-screen w-screen text-white;
   font-family: 'default', sans-serif;
+  cursor: url("assets/cursor.png"), auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
