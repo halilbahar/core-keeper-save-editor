@@ -9,10 +9,12 @@ import re
 import time
 
 import yaml
+from PIL import Image
 from unityparser import UnityDocument
 
 ASSET_FOLDER = './dump/CoreKeeper/ExportedProject/Assets'
 CACHE_FOLDER = './.cache'
+BLACK_LISTED_TERMS = ['objectType: 1\n', 'objectType: 900\n', 'objectType: 6000\n', 'icon: {fileID: 0}\n']
 USE_CACHE = True
 
 object_ids = {}
@@ -66,7 +68,13 @@ if __name__ == '__main__':
         # The black listed terms include object types that are not items and items without an icon
         for filepath in filepaths:
             with open(filepath, 'r') as stream:
-                if 'objectInfo' in stream.read():
+                file_content = stream.read()
+                has_blacklisted_term = False
+                for term in BLACK_LISTED_TERMS:
+                    if term in file_content:
+                        has_blacklisted_term = True
+
+                if 'objectInfo' in file_content and not has_blacklisted_term:
                     doc = UnityDocument.load_yaml(filepath)
                     mono_behaviour = doc.filter(class_names=('MonoBehaviour',), attributes=('objectInfo',))
 
@@ -151,7 +159,7 @@ if __name__ == '__main__':
                 metadata = yaml.safe_load(stream)
                 textures[metadata['guid']] = {
                     'metadata': metadata,
-                    'filepath': filepath
+                    'filepath': filepath[:len(filepath) - 5]
                 }
         png_meta_data_time_end = time.time()
         with open(os.path.join(CACHE_FOLDER, 'png_metadata'), 'wb') as f:
@@ -167,6 +175,7 @@ if __name__ == '__main__':
     # If we have a match we will look up the texture file and extract the image
     # At the end we will assemble a big sprite-sheet with a big json
     data = []
+    images = []
     for index, item in enumerate(translations):
         try:
             object_id = object_ids[item]
@@ -176,6 +185,55 @@ if __name__ == '__main__':
             continue
 
         icon = object_info['icon']
+        icon_offset = object_info['iconOffset']
+        icon_offset_x = icon_offset['x']
+        icon_offset_y = icon_offset['y']
+
+        # Get the texture file based on the icon object
+        texture = textures[icon['guid']]
+        # Loop over all the icons of the spritesheet and find the correct one
+        found_image = False
+        for sprite in texture['metadata']['TextureImporter']['spriteSheet']['sprites']:
+            if sprite['internalID'] == icon['fileID']:
+                found_image = True
+                rect = sprite['rect']
+                x = rect['x']
+                y = rect['y']
+                width = rect['width']
+                height = rect['height']
+                sprite_pixels_to_units = texture['metadata']['TextureImporter']['spritePixelsToUnits']
+                offset_x = icon_offset_x * sprite_pixels_to_units
+                offset_y = icon_offset_y * sprite_pixels_to_units
+
+                # The coordinate system of the games starts from bottem left
+                # so we have to reverse the y
+                # The spritesheet is perfectly uniform with 16x16 icons
+                # The tool sprites (which is also used for animation) on the other hand are not
+                # We have found x / y values of 40, 50, ...
+                # But the width is still 16 pixel of that icon
+                # We just have to crop it right
+                # We need to width - 16 and split that in 2
+                # For example: 40 - 16 = 24. We make the crop 12 pixel in both directions smaller
+                # This would mean for cropped_x to add 12 and cropped_x2 to remove 12
+                # ------------------- cropped_y to add 12 and cropped_y2 to remove 12
+                # For perfect values of 16 the result will be 0 and the crop won't be effected
+                # For some objectInfo the iconOffset is set to something other than 0
+                # We need to apply this offset to center the icon. Just multiple the offset with the pixel ratio
+                # and apply it on
+                image = Image.open(texture['filepath'])
+                diff = (width - 16) / 2
+                cropped_x = x + diff
+                cropped_y = image.height - y - width + diff + offset_y
+                cropped_x2 = x + width - diff + offset_x
+                cropped_y2 = image.height - y - diff
+
+                area = (cropped_x, cropped_y, cropped_x2, cropped_y2)
+                cropped_image = image.crop(area)
+                images.append(cropped_image)
+
+        if not found_image:
+            continue
+
         data.append({
             'objectID': object_info['objectID'],
             'name': translations[item]['name'],
@@ -188,6 +246,14 @@ if __name__ == '__main__':
             # 'variation': object_info['variation'],
         })
 
+    # Create json
     json_data = json.dumps(data)
     with open('item-data.json', 'w') as file:
         file.write(json_data)
+
+    # Create spritesheet
+    image = Image.new('RGBA', (len(data) * 16, 16))
+    for index, single_image in enumerate(images):
+        image.paste(single_image, (index * 16, 0))
+
+    image.save('spritesheet.png')
