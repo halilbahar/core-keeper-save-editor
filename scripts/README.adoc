@@ -1,0 +1,6 @@
+= Scripts for extracting Core Keeper data
+
+[source,bash]
+----
+python3 -m venv ./venv
+----
