@@ -1,4 +1,4 @@
-<app-card class="!flex flex-col !p-5">
+<app-card class="!flex flex-col">
   <div class="mb-5">
     <input
       type="text"
@@ -14,7 +14,5 @@
     </select>
   </div>
 
-  <div class="grid grid-cols-10 gap-2 overflow-x-hidden overflow-y-scroll pr-2">
-    <app-item *ngFor="let item of filteredItems" [item]="item"></app-item>
-  </div>
+  <app-item-list [inventory]="filteredItems"></app-item-list>
 </app-card>

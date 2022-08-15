@@ -1,5 +1,3 @@
 <app-card>
-  <div class="grid grid-cols-10 gap-2">
-    <app-item *ngFor="let item of inventory" [item]="item"></app-item>
-  </div>
+  <app-item-list [inventory]=inventory></app-item-list>
 </app-card>
