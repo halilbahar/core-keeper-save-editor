@@ -1,25 +1,25 @@
 :host {
-    @apply relative p-2 rounded-xl inline-block w-full h-full;
-    background-color: #915b26;
+  @apply relative p-2 rounded-xl inline-block w-full h-full p-8;
+  background-color: #915b26;
 }
 
 .card-corner {
-    position: absolute;
-    image-rendering: pixelated;
-    z-index: 10;
-    width: 30px;
+  position: absolute;
+  image-rendering: pixelated;
+  z-index: 10;
+  width: 30px;
 }
 
 .card-edge {
-    position: absolute;
-    image-rendering: pixelated;
-    object-fit: fill;
+  position: absolute;
+  image-rendering: pixelated;
+  object-fit: fill;
 }
 
 .card-edge-x {
-    height: 10px;
+  height: 10px;
 }
 
 .card-edge-y {
-    width: 10px;
+  width: 10px;
 }
