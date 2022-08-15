@@ -10,16 +10,15 @@ import { CharacterComponent } from './components/character/character.component';
 import { EquipmentComponent } from './components/equipment/equipment.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { ItemBrowserComponent } from './components/item-browser/item-browser.component';
+import { ItemListComponent } from './components/item-list/item-list.component';
 import { ItemTooltipComponent } from './components/item-tooltip/item-tooltip.component';
 import { ItemComponent } from './components/item/item.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SelectionDetailComponent } from './components/selection-detail/selection-detail.component';
 import { SkillComponent } from './components/skill/skill.component';
-import { FitToParentDirective } from './directives/fit-to-parent.directive';
-import { ItemTooltipDirective } from './directives/item-tooltip.directive';
-import { ItemListComponent } from './components/item-list/item-list.component';
 import { TabGroupComponent } from './components/tab-group/tab-group.component';
 import { TabComponent } from './components/tab-group/tab/tab.component';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { ItemTooltipDirective } from './directives/item-tooltip.directive';
 
 @NgModule({
   declarations: [
@@ -32,7 +31,6 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     SkillComponent,
     SelectionDetailComponent,
     CharacterComponent,
-    FitToParentDirective,
     ItemTooltipDirective,
     ItemTooltipComponent,
     ItemListComponent,

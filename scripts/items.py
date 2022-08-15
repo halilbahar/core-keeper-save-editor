@@ -26,32 +26,51 @@ item_translations = {}
 item_description_translations = {}
 item_name_translations = {}
 
+logging.basicConfig()
 log = logging.getLogger('items')
+log.setLevel(logging.INFO)
 
 if __name__ == '__main__':
+    print(1)
     if USE_CACHE:
         log.info('Cache is enabled...')
         # Cache folder does not exit -> create all needed cache files
-        if not os.path.isdir(CACHE_FOLDER):
-            log.info('No .cache folder found, creating one')
-            os.mkdir(CACHE_FOLDER)
-            for item in ['png_metadata', 'prefabs', 'translations', 'object_ids']:
-                path = os.path.join(CACHE_FOLDER, item)
-                with open(path, 'w'):
-                    pass
-                log.info('Created cache file \'%s\'', path)
-        # Cache folder exists, try to read the files
-        else:
-            log.info('Found .cache folder, reading files...')
-            with open(os.path.join(CACHE_FOLDER, 'object_ids'), 'rb') as f:
+        os.makedirs(CACHE_FOLDER, exist_ok=True)
+        for item in ['png_metadata', 'prefabs', 'translations', 'object_ids']:
+            path = os.path.join(CACHE_FOLDER, item)
+            with open(path, 'a+'):
+                pass
+            log.info('Created cache file \'%s\'', path)
+        log.info('Found .cache folder, reading files...')
+        with open(os.path.join(CACHE_FOLDER, 'object_ids'), 'rb') as f:
+            try:
                 object_ids = pickle.load(f)
-            with open(os.path.join(CACHE_FOLDER, 'translations'), 'rb') as f:
+                log.info('Successfully loaded object_ids...')
+            except:
+                log.info('Failed to load object_ids...')
+                pass
+        with open(os.path.join(CACHE_FOLDER, 'translations'), 'rb') as f:
+            try:
                 translations = pickle.load(f)
-            with open(os.path.join(CACHE_FOLDER, 'png_metadata'), 'rb') as f:
+                log.info('Successfully loaded translations...')
+            except:
+                log.info('Failed to load translations...')
+                pass
+        with open(os.path.join(CACHE_FOLDER, 'png_metadata'), 'rb') as f:
+            try:
                 textures = pickle.load(f)
-            with open(os.path.join(CACHE_FOLDER, 'prefabs'), 'rb') as f:
+                log.info('Successfully loaded textures...')
+            except:
+                log.info('Failed to load textures...')
+                pass
+        with open(os.path.join(CACHE_FOLDER, 'prefabs'), 'rb') as f:
+            try:
                 prefabs = pickle.load(f)
-            log.info('Finished reading .cache files')
+                log.info('Successfully loaded prefabs...')
+            except:
+                log.info('Failed to load prefabs...')
+                pass
+        log.info('Finished reading .cache files')
 
     # Iterate over all prefabs and save them, so we can access it later
     # If prefabs length is 0 the cache has to be unset whether the USE_CACHE is True or False
