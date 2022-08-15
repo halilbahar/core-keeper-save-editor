@@ -1,0 +1,9 @@
+input, select {
+    appearance: none;
+    outline: none;
+    padding-left: 5px;
+    background-color: #32220d;
+    border: solid;
+    border-image: url('/assets/input-border.png') 1;
+    image-rendering: pixelated;
+}
