@@ -16,6 +16,7 @@ import { SelectionDetailComponent } from './components/selection-detail/selectio
 import { SkillComponent } from './components/skill/skill.component';
 import { FitToParentDirective } from './directives/fit-to-parent.directive';
 import { ItemTooltipDirective } from './directives/item-tooltip.directive';
+import { ItemListComponent } from './components/item-list/item-list.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ItemTooltipDirective } from './directives/item-tooltip.directive';
     CharacterComponent,
     FitToParentDirective,
     ItemTooltipDirective,
-    ItemTooltipComponent
+    ItemTooltipComponent,
+    ItemListComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, OverlayModule],
   providers: [],
