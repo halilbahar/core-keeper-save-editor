@@ -10,13 +10,12 @@ import { CharacterComponent } from './components/character/character.component';
 import { EquipmentComponent } from './components/equipment/equipment.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { ItemBrowserComponent } from './components/item-browser/item-browser.component';
+import { ItemListComponent } from './components/item-list/item-list.component';
 import { ItemTooltipComponent } from './components/item-tooltip/item-tooltip.component';
 import { ItemComponent } from './components/item/item.component';
 import { SelectionDetailComponent } from './components/selection-detail/selection-detail.component';
 import { SkillComponent } from './components/skill/skill.component';
-import { FitToParentDirective } from './directives/fit-to-parent.directive';
 import { ItemTooltipDirective } from './directives/item-tooltip.directive';
-import { ItemListComponent } from './components/item-list/item-list.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +28,6 @@ import { ItemListComponent } from './components/item-list/item-list.component';
     SkillComponent,
     SelectionDetailComponent,
     CharacterComponent,
-    FitToParentDirective,
     ItemTooltipDirective,
     ItemTooltipComponent,
     ItemListComponent
