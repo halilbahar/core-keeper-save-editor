@@ -1,16 +1,17 @@
 :host {
-  @apply flex justify-center items-center w-max h-max p-1 relative;
+  @apply flex justify-center items-center w-max h-max p-1 relative box-content;
   background-image: url('/assets/item-frame.png');
   background-repeat: no-repeat;
   background-size: cover;
   image-rendering: pixelated;
+  height: calc(var(--spritesheet-icon-width) * var(--spritesheet-scale-factor));
+  width: calc(var(--spritesheet-icon-width) * var(--spritesheet-scale-factor));
 }
 
 .icon {
-  --index: 0;
+  --index: -100;
+  @apply h-full w-full;
   background-image: url('/assets/spritesheet.png');
-  height: calc(var(--spritesheet-icon-width) * var(--spritesheet-scale-factor));
-  width: calc(var(--spritesheet-icon-width) * var(--spritesheet-scale-factor));
   background-position: calc(var(--index) * var(--spritesheet-scaled-size) * -1) 0px;
   background-size: calc(var(--spritesheet-width) * var(--spritesheet-scale-factor)) var(--spritesheet-scaled-size);
   image-rendering: pixelated;
