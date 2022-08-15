@@ -1,11 +1,10 @@
-<app-card class="!flex flex-col">
-  <div class="mb-5">
+<app-card>
+  <div class="mb-4">
     <input
       type="text"
       [ngModel]="filterTerm"
       (input)="onFilterInput($event)"
-      placeholder="Search..."
-      class="mr-5" />
+      placeholder="Search..." />
     <select [ngModel]="selectedCategory" (ngModelChange)="onCategorySelect($event)">
       <option value="-1">all</option>
       <option *ngFor="let category of getCategoryNames()" value="{{ categories[category] }}">

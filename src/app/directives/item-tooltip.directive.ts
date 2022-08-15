@@ -24,8 +24,8 @@ export class ItemTooltipDirective {
         .flexibleConnectedTo(this.elementRef)
         .withPositions([
           {
-            originX: 'end',
-            originY: 'top',
+            originX: 'start',
+            originY: 'bottom',
             overlayX: 'start',
             overlayY: 'top'
           }

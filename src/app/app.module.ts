@@ -17,6 +17,9 @@ import { SkillComponent } from './components/skill/skill.component';
 import { FitToParentDirective } from './directives/fit-to-parent.directive';
 import { ItemTooltipDirective } from './directives/item-tooltip.directive';
 import { ItemListComponent } from './components/item-list/item-list.component';
+import { TabGroupComponent } from './components/tab-group/tab-group.component';
+import { TabComponent } from './components/tab-group/tab/tab.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { ItemListComponent } from './components/item-list/item-list.component';
     FitToParentDirective,
     ItemTooltipDirective,
     ItemTooltipComponent,
-    ItemListComponent
+    ItemListComponent,
+    TabGroupComponent,
+    TabComponent,
+    NavBarComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, OverlayModule],
   providers: [],

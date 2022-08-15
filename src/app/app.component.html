@@ -1,4 +1,19 @@
-<app-inventory></app-inventory>
+<app-tab-group>
+  <app-tab title="Items" [active]="true">
+    <div class="flex gap-8">
+      <app-inventory></app-inventory>>
+      <app-item-browser></app-item-browser>
+    </div>
+  </app-tab>
+  <app-tab title="Skills">
+    <p>Skills-Tab Content</p>
+  </app-tab>
+  <app-tab title="Character">
+    <p>Character-Tab Content</p>
+  </app-tab>
+</app-tab-group>
+
+<!-- <app-inventory></app-inventory>
 
 <div class="flex justify-between align-middle gap-4">
   <app-equipment class="flex-1"></app-equipment>
@@ -10,4 +25,4 @@
 <div class="flex justify-between align-middle gap-4">
   <app-selection-detail class="flex-1"></app-selection-detail>
   <app-character class="flex-1"></app-character>
-</div>
+</div> -->

@@ -1,10 +1,14 @@
-input,
-select {
-  appearance: none;
-  outline: none;
-  padding-left: 5px;
+:host {
+  @apply p-6 block h-full flex flex-col;
+}
+
+.tab-title {
   background-color: #32220d;
   border: solid;
   border-image: url('/assets/input-border.png') 1;
   image-rendering: pixelated;
+}
+
+.active {
+  border: 3px solid white;
 }
