@@ -1,5 +1,5 @@
 :host {
-  @apply relative inline-block h-full p-4;
+  @apply relative inline-block h-full p-4 overflow-y-auto;
   background-color: #915b26;
   border: 9px solid;
   border-image: url('/assets/card-border-v2.png') 9;
@@ -7,25 +7,4 @@
   border-image-outset: 9px;
   image-rendering: pixelated;
   box-shadow: 0 5px 15px 10px rgba(0, 0, 0, 0.4);
-}
-
-.card-corner {
-  position: absolute;
-  image-rendering: pixelated;
-  z-index: 10;
-  width: 30px;
-}
-
-.card-edge {
-  position: absolute;
-  image-rendering: pixelated;
-  object-fit: fill;
-}
-
-.card-edge-x {
-  height: 10px;
-}
-
-.card-edge-y {
-  width: 10px;
 }
