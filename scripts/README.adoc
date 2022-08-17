@@ -1,6 +1,44 @@
 = Scripts for extracting Core Keeper data
 
+== Data extraction
+
+=== Requirements
+
+* Python 3.8+
+* Python venv
+* https://github.com/AssetRipper/AssetRipper[AssetRipper]
+
+Before extracting any data, `venv` needs to be initialized and the needed `pip-packages` needs to be installed.
+
+.Init venv and install pip packages
 [source,bash]
 ----
 python3 -m venv ./venv
+pip install -r requirements.txt
 ----
+
+To extract the assets we need to be on Windows (`AssetRipper` is cross-platform but does not extract everything on linux)
+Open `AssetRipper`, File > Open Folder > Core Keeper Folder.
+The Core Keeper folder is by default located at `C:\Program Files (x86)\Steam\steamapps\common\Core Keeper`.
+Export > Export all Files into the `/dump` folder. This can be done in 2 steps if you execute this program in linux.
+
+Now you can execute:
+
+[source,bash]
+----
+python3 items.py
+python3 talents.py
+----
+
+The extracted data should be in `/out`.
+
+To override the old data in the projects do:
+
+[source,bash]
+----
+python3 deploy.py
+----
+
+=== How it works
+
+To get reliably all the items we have chosen to use the language file as the starting point. We used to extract the data by `prefabs`, but it got out of hand really fast, because we filtered after `objectID` but not only do the items have that property but also `bosses`, `projectile`, etc. All items in the language file are prefixed with `Items/` and description are suffixed with `Desc`. Based on `Items/<InternalEnumName>` we looked up the `objectID`. With that we could search now all the `prefabs` and find the `icon` referenced in that file and create a big spritesheet. All the icons are spread out and not in one spritesheet.
