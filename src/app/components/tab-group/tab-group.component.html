@@ -2,9 +2,9 @@
   <div class="flex flex-row gap-2">
     <div
       *ngFor="let tab of tabs"
-      class="tab-title p-1 {{ tab.active ? 'active' : '' }}"
+      class="p-2 nav-item {{ tab.active ? 'active' : '' }}"
       (click)="selectTab(tab)">
-      {{ tab.title }}
+      <span>{{ tab.title }}</span>
     </div>
   </div>
 </app-nav-bar>

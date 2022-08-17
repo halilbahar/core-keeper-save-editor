@@ -2,13 +2,22 @@
   @apply p-6 block h-full flex flex-col;
 }
 
-.tab-title {
-  background-color: #32220d;
-  border: solid;
-  border-image: url('/assets/input-border.png') 1;
-  image-rendering: pixelated;
-}
+.nav-item {
+  @apply border-b-2 border-transparent transition-all text-gray-300;
 
-.active {
-  border: 3px solid white;
+  span {
+    @apply block transition-transform;
+  }
+
+  &:hover span {
+    @apply scale-110;
+  }
+
+  &.active {
+    @apply border-white text-white;
+
+    span {
+      @apply scale-110;
+    }
+  }
 }
