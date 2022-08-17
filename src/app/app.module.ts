@@ -19,6 +19,8 @@ import { SkillComponent } from './components/skill/skill.component';
 import { TabGroupComponent } from './components/tab-group/tab-group.component';
 import { TabComponent } from './components/tab-group/tab/tab.component';
 import { ItemTooltipDirective } from './directives/item-tooltip.directive';
+import { ItemsComponent } from './pages/items/items.component';
+import { SkillsComponent } from './pages/skills/skills.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { ItemTooltipDirective } from './directives/item-tooltip.directive';
     ItemListComponent,
     TabGroupComponent,
     TabComponent,
-    NavBarComponent
+    NavBarComponent,
+    ItemsComponent,
+    SkillsComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, OverlayModule],
   providers: [],
