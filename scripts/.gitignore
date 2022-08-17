@@ -277,7 +277,8 @@ cython_debug/
 #.idea/
 
 venv/
-dump/
+dump/*
+!dump/.gitkeep
 .cache/
 item-data.json
 spritesheet.png
