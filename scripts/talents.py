@@ -83,7 +83,12 @@ if __name__ == '__main__':
             name = translations['SkillTalents/' + skill_talent_name]
             increment = talent['conditionValuePerPoint']
             try:
-                description = translations['Conditions/' + condition_name]
+                # Edge case for crit damage description.
+                # There are 2 conditions that use this description instead of their own
+                if 'CriticalDamagePercentageIncrease' in condition_name:
+                    description = translations['Conditions/CriticalDamagePercentageIncrease']
+                else:
+                    description = translations['Conditions/' + condition_name]
             except:
                 description = ''
 
