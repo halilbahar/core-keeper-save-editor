@@ -61,7 +61,7 @@ if __name__ == '__main__':
     log.info('Finished reading I2Languages...')
 
     log.info('Reading SkillTalentsTable and creating spritesheet...')
-    # Init data with 9 arrays. We group the data by their skillID so we access the talents by skill
+    # Init data with 9 arrays. We group the data by their skillID, so we access the talents by skill
     data = {}
     for i in range(9):
         data[i] = []
@@ -89,7 +89,7 @@ if __name__ == '__main__':
                     description = translations['Conditions/CriticalDamagePercentageIncrease']
                 else:
                     description = translations['Conditions/' + condition_name]
-            except:
+            except KeyError:
                 description = ''
 
             data[skill_id].append({
