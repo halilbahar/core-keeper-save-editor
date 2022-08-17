@@ -267,13 +267,12 @@ if __name__ == '__main__':
         index += 1
 
     # Create json
-    json_data = json.dumps(data)
-    with open('item-data.json', 'w') as file:
-        file.write(json_data)
+    with open('out/item-data.json', 'w') as file:
+        file.write(json.dumps(data))
 
     # Create spritesheet
     image = Image.new('RGBA', (len(data) * 16, 16))
     for index, single_image in enumerate(images):
         image.paste(single_image, (index * 16, 0))
 
-    image.save('spritesheet.png')
+    image.save('out/item-spritesheet.png')
