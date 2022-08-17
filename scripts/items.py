@@ -31,7 +31,6 @@ log = logging.getLogger('items')
 log.setLevel(logging.INFO)
 
 if __name__ == '__main__':
-    print(1)
     if USE_CACHE:
         log.info('Cache is enabled...')
         # Cache folder does not exit -> create all needed cache files
@@ -118,7 +117,7 @@ if __name__ == '__main__':
     # If object_ids is empty the cache has to be empty whether the USE_CACHE is True or False
     if object_ids == {}:
         with open(os.path.join(ASSET_FOLDER, 'MonoScript/Pug.Core/ObjectID.cs'), 'r') as file:
-            pattern = re.compile('(\w+) = (\d*)')
+            pattern = re.compile(r'(\w+) = (\d*)')
             for match in pattern.finditer(file.read()):
                 object_name = match.group(1)
                 object_id = match.group(2)
