@@ -82,7 +82,7 @@ if __name__ == '__main__':
                                     glob.iglob(os.path.join(ASSET_FOLDER, 'Resource/**/*.prefab'), recursive=True))
 
         # Go over all files and filter them by objectInfo and black listed terms
-        # If the perfab does not have an objectInfo it cannot be an item
+        # If the prefab does not have an objectInfo it cannot be an item
         # The black listed terms include object types that are not items and items without an icon
         for filepath in filepaths:
             with open(filepath, 'r') as stream:
@@ -167,7 +167,7 @@ if __name__ == '__main__':
         log.info('Finished getting all the translation...')
         log.info('This took %s' % str(datetime.timedelta(seconds=(translation_time_end - translation_time_begin))))
 
-    # Iterate over all assets and save them, so we can access it later when looking up a texture of a item
+    # Iterate over all assets and save them, so we can access it later when looking up a texture of an item
     # If textures is empty the cache has to be unset whether the USE_CACHE is True or False
     if textures == {}:
         log.info('Reading all texture meta files...')
@@ -194,7 +194,8 @@ if __name__ == '__main__':
     # At the end we will assemble a big sprite-sheet with a big json
     data = []
     images = []
-    for index, item in enumerate(translations):
+    index = 0
+    for item in translations:
         try:
             object_id = object_ids[item]
             # Convert the object_id to int because we used int to assign the object_info
@@ -223,7 +224,7 @@ if __name__ == '__main__':
                 offset_x = icon_offset_x * sprite_pixels_to_units
                 offset_y = icon_offset_y * sprite_pixels_to_units
 
-                # The coordinate system of the games starts from bottem left
+                # The coordinate system of the games starts from bottem left,
                 # so we have to reverse the y
                 # The spritesheet is perfectly uniform with 16x16 icons
                 # The tool sprites (which is also used for animation) on the other hand are not
@@ -236,7 +237,7 @@ if __name__ == '__main__':
                 # ------------------- cropped_y to add 12 and cropped_y2 to remove 12
                 # For perfect values of 16 the result will be 0 and the crop won't be effected
                 # For some objectInfo the iconOffset is set to something other than 0
-                # We need to apply this offset to center the icon. Just multiple the offset with the pixel ratio
+                # We need to apply this offset to center the icon. Just multiply the offset with the pixel ratio
                 # and apply it on
                 image = Image.open(texture['filepath'])
                 diff = (width - 16) / 2
@@ -263,6 +264,7 @@ if __name__ == '__main__':
             'iconIndex': index
             # 'variation': object_info['variation'],
         })
+        index += 1
 
     # Create json
     json_data = json.dumps(data)
