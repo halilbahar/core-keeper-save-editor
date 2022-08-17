@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { SelectedItemService } from 'src/app/services/selected-item.service';
 import { InventorySlot } from '~models';
 
 @Component({
@@ -8,6 +9,7 @@ import { InventorySlot } from '~models';
   styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent {
+  @Input() isEditable: boolean;
   @Input() inventory: InventorySlot[] = [];
 
   constructor() {}

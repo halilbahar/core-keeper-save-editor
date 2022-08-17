@@ -2,5 +2,6 @@
   appItemTooltip
   [tooltipItemData]="this.itemData"
   *ngIf="this.itemData"
+  (click)="this.selectItem()"
   class="icon"
   style="--index:{{ this.itemData.iconIndex }}"></div>

@@ -9,7 +9,7 @@ export class TabComponent {
   private _active = false;
 
   @HostBinding('class') classes = 'hidden';
-  @Input() title: string;
+  @Input() navItemTitle: string;
 
   @Input() set active(value: boolean) {
     this._active = value;

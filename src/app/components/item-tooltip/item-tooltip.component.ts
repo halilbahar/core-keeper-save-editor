@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { ItemData } from '~models';
+import { ItemDataService } from '~services';
 
 @Component({
   selector: 'app-item-tooltip',
@@ -10,25 +11,9 @@ import { ItemData } from '~models';
 export class ItemTooltipComponent {
   @Input() item: ItemData;
 
-  constructor() {}
+  constructor(private itemDataService: ItemDataService) {}
 
   getRarityColor(): string {
-    switch (this.item.rarity) {
-      case 1:
-        return '#38c54f';
-        break;
-      case 2:
-        return '#328aff';
-        break;
-      case 3:
-        return '#cd3bbd';
-        break;
-      case 4:
-        return '#ffb426';
-        break;
-      default:
-        return '#ffffff';
-        break;
-    }
+    return this.itemDataService.getRarityColor(this.item);
   }
 }
