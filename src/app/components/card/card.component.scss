@@ -1,5 +1,5 @@
 :host {
-  @apply relative inline-block h-full p-4 overflow-y-auto;
+  @apply relative inline-block max-h-full p-4 overflow-y-auto;
   background-color: #915b26;
   border: 9px solid;
   border-image: url('/assets/card-border-v2.png') 9;
