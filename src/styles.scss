@@ -18,13 +18,21 @@
   src: url('assets/fonts/LomoCopy-LT-Std-Mezzo_28688.ttf') format('truetype');
 }
 
-html, body {
+html,
+body {
   @apply h-screen w-screen text-white;
   font-family: 'default', sans-serif;
-  cursor: url("assets/cursor.png"), auto;
+  cursor: url('assets/cursor.png'), auto;
+  background-image: url('assets/background.jpeg');
+  background-size: cover;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
 }
 

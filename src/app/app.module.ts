@@ -13,8 +13,11 @@ import { ItemBrowserComponent } from './components/item-browser/item-browser.com
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { ItemTooltipComponent } from './components/item-tooltip/item-tooltip.component';
 import { ItemComponent } from './components/item/item.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SelectionDetailComponent } from './components/selection-detail/selection-detail.component';
 import { SkillComponent } from './components/skill/skill.component';
+import { TabGroupComponent } from './components/tab-group/tab-group.component';
+import { TabComponent } from './components/tab-group/tab/tab.component';
 import { ItemTooltipDirective } from './directives/item-tooltip.directive';
 
 @NgModule({
@@ -30,7 +33,10 @@ import { ItemTooltipDirective } from './directives/item-tooltip.directive';
     CharacterComponent,
     ItemTooltipDirective,
     ItemTooltipComponent,
-    ItemListComponent
+    ItemListComponent,
+    TabGroupComponent,
+    TabComponent,
+    NavBarComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, OverlayModule],
   providers: [],
