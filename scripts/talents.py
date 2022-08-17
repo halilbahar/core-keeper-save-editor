@@ -9,6 +9,7 @@ from unityparser import UnityDocument
 
 ASSET_FOLDER = './dump/CoreKeeper/ExportedProject/Assets'
 CACHE_FOLDER = './.cache'
+OUTPUT_FOLDER = './out'
 
 condition_ids = {}
 skill_talent_ids = {}
@@ -65,11 +66,12 @@ if __name__ == '__main__':
     data = {}
     for i in range(9):
         data[i] = []
-    images = []
+    # Create out/ folder if it does not exist
+    os.makedirs(os.path.join(OUTPUT_FOLDER, 'talents'), exist_ok=True)
     icons_image = Image.open(os.path.join(ASSET_FOLDER, 'Texture2D/talent_icons.png'))
+
     doc = UnityDocument.load_yaml(os.path.join(ASSET_FOLDER, 'Resources/SkillTalentsTable.asset'))
     mono_behaviour = doc.get(class_name='MonoBehaviour')
-    index = 0
     for skill_talent_tree in mono_behaviour.skillTalentTrees:
         skill_id = skill_talent_tree['skillID']
         for talent in skill_talent_tree['skillTalents']:
@@ -97,9 +99,7 @@ if __name__ == '__main__':
                 'name': name,
                 'description': description,
                 'increment': increment,
-                'iconIndex': index
             })
-            index += 1
 
             icon_x_y = icons[icon_id]
             x = icon_x_y['x']
@@ -112,15 +112,8 @@ if __name__ == '__main__':
 
             area = (cropped_x, cropped_y, cropped_x2, cropped_y2)
             cropped_image = icons_image.crop(area)
-            images.append(cropped_image)
+            cropped_image.save(os.path.join(OUTPUT_FOLDER, 'talents', str(skill_talent_id) + '.png'))
 
     # Create json
-    with open('out/skill-data.json', 'w') as file:
+    with open('out/talent-data.json', 'w') as file:
         file.write(json.dumps(data))
-
-    # Create spritesheet
-    image = Image.new('RGBA', (9 * 8 * 16, 16))
-    for index, single_image in enumerate(images):
-        image.paste(single_image, (index * 16, 0))
-
-    image.save('out/skill-spritesheet.png')
