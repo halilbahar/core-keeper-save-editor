@@ -6,21 +6,11 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "paths": {
-      "~components/*": [
-        "./src/app/components/*"
-      ],
-      "~directives/*": [
-        "./src/app/directives/*"
-      ],
-      "~models": [
-        "./src/app/models/index.ts"
-      ],
-      "~services": [
-        "./src/app/services/index.ts"
-      ],
-      "~env": [
-        "./src/environments/environment.ts"
-      ]
+      "~components/*": ["./src/app/components/*"],
+      "~directives/*": ["./src/app/directives/*"],
+      "~models": ["./src/app/models/index.ts"],
+      "~services": ["./src/app/services/index.ts"],
+      "~env": ["./src/environments/environment.ts"]
     },
     "forceConsistentCasingInFileNames": true,
     "strict": false,
@@ -36,10 +26,7 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ]
+    "lib": ["es2020", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

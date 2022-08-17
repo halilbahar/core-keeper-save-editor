@@ -2,7 +2,6 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
-import { CardComponent } from '~components/card/card.component';
 import { ItemTooltipComponent } from '~components/item-tooltip/item-tooltip.component';
 import { ItemData } from '~models';
 
