@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { debounceTime, Subject } from 'rxjs';
 
-import { ItemCategories } from 'src/app/enums/item-categories';
+import { ItemCategories } from '~enums';
 import { ItemDataService } from '~services';
 
 @UntilDestroy()
