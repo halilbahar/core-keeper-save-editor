@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 import { ItemData } from '~models';
 import { ItemDataService } from '~services';
@@ -8,9 +8,9 @@ import { ItemDataService } from '~services';
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss']
 })
-export class ItemComponent implements OnInit {
+export class ItemComponent {
+  private _objectID: number;
   private _scale: number = 1;
-  @Input() objectID: number;
   @HostBinding('style') style: string = `--individual-scale: ${this._scale};`;
   itemData: ItemData;
 
@@ -19,9 +19,10 @@ export class ItemComponent implements OnInit {
     this.style = `--individual-scale: ${this._scale};`;
   }
 
-  constructor(private itemDataService: ItemDataService) {}
-
-  ngOnInit(): void {
-    this.itemData = this.itemDataService.getData(this.objectID);
+  @Input() set objectID(value) {
+    this._objectID = value;
+    this.itemData = this.itemDataService.getData(value);
   }
+
+  constructor(private itemDataService: ItemDataService) {}
 }
