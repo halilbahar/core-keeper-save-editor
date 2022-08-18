@@ -1,18 +1,24 @@
+:root {
+  --individual-scale: 1;
+}
+
 :host {
   @apply flex justify-center items-center w-max h-max p-1 relative box-content;
   background-image: url('/assets/item-frame.png');
   background-repeat: no-repeat;
   background-size: cover;
   image-rendering: pixelated;
-  height: calc(var(--spritesheet-icon-width) * var(--spritesheet-scale-factor));
-  width: calc(var(--spritesheet-icon-width) * var(--spritesheet-scale-factor));
+  --size: calc(var(--spritesheet-scaled-size) * var(--individual-scale));
+  height: var(--size);
+  width: var(--size);
 }
 
 .icon {
   --index: -100;
+  --size: calc(var(--spritesheet-scaled-size) * var(--individual-scale));
   @apply h-full w-full;
   background-image: url('/assets/item-spritesheet.png');
-  background-position: calc(var(--index) * var(--spritesheet-scaled-size) * -1) 0px;
-  background-size: calc(var(--spritesheet-width) * var(--spritesheet-scale-factor)) var(--spritesheet-scaled-size);
+  background-position: calc(var(--index) * var(--size) * -1) 0px;
+  background-size: calc(var(--spritesheet-width) * var(--spritesheet-scale-factor) * var(--individual-scale)) var(--size);
   image-rendering: pixelated;
 }
