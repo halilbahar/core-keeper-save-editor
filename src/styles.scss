@@ -18,6 +18,12 @@
   src: url('assets/fonts/LomoCopy-LT-Std-Mezzo_28688.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'default';
+  font-weight: 100;
+  src: url('assets/fonts/CKSE-Numbers.ttf') format('truetype');
+}
+
 html,
 body {
   @apply h-screen w-screen text-white;
