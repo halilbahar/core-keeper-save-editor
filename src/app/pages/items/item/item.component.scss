@@ -11,7 +11,7 @@
 .icon {
   --index: -100;
   @apply h-full w-full;
-  background-image: url('/assets/spritesheet.png');
+  background-image: url('/assets/item-spritesheet.png');
   background-position: calc(var(--index) * var(--spritesheet-scaled-size) * -1) 0px;
   background-size: calc(var(--spritesheet-width) * var(--spritesheet-scale-factor)) var(--spritesheet-scaled-size);
   image-rendering: pixelated;

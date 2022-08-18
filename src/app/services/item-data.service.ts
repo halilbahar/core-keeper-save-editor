@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ItemData } from '~models';
 
 // eslint-disable-next-line no-restricted-imports
-import ItemDataJson from '../../assets/item_data.json';
+import ItemDataJson from '../../assets/item-data.json';
 
 @Injectable({
   providedIn: 'root'
