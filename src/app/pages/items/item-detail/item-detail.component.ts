@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ItemRarity } from 'src/app/enums/item-rarity';
+import { ItemRarity } from '~enums';
 import { InventorySlot, ItemData } from '~models';
-import { ItemDataService, SelectedItemService } from '~services';
+import { CharacterService, ItemDataService, SelectedItemService } from '~services';
 
 @Component({
   selector: 'app-item-detail',
@@ -10,31 +10,32 @@ import { ItemDataService, SelectedItemService } from '~services';
   styleUrls: ['./item-detail.component.scss']
 })
 export class ItemDetailComponent implements OnInit {
+  rarityColor: string;
   item: ItemData;
   inventorySlot: InventorySlot;
-  isEditable: boolean;
+  itemIndex: number;
+  rarity: string;
 
   constructor(
+    private characterService: CharacterService,
     private itemDataService: ItemDataService,
     private selectedItemService: SelectedItemService
   ) {}
 
   ngOnInit(): void {
-    this.selectedItemService.$selectedItem.subscribe(data => {
-      // if (data) {
-      //   this.item = this.itemDataService.getData(data.inventorySlot.objectID);
-      //   this.inventorySlot = data.inventorySlot;
-      //   this.isEditable = data.isEditable;
-      //   console.log(data.inventorySlot);
-      // }
+    this.selectedItemService.$selectedItem.subscribe(index => {
+      const inventorySlot = this.characterService.$character.value.inventory[index];
+      if (inventorySlot.objectID !== 0) {
+        this.inventorySlot = inventorySlot;
+        this.itemIndex = index;
+        this.item = this.itemDataService.getData(this.inventorySlot.objectID);
+        this.rarity = ItemRarity[this.item.rarity];
+        this.rarityColor = this.itemDataService.getRarityColor(this.item.rarity);
+      }
     });
   }
 
-  getRarityColor(): string {
-    return this.itemDataService.getRarityColor(this.item);
-  }
-
-  getRarity(): string {
-    return ItemRarity[this.item.rarity];
+  onAmountChange(event): void {
+    console.log(event);
   }
 }

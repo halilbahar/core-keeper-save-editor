@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { ItemRarity } from '~enums';
 import { ItemData } from '~models';
 
 // eslint-disable-next-line no-restricted-imports
@@ -20,8 +21,8 @@ export class ItemDataService {
     return null;
   }
 
-  getRarityColor(item: ItemData): string {
-    switch (item.rarity) {
+  getRarityColor(rarity: ItemRarity): string {
+    switch (rarity) {
       case -1:
         return '#adadad';
       case 1:
