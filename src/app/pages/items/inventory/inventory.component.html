@@ -1,8 +1,8 @@
 <app-card>
   <div class="item-grid">
     <app-item
-      *ngFor="let item of inventory"
-      [objectID]="item.objectID"
-      [isEditable]="true"></app-item>
+      *ngFor="let inventorySlot of this.inventory; let i = index"
+      (click)="this.onItemClick(i)"
+      [objectID]="inventorySlot.objectID"></app-item>
   </div>
 </app-card>

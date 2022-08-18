@@ -10,7 +10,6 @@ import { ItemDataService } from '~services';
 })
 export class ItemComponent implements OnInit {
   private _scale: number = 1;
-  @Input() isEditable: boolean;
   @Input() objectID: number;
   @HostBinding('style') style: string = `--individual-scale: ${this._scale};`;
   itemData: ItemData;

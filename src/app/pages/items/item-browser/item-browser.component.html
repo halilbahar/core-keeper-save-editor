@@ -18,9 +18,6 @@
   </div>
 
   <div class="item-grid">
-    <app-item
-      *ngFor="let objectID of this.filteredObjectIDs"
-      [objectID]="objectID"
-      [isEditable]="false"></app-item>
+    <app-item *ngFor="let objectID of this.filteredObjectIDs" [objectID]="objectID"></app-item>
   </div>
 </app-card>
