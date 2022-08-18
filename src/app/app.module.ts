@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -40,7 +41,7 @@ import { SkillsComponent } from './pages/skills/skills.component';
     CharacterComponent,
     ItemDetailComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, OverlayModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, OverlayModule, DragDropModule],
   providers: [],
   bootstrap: [AppComponent]
 })
