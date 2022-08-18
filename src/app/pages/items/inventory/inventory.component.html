@@ -3,6 +3,7 @@
     <app-item
       *ngFor="let inventorySlot of this.inventory; let i = index"
       (click)="this.onItemClick(i)"
-      [objectID]="inventorySlot.objectID"></app-item>
+      [objectID]="inventorySlot.objectID"
+      [amount]="inventorySlot.amount"></app-item>
   </div>
 </app-card>

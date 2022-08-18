@@ -9,9 +9,10 @@
   background-size: cover;
   image-rendering: pixelated;
   --size: calc(var(--spritesheet-scaled-size) * var(--individual-scale));
+  --factor: calc(var(--individual-scale) * var(--spritesheet-scale-factor));
   height: var(--size);
   width: var(--size);
-  padding: calc(0.125rem * var(--individual-scale) * var(--spritesheet-scale-factor));
+  padding: calc(0.125rem * var(--factor));
 }
 
 .icon {
@@ -24,4 +25,26 @@
     )
     var(--size);
   image-rendering: pixelated;
+
+  .item-amount {
+    font-weight: 100;
+    position: absolute;
+    bottom: 0;
+    right: calc(1px * var(--factor));
+    font-size: calc(0.5rem * var(--factor));
+    line-height: calc(0.5rem * var(--factor));
+    text-shadow: calc(-1px * var(--factor)) 0 0 #000,
+      calc(1px * var(--factor)) calc(1px * var(--factor)) 0 #000;
+  }
+
+  .durability-progress {
+    height: calc(1.5px * var(--factor));
+    width: calc(100% - calc(4px * var(--factor)));
+    left: calc(2px * var(--factor));
+    bottom: calc(2px * var(--factor));
+
+    & > * {
+      min-width: calc(1px * var(--factor));
+    }
+  }
 }
