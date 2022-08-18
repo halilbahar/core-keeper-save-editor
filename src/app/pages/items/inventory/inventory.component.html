@@ -1,3 +1,8 @@
 <app-card>
-  <app-item-list [inventory]="inventory" [isEditable]="true"></app-item-list>
+  <div class="item-grid">
+    <app-item
+      *ngFor="let item of inventory"
+      [objectID]="item.objectID"
+      [isEditable]="true"></app-item>
+  </div>
 </app-card>

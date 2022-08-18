@@ -52,3 +52,7 @@ h6 {
 ::-webkit-scrollbar-thumb:hover {
   background: #e3984f;
 }
+
+.item-grid {
+  @apply grid grid-cols-10 gap-2;
+}

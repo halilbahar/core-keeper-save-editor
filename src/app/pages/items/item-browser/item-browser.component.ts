@@ -1,85 +1,91 @@
 import { Component, OnInit } from '@angular/core';
-import { debounceTime, Subject, Subscription } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { debounceTime, Subject } from 'rxjs';
 
 import { ItemCategories } from 'src/app/enums/item-categories';
-import { InventorySlot, ItemData } from '~models';
 import { ItemDataService } from '~services';
 
+@UntilDestroy()
 @Component({
   selector: 'app-item-browser',
   templateUrl: './item-browser.component.html',
   styleUrls: ['./item-browser.component.scss']
 })
 export class ItemBrowserComponent implements OnInit {
-  items: ItemData[];
-  filteredItems: InventorySlot[] = [];
-  categories = ItemCategories;
+  private $modelChanged: Subject<string> = new Subject();
+
+  filteredObjectIDs: number[] = [];
+  itemCategories = ItemCategories;
 
   filterTerm: string = '';
   selectedCategory: number = -1;
 
-  private modelChanged: Subject<string> = new Subject<string>();
-  private subscription: Subscription;
-  debounceTime = 500;
-
   constructor(private itemDataService: ItemDataService) {}
 
+  /**
+   * Initialize the items and a subscription which uses a debounce method.
+   * This way the form will only be alerted after the last keystrok + 500ms
+   */
   ngOnInit(): void {
-    this.items = this.itemDataService.items;
-    this.subscription = this.modelChanged.pipe(debounceTime(this.debounceTime)).subscribe(data => {
-      this.filterTerm = data;
-      this.filterItems();
-    });
+    this.$modelChanged
+      .pipe(debounceTime(500))
+      .pipe(untilDestroyed(this))
+      .subscribe(data => {
+        this.filterTerm = data;
+        this.filterItems();
+      });
     this.filterItems();
   }
 
+  /**
+   * Event handler for the input field.
+   * @param event InputEvent
+   */
   onFilterInput(event) {
-    this.modelChanged.next(event.target.value);
+    this.$modelChanged.next(event.target.value);
   }
 
-  filterItems() {
-    this.filteredItems = [];
-    let categorizedItems = [];
-
-    if (this.selectedCategory !== -1) {
-      for (let item of this.items) {
-        if (item.objectType == this.selectedCategory) {
-          categorizedItems.push(item);
-        }
-      }
-    } else {
-      categorizedItems = [...this.items];
-    }
-
-    for (let item of categorizedItems) {
-      if (isNaN(Number(this.filterTerm)) || Number(this.filterTerm) == 0) {
-        if (item.name.toLowerCase().includes(this.filterTerm.toLowerCase())) {
-          this.filteredItems.push({
-            objectID: item.objectID,
-            amount: item.initialAmount,
-            variation: 0,
-            variationUpdateCount: 0
-          } as InventorySlot);
-        }
-      } else {
-        if (item.objectID === Number(this.filterTerm)) {
-          this.filteredItems.push({
-            objectID: item.objectID,
-            amount: item.initialAmount,
-            variation: 0,
-            variationUpdateCount: 0
-          } as InventorySlot);
-        }
-      }
-    }
-  }
-
-  getCategoryNames(): string[] {
-    return Object.keys(ItemCategories).filter(key => !isNaN(Number(ItemCategories[key])));
-  }
-
+  /**
+   * Event handler for the select field.
+   * @param category id
+   */
   onCategorySelect(category: number) {
     this.selectedCategory = +category;
     this.filterItems();
+  }
+
+  /**
+   * Filter the items by category whether the items belong to the current category (-1 for excluding this mechanisim)
+   * and by name / objectID
+   */
+  filterItems() {
+    this.filteredObjectIDs = [];
+    let items = [];
+
+    // Check if we need to filter by category
+    if (this.selectedCategory !== -1) {
+      items = this.itemDataService.items.filter(item => item.objectType == this.selectedCategory);
+    } else {
+      items = [...this.itemDataService.items];
+    }
+
+    // Exclude everything that does not match (either as number or as string)
+    for (let item of items) {
+      const isANumber = isNaN(Number(this.filterTerm));
+      if (
+        item.name.toLowerCase().includes(this.filterTerm.toLowerCase()) ||
+        (isANumber && item.objectID === Number(this.filterTerm))
+      ) {
+        this.filteredObjectIDs.push(item.objectID);
+      }
+    }
+  }
+
+  /**
+   * @returns all labels of ItemCategories
+   */
+  getCategoryNames(): string[] {
+    // This way the numbered version is filtered out
+    return Object.values(ItemCategories).filter(value => typeof value === 'string') as string[];
   }
 }

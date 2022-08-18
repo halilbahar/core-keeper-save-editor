@@ -10,8 +10,8 @@ import { ItemDataService } from '~services';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit {
-  @Input() item: InventorySlot;
   @Input() isEditable: boolean;
+  @Input() objectID: number;
   itemData: ItemData;
 
   constructor(
@@ -20,10 +20,10 @@ export class ItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.itemData = this.itemDataService.getData(this.item.objectID);
+    this.itemData = this.itemDataService.getData(this.objectID);
   }
 
   selectItem(): void {
-    this.selectedItemService.setSelectedItem(this.item, this.isEditable);
+    this.selectedItemService.setSelectedItem(null, this.isEditable);
   }
 }

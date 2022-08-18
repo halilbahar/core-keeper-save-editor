@@ -24,22 +24,16 @@ export class ItemDataService {
     switch (item.rarity) {
       case -1:
         return '#adadad';
-        break;
       case 1:
         return '#38c54f';
-        break;
       case 2:
         return '#328aff';
-        break;
       case 3:
         return '#cd3bbd';
-        break;
       case 4:
         return '#ffb426';
-        break;
       default:
         return '#ffffff';
-        break;
     }
   }
 }

@@ -15,12 +15,11 @@ import { CharacterComponent } from './pages/character/character.component';
 import { EquipmentComponent } from './pages/items/equipment/equipment.component';
 import { InventoryComponent } from './pages/items/inventory/inventory.component';
 import { ItemBrowserComponent } from './pages/items/item-browser/item-browser.component';
-import { ItemListComponent } from './pages/items/item-list/item-list.component';
+import { ItemDetailComponent } from './pages/items/item-detail/item-detail.component';
 import { ItemComponent } from './pages/items/item/item.component';
 import { ItemsComponent } from './pages/items/items.component';
 import { SkillComponent } from './pages/skills/skill/skill.component';
 import { SkillsComponent } from './pages/skills/skills.component';
-import { ItemDetailComponent } from './pages/items/item-detail/item-detail.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,6 @@ import { ItemDetailComponent } from './pages/items/item-detail/item-detail.compo
     SkillComponent,
     ItemTooltipDirective,
     ItemTooltipComponent,
-    ItemListComponent,
     TabGroupComponent,
     TabComponent,
     NavBarComponent,

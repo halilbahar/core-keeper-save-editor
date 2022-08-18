@@ -4,16 +4,23 @@
     style="background-color: #915b26">
     <input
       type="text"
-      [ngModel]="filterTerm"
-      (input)="onFilterInput($event)"
+      [ngModel]="this.filterTerm"
+      (input)="this.onFilterInput($event)"
       placeholder="Search..." />
-    <select [ngModel]="selectedCategory" (ngModelChange)="onCategorySelect($event)">
+    <select [ngModel]="this.selectedCategory" (ngModelChange)="this.onCategorySelect($event)">
       <option value="-1">all</option>
-      <option *ngFor="let category of getCategoryNames()" value="{{ categories[category] }}">
+      <option
+        *ngFor="let category of this.getCategoryNames()"
+        value="{{ this.itemCategories[category] }}">
         {{ category }}
       </option>
     </select>
   </div>
 
-  <app-item-list [inventory]="filteredItems" [isEditable]="false"></app-item-list>
+  <div class="item-grid">
+    <app-item
+      *ngFor="let objectID of this.filteredObjectIDs"
+      [objectID]="objectID"
+      [isEditable]="false"></app-item>
+  </div>
 </app-card>
