@@ -1,5 +1,5 @@
 <app-card>
-  <div class="item-grid">
+  <div class="item-grid" id="inventory-drag-list" cdkDropList>
     <app-item
       *ngFor="let inventorySlot of this.inventory; let i = index"
       (click)="this.onItemClick(i)"

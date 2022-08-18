@@ -13,7 +13,7 @@ export class ItemComponent {
   private _scale: number = 1;
   private _amount: number;
   @HostBinding('style') style: string = `--individual-scale: ${this._scale};`;
-
+  @Input() drag: boolean = false;
   itemData: ItemData;
   durabilityProgress?: number;
   durabilityBarColor?: string;

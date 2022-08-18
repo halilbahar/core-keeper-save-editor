@@ -1,5 +1,7 @@
 <div
   appItemTooltip
+  cdkDrag
+  [cdkDragDisabled]="!this.drag"
   [tooltipItemData]="this.itemData"
   *ngIf="this.itemData"
   class="icon"
