@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 import { InventorySlot } from '~models';
 
@@ -7,12 +7,12 @@ import { InventorySlot } from '~models';
   providedIn: 'root'
 })
 export class SelectedItemService {
-  private _$selectedItem: BehaviorSubject<InventorySlot> = new BehaviorSubject(null);
-  readonly $selectedItem: Observable<InventorySlot> = this._$selectedItem.asObservable();
+  private _$selectedItem: Subject<number> = new Subject();
+  readonly $selectedItem: Observable<number> = this._$selectedItem.asObservable();
 
   constructor() {}
 
-  setSelectedItem(inventorySlot: InventorySlot) {
-    this._$selectedItem.next(inventorySlot);
+  setSelectedItem(inventorySlotIndex: number) {
+    this._$selectedItem.next(inventorySlotIndex);
   }
 }

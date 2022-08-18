@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { InventorySlot } from '~models';
-import { CharacterService } from '~services';
+import { CharacterService, SelectedItemService } from '~services';
 
 @UntilDestroy()
 @Component({
@@ -13,11 +13,22 @@ import { CharacterService } from '~services';
 export class InventoryComponent implements OnInit {
   inventory: InventorySlot[];
 
-  constructor(private characterService: CharacterService) {}
+  constructor(
+    private characterService: CharacterService,
+    private selectedItemService: SelectedItemService
+  ) {}
 
   ngOnInit(): void {
     this.characterService.$character.pipe(untilDestroyed(this)).subscribe(value => {
       this.inventory = value.inventory;
     });
+  }
+
+  /**
+   * Event handler for the on click event on items
+   * @param index of the inventory slot
+   */
+  onItemClick(index: number): void {
+    this.selectedItemService.setSelectedItem(index);
   }
 }
