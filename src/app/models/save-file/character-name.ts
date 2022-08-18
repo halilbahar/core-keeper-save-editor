@@ -1,6 +1,6 @@
 export interface CharacterName {
   utf8LengthInBytes: number;
-  bytes: {};
+  bytes: CharacterNameBytes;
 }
 
 export interface CharacterNameBytes {
