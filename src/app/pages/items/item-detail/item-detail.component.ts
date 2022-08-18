@@ -21,12 +21,12 @@ export class ItemDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedItemService.$selectedItem.subscribe(data => {
-      if (data) {
-        this.item = this.itemDataService.getData(data.inventorySlot.objectID);
-        this.inventorySlot = data.inventorySlot;
-        this.isEditable = data.isEditable;
-        console.log(data.inventorySlot);
-      }
+      // if (data) {
+      //   this.item = this.itemDataService.getData(data.inventorySlot.objectID);
+      //   this.inventorySlot = data.inventorySlot;
+      //   this.isEditable = data.isEditable;
+      //   console.log(data.inventorySlot);
+      // }
     });
   }
 

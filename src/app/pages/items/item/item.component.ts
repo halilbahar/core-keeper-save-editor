@@ -1,7 +1,6 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 
-import { SelectedItemService } from 'src/app/services/selected-item.service';
-import { InventorySlot, ItemData } from '~models';
+import { ItemData } from '~models';
 import { ItemDataService } from '~services';
 
 @Component({
@@ -21,16 +20,9 @@ export class ItemComponent implements OnInit {
     this.style = `--individual-scale: ${this._scale};`;
   }
 
-  constructor(
-    private itemDataService: ItemDataService,
-    private selectedItemService: SelectedItemService
-  ) {}
+  constructor(private itemDataService: ItemDataService) {}
 
   ngOnInit(): void {
     this.itemData = this.itemDataService.getData(this.objectID);
-  }
-
-  selectItem(): void {
-    this.selectedItemService.setSelectedItem(null, this.isEditable);
   }
 }

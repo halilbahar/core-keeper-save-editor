@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-import { InventorySlot, SelectedInventorySlot } from '~models';
+import { InventorySlot } from '~models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SelectedItemService {
-  $selectedItem: BehaviorSubject<SelectedInventorySlot> = new BehaviorSubject(null);
+  private _$selectedItem: BehaviorSubject<InventorySlot> = new BehaviorSubject(null);
+  readonly $selectedItem: Observable<InventorySlot> = this._$selectedItem.asObservable();
 
   constructor() {}
 
-  setSelectedItem(item: InventorySlot, isEditable: boolean) {
-    this.$selectedItem.next({ inventorySlot: item, isEditable });
+  setSelectedItem(inventorySlot: InventorySlot) {
+    this._$selectedItem.next(inventorySlot);
   }
 }

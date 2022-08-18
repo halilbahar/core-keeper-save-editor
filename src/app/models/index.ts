@@ -6,4 +6,3 @@ export * from './character-name';
 export * from './inventory-slot';
 export * from './item-data';
 export * from './character-customization';
-export * from './selected-inventory-slot';
