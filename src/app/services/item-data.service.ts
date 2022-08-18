@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 
+import { ItemRarity } from '~enums';
 import { ItemData } from '~models';
 
 // eslint-disable-next-line no-restricted-imports
-import ItemDataJson from '../../assets/item_data.json';
+import ItemDataJson from '../../assets/item-data.json';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,22 @@ export class ItemDataService {
       if (Object.values(item)[0] === objectID) return item;
     }
     return null;
+  }
+
+  getRarityColor(rarity: ItemRarity): string {
+    switch (rarity) {
+      case -1:
+        return '#adadad';
+      case 1:
+        return '#38c54f';
+      case 2:
+        return '#328aff';
+      case 3:
+        return '#cd3bbd';
+      case 4:
+        return '#ffb426';
+      default:
+        return '#ffffff';
+    }
   }
 }

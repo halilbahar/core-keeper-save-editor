@@ -1,2 +1,5 @@
-<h3 class="text-xl" [ngStyle]="{ color: getRarityColor() }">{{ item.name }}</h3>
-<p class="text-xl">{{ item.desc }}</p>
+<div class="flex gap-1 items-center">
+  <h3 class="text-xl" [ngStyle]="{ color: this.rarityColor }">{{ this.item.name }}</h3>
+  <span class="text-xl text-gray-400">#{{ this.item.objectID.toString().padStart(4, '0') }}</span>
+</div>
+<p class="text-xl">{{ this.item.description }}</p>

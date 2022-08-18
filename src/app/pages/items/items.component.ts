@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { InventorySlot, ItemData } from '~models';
 
 @Component({
   selector: 'app-items',
@@ -6,10 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./items.component.scss']
 })
 export class ItemsComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

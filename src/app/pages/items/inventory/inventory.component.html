@@ -1,3 +1,9 @@
 <app-card>
-  <app-item-list [inventory]=inventory></app-item-list>
+  <div class="item-grid">
+    <app-item
+      *ngFor="let inventorySlot of this.inventory; let i = index"
+      (click)="this.onItemClick(i)"
+      [objectID]="inventorySlot.objectID"
+      [amount]="inventorySlot.amount"></app-item>
+  </div>
 </app-card>

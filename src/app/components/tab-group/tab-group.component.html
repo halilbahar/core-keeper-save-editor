@@ -4,7 +4,7 @@
       *ngFor="let tab of tabs"
       class="p-2 nav-item {{ tab.active ? 'active' : '' }}"
       (click)="selectTab(tab)">
-      <span>{{ tab.title }}</span>
+      <span>{{ tab.navItemTitle }}</span>
     </div>
   </div>
 </app-nav-bar>

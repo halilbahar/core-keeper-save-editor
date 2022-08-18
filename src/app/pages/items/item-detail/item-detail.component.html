@@ -1,0 +1,27 @@
+<app-card *ngIf="this.item">
+  <div class="flex gap-2 mb-2 items-center">
+    <app-item
+      class="pointer-events-none"
+      [objectID]="this.inventorySlot.objectID"
+      [scale]="2"></app-item>
+    <div class="flex flex-col justify-center">
+      <div class="flex gap-2">
+        <h3 class="text-xl title-shadow" [ngStyle]="{ color: this.rarityColor }">
+          {{ this.item.name }}
+        </h3>
+        <span class="text-xl text-gray-300"
+          >#{{ this.item.objectID.toString().padStart(4, '0') }}</span
+        >
+      </div>
+      <h4 class="text-md title-shadow" [ngStyle]="{ color: this.rarityColor }">
+        {{ this.rarity }}
+      </h4>
+    </div>
+  </div>
+  <p class="text-xl">{{ this.item.description }}</p>
+  <div>
+    <input type="number" (input)="this.onAmountChange($event)" class="text-black" />
+    /
+    <span>500</span>
+  </div>
+</app-card>

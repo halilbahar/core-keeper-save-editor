@@ -1,4 +1,7 @@
+import { CharacterName } from './character-name';
+
 export interface CharacterCostomization {
+  name: CharacterName;
   gender: number;
   skinColor: number;
   hair: number;

@@ -1,18 +1,50 @@
 :host {
-  @apply flex justify-center items-center w-max h-max p-1 relative box-content;
+  --individual-scale: 1;
+}
+
+:host {
+  @apply flex justify-center items-center w-max h-max relative box-content;
   background-image: url('/assets/item-frame.png');
   background-repeat: no-repeat;
   background-size: cover;
   image-rendering: pixelated;
-  height: calc(var(--spritesheet-icon-width) * var(--spritesheet-scale-factor));
-  width: calc(var(--spritesheet-icon-width) * var(--spritesheet-scale-factor));
+  --size: calc(var(--spritesheet-scaled-size) * var(--individual-scale));
+  --factor: calc(var(--individual-scale) * var(--spritesheet-scale-factor));
+  height: var(--size);
+  width: var(--size);
+  padding: calc(0.125rem * var(--factor));
 }
 
 .icon {
-  --index: -100;
+  --size: calc(var(--spritesheet-scaled-size) * var(--individual-scale));
   @apply h-full w-full;
-  background-image: url('/assets/spritesheet.png');
-  background-position: calc(var(--index) * var(--spritesheet-scaled-size) * -1) 0px;
-  background-size: calc(var(--spritesheet-width) * var(--spritesheet-scale-factor)) var(--spritesheet-scaled-size);
+  background-image: url('/assets/item-spritesheet.png');
+  background-position: calc(var(--index) * var(--size) * -1) 0px;
+  background-size: calc(
+      var(--spritesheet-width) * var(--spritesheet-scale-factor) * var(--individual-scale)
+    )
+    var(--size);
   image-rendering: pixelated;
+
+  .item-amount {
+    font-weight: 100;
+    position: absolute;
+    bottom: 0;
+    right: calc(1px * var(--factor));
+    font-size: calc(0.5rem * var(--factor));
+    line-height: calc(0.5rem * var(--factor));
+    text-shadow: calc(-1px * var(--factor)) 0 0 #000,
+      calc(1px * var(--factor)) calc(1px * var(--factor)) 0 #000;
+  }
+
+  .durability-progress {
+    height: calc(1.5px * var(--factor));
+    width: calc(100% - calc(4px * var(--factor)));
+    left: calc(2px * var(--factor));
+    bottom: calc(2px * var(--factor));
+
+    & > * {
+      min-width: calc(1px * var(--factor));
+    }
+  }
 }
