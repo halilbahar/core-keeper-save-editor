@@ -1,15 +1,12 @@
 :host {
   --individual-scale: 1;
-}
-
-:host {
+  --size: calc(var(--spritesheet-scaled-size) * var(--individual-scale));
+  --factor: calc(var(--individual-scale) * var(--spritesheet-scale-factor));
   @apply flex justify-center items-center w-max h-max relative box-content;
   background-image: url('/assets/item-frame.png');
   background-repeat: no-repeat;
   background-size: cover;
   image-rendering: pixelated;
-  --size: calc(var(--spritesheet-scaled-size) * var(--individual-scale));
-  --factor: calc(var(--individual-scale) * var(--spritesheet-scale-factor));
   height: var(--size);
   width: var(--size);
   padding: calc(0.125rem * var(--factor));
@@ -17,7 +14,8 @@
 
 .icon {
   --size: calc(var(--spritesheet-scaled-size) * var(--individual-scale));
-  @apply h-full w-full;
+  height: var(--size);
+  width: var(--size);
   background-image: url('/assets/item-spritesheet.png');
   background-position: calc(var(--index) * var(--size) * -1) 0px;
   background-size: calc(

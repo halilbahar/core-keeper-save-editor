@@ -1,9 +1,12 @@
 <div
-  appItemTooltip
-  [tooltipItemData]="this.itemData"
-  *ngIf="this.itemData"
   class="icon"
-  style="--index:{{ this.itemData.iconIndex }}">
+  *ngIf="this.itemData"
+  appItemTooltip
+  cdkDrag
+  [cdkDragData]="this.itemData"
+  [cdkDragDisabled]="!this.drag"
+  [tooltipItemData]="this.itemData"
+  style="--index:{{ this.itemData?.iconIndex }}; --individual-scale: {{ this.scale }};">
   <div
     class="item-amount"
     *ngIf="this.amount && !this.durabilityProgress && this.itemData.isStackable === 1">

@@ -20,6 +20,8 @@ export class ItemBrowserComponent implements OnInit {
   filterTerm: string = '';
   selectedCategory: number = -1;
 
+  inventory_ids: string[] = [];
+
   constructor(private itemDataService: ItemDataService) {}
 
   /**
@@ -35,6 +37,10 @@ export class ItemBrowserComponent implements OnInit {
         this.filterItems();
       });
     this.filterItems();
+
+    for (let i = 0; i < 66; i++) {
+      this.inventory_ids.push(`inventory-${i}`);
+    }
   }
 
   /**

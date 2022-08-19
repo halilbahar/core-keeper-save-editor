@@ -18,6 +18,11 @@
   </div>
 
   <div class="item-grid">
-    <app-item *ngFor="let objectID of this.filteredObjectIDs" [objectID]="objectID"></app-item>
+    <app-item
+      cdkDropList
+      *ngFor="let objectID of this.filteredObjectIDs"
+      [cdkDropListConnectedTo]="this.inventory_ids"
+      [objectID]="objectID"
+      [drag]="true"></app-item>
   </div>
 </app-card>

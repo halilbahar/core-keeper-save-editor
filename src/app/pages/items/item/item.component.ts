@@ -13,7 +13,7 @@ export class ItemComponent {
   private _scale: number = 1;
   private _amount: number;
   @HostBinding('style') style: string = `--individual-scale: ${this._scale};`;
-
+  @Input() drag: boolean = false;
   itemData: ItemData;
   durabilityProgress?: number;
   durabilityBarColor?: string;
@@ -38,8 +38,12 @@ export class ItemComponent {
 
   constructor(private itemDataService: ItemDataService) {}
 
-  get amount() {
+  get amount(): number {
     return this._amount;
+  }
+
+  get scale(): number {
+    return this._scale;
   }
 
   private mapColor(progress: number): string {
