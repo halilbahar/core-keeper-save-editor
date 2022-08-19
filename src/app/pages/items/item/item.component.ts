@@ -38,8 +38,12 @@ export class ItemComponent {
 
   constructor(private itemDataService: ItemDataService) {}
 
-  get amount() {
+  get amount(): number {
     return this._amount;
+  }
+
+  get scale(): number {
+    return this._scale;
   }
 
   private mapColor(progress: number): string {
