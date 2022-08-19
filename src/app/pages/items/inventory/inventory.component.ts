@@ -1,7 +1,8 @@
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-import { InventorySlot } from '~models';
+import { InventorySlot, ItemData } from '~models';
 import { CharacterService, SelectedItemService } from '~services';
 
 @UntilDestroy()
@@ -30,5 +31,11 @@ export class InventoryComponent implements OnInit {
    */
   onItemClick(index: number): void {
     this.selectedItemService.setSelectedItem(index);
+  }
+
+  onDrop(event: CdkDragDrop<InventorySlot, any, ItemData>) {
+    const { objectID, initialAmount } = event.item.data;
+    event.container.data.objectID = objectID;
+    event.container.data.amount = initialAmount;
   }
 }
