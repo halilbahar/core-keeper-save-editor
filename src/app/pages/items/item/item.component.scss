@@ -13,7 +13,6 @@
 }
 
 .icon {
-  --individual-scale: 1;
   --size: calc(var(--spritesheet-scaled-size) * var(--individual-scale));
   height: var(--size);
   width: var(--size);
