@@ -8,7 +8,10 @@
       cdkDropList
       [cdkDropListData]="inventorySlot"
       (cdkDropListDropped)="this.onDrop($event)"
+      (cdkDropListEntered)="this.onEnter($event)"
+      (cdkDropListExited)="this.onExit($event)"
       [drag]="true"
+      [hide]="this.indexToHide === i"
       id="inventory-{{ i }}"></app-item>
   </div>
 </app-card>

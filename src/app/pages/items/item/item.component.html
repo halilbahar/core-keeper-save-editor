@@ -6,6 +6,7 @@
   [cdkDragData]="this.itemData"
   [cdkDragDisabled]="!this.drag"
   [tooltipItemData]="this.itemData"
+  [class.hidden]="this.hide"
   style="--index:{{ this.itemData?.iconIndex }}; --individual-scale: {{ this.scale }};">
   <div
     class="item-amount"

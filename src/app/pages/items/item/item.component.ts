@@ -12,11 +12,16 @@ export class ItemComponent {
   private _objectID: number;
   private _scale: number = 1;
   private _amount: number;
+
   @HostBinding('style') style: string = `--individual-scale: ${this._scale};`;
   @Input() drag: boolean = false;
+  @Input() hide: boolean = false;
+
   itemData: ItemData;
   durabilityProgress?: number;
   durabilityBarColor?: string;
+
+  constructor(private itemDataService: ItemDataService) {}
 
   @Input() set scale(value) {
     this._scale = value;
@@ -35,8 +40,6 @@ export class ItemComponent {
       this.durabilityBarColor = this.mapColor(this.durabilityProgress);
     }
   }
-
-  constructor(private itemDataService: ItemDataService) {}
 
   get amount(): number {
     return this._amount;
