@@ -1,4 +1,4 @@
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDragEnter, CdkDragExit } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
@@ -13,6 +13,7 @@ import { CharacterService, SelectedItemService } from '~services';
 })
 export class InventoryComponent implements OnInit {
   inventory: InventorySlot[];
+  indexToHide: number = -1;
 
   constructor(
     private characterService: CharacterService,
@@ -40,7 +41,7 @@ export class InventoryComponent implements OnInit {
    * This mean when the old item-slot is not empty, the 2 items will swap places.
    * @param event CdkDragDrop Event
    */
-  onDrop(event: CdkDragDrop<InventorySlot, InventorySlot, ItemData>) {
+  onDrop(event: CdkDragDrop<InventorySlot, InventorySlot, ItemData>): void {
     let objectID: number;
     let amount: number;
     let variation: number;
@@ -76,5 +77,30 @@ export class InventoryComponent implements OnInit {
     event.container.data.amount = amount;
     event.container.data.variation = variation;
     event.container.data.variationUpdateCount = variationUpdateCount;
+
+    // If the item is dropped the exit event never gets called, thus the index is still set. Reset it
+    this.indexToHide = -1;
+  }
+
+  /**
+   * Event handler for the enter drop event on all item item-slots.
+   * If the item enters find out the index and assign it to the indexToHide variable,
+   * so it can be hidden in app-item
+   * @param event CdkDragEnter Event
+   */
+  onEnter(event: CdkDragEnter<unknown>): void {
+    const id = event.container.id;
+    const regex = /inventory-(\d+)/;
+    const match = id.match(regex);
+    this.indexToHide = +match[1];
+  }
+
+  /**
+   * Event handler for the exit drop event on all item item-slots.
+   * Unset the indexToHide variable so all items are shown.
+   * @param event CdkDragEnter Event
+   */
+  onExit(event: CdkDragExit<unknown>) {
+    this.indexToHide = -1;
   }
 }
