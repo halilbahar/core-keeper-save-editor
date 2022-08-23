@@ -1,5 +1,5 @@
 <app-card>
-  <div class="item-grid" cdkDropListGroup>
+  <div class="item-grid">
     <app-item
       *ngFor="let inventorySlot of this.inventory; let i = index"
       (click)="this.onItemClick(i)"
@@ -7,9 +7,9 @@
       [amount]="inventorySlot.amount"
       cdkDropList
       [cdkDropListData]="inventorySlot"
-      (cdkDropListDropped)="this.onDrop($event)"
-      (cdkDropListEntered)="this.onEnter($event)"
-      (cdkDropListExited)="this.onExit($event)"
+      (cdkDropListDropped)="this.dragNDropService.onDrop($event)"
+      (cdkDropListEntered)="this.dragNDropService.onEnter($event)"
+      (cdkDropListExited)="this.dragNDropService.onExit($event)"
       [drag]="true"
       [hide]="this.indexToHide === i"
       id="inventory-{{ i }}"></app-item>
