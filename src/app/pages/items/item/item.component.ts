@@ -35,7 +35,7 @@ export class ItemComponent {
 
   @Input() set amount(value) {
     this._amount = value;
-    if (value && this.itemData.initialAmount > 1) {
+    if (value && this.itemData?.initialAmount > 1) {
       this.durabilityProgress = (value / this.itemData.initialAmount) * 100;
       this.durabilityBarColor = this.mapColor(this.durabilityProgress);
     }

@@ -4,11 +4,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardComponent } from './components/card/card.component';
 import { ItemTooltipComponent } from './components/item-tooltip/item-tooltip.component';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { TabGroupComponent } from './components/tab-group/tab-group.component';
 import { TabComponent } from './components/tab-group/tab/tab.component';
 import { ItemTooltipDirective } from './directives/item-tooltip.directive';
@@ -35,13 +33,12 @@ import { SkillsComponent } from './pages/skills/skills.component';
     ItemTooltipComponent,
     TabGroupComponent,
     TabComponent,
-    NavBarComponent,
     ItemsComponent,
     SkillsComponent,
     CharacterComponent,
     ItemDetailComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, OverlayModule, DragDropModule],
+  imports: [BrowserModule, FormsModule, OverlayModule, DragDropModule],
   providers: [],
   bootstrap: [AppComponent]
 })
