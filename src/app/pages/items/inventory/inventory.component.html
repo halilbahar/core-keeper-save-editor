@@ -2,16 +2,16 @@
   <div class="item-grid">
     <app-item
       *ngFor="let inventorySlot of this.inventory; let i = index"
-      (click)="this.onItemClick(i)"
+      id="inventory-{{ i }}"
       [objectID]="inventorySlot.objectID"
       [amount]="inventorySlot.amount"
+      [drag]="true"
+      [hide]="this.indexToHide === i"
       cdkDropList
       [cdkDropListData]="inventorySlot"
       (cdkDropListDropped)="this.dragNDropService.onDrop($event)"
       (cdkDropListEntered)="this.dragNDropService.onEnter($event)"
       (cdkDropListExited)="this.dragNDropService.onExit($event)"
-      [drag]="true"
-      [hide]="this.indexToHide === i"
-      id="inventory-{{ i }}"></app-item>
+      (click)="this.onItemClick(i)"></app-item>
   </div>
 </app-card>

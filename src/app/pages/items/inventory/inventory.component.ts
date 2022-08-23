@@ -22,7 +22,7 @@ export class InventoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.characterService.$character.pipe(untilDestroyed(this)).subscribe(value => {
-      this.inventory = value.inventory;
+      this.inventory = value.inventory.slice(0, 49 + 1);
     });
 
     this.dragNDropService.$indexToHide
