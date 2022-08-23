@@ -51,6 +51,7 @@ export class TabGroupComponent {
       link.href = window.URL.createObjectURL(blob);
       link.download = `${index}.json.enc`;
       link.click();
+      window.URL.revokeObjectURL(link.href);
     });
   }
 }
