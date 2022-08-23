@@ -32,12 +32,12 @@ jobs:
             --directory dist/core-keeper-save-editor/ \
             -cvf ${{ runner.temp }}/artifact.tar \
             .
-    - name: Upload artifact
-      uses: actions/upload-artifact@main
-      with:
-        name: github-pages
-        path: ${{ runner.temp }}/artifact.tar
-        retention-days: 1
+      - name: Upload artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
   deploy:
     needs: build
     permissions:
