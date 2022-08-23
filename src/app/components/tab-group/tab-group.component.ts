@@ -38,5 +38,19 @@ export class TabGroupComponent {
     });
   }
 
-  export(): void {}
+  /**
+   * Export the current character with the given index.
+   * Create a invisible a tag and click on it so the user can download the file
+   */
+  export(): void {
+    const character = this.characterService.$character.value;
+    const index = this.characterService.$index.value;
+    this.aesService.encryptCharacterSaveFile(character, index).then(bytes => {
+      const blob = new Blob([bytes.buffer], { type: 'application/octet-stream' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = `${index}.json.enc`;
+      link.click();
+    });
+  }
 }
