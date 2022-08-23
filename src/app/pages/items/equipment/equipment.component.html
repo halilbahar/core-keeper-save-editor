@@ -4,7 +4,7 @@
     [objectID]="item.objectID"
     [amount]="item.amount"
     [drag]="true"
-    [hide]="this.indexToHide === i"
+    [hide]="this.indexToHide === 51 + i"
     cdkDropList
     [cdkDropListData]="item"
     [cdkDropListEnterPredicate]="this.dragNDropService.equipmentEnterPredicate()"
