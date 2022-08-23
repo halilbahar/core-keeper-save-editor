@@ -126,4 +126,29 @@ export class DragNDropService {
       return true;
     };
   }
+
+  /**
+   * Predicate whether the item can be dropped into the inventory item slots.
+   * Without this function you could drop your helm into one slot and the service would switch thoes items.
+   * For example: You have a bronze helm equipped but want to drop it into your inventory.
+   * If you drop it to the slot with the ancient coins, they both will swap
+   */
+  InventoryEnterPredicate(): (drag: CdkDrag, drop: CdkDropList) => boolean {
+    return (drag: CdkDrag<{ objectID: number }>, drop: CdkDropList<InventorySlot>) => {
+      // If the item comes from the item-browser, allow everything or if the item slot is empty
+      if (!drag.dropContainer.id.startsWith('inventory-') || drop.data.objectID === 0) {
+        return true;
+      }
+
+      const dragItemData = this.itemDataService.getData(drag.data.objectID);
+      const dropItemData = this.itemDataService.getData(drop.data.objectID);
+
+      if (dragItemData == null || dropItemData == null) {
+        console.log(dragItemData, drop);
+      }
+
+      // If the types are the same, you are allowed to swap the items
+      return dragItemData.objectType === dropItemData.objectType;
+    };
+  }
 }
