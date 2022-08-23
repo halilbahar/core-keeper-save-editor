@@ -1,4 +1,6 @@
-import { Component, ContentChildren, OnInit, QueryList } from '@angular/core';
+import { Component, ContentChildren, QueryList } from '@angular/core';
+
+import { AesService, CharacterService } from '~services';
 
 import { TabComponent } from './tab/tab.component';
 
@@ -10,10 +12,31 @@ import { TabComponent } from './tab/tab.component';
 export class TabGroupComponent {
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
 
+  constructor(private aesService: AesService, private characterService: CharacterService) {}
+
   selectTab(tab: TabComponent): void {
     this.tabs.forEach(t => {
       t.active = false;
     });
     tab.active = true;
   }
+
+  /**
+   * Import the x.json.enc file with this on file upload event handler.
+   * This finds out what x is and decrypts it with the proper private key.
+   */
+  onFileUpload(files: FileList): void {
+    const file = files.item(0);
+    const filename = file.name;
+    const regex = /(\d{1,2})\.json\.enc/;
+    const match = filename.match(regex);
+    const index = +match[1];
+
+    this.aesService.decryptCharacterSaveFile(file, index).then(character => {
+      this.characterService.setCharacter(character);
+      this.characterService.setIndex(index);
+    });
+  }
+
+  export(): void {}
 }

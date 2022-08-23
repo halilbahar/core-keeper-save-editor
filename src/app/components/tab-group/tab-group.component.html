@@ -5,6 +5,14 @@
     (click)="selectTab(tab)">
     <span>{{ tab.navItemTitle }}</span>
   </div>
+  <div class="p-2 nav-item" (click)="fileUpload.click()"><span>Import</span></div>
+  <div class="p-2 nav-item" (click)="this.export()"><span>Export</span></div>
 </div>
 
+<input
+  type="file"
+  accept=".json.enc"
+  class="hidden"
+  (change)="this.onFileUpload(fileUpload.files)"
+  #fileUpload />
 <ng-content></ng-content>
