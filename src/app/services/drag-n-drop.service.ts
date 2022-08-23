@@ -92,7 +92,12 @@ export class DragNDropService {
     this.$indexToHide.next(-1);
   }
 
-  enterPredicate(): (drag: CdkDrag, drop: CdkDropList) => boolean {
+  /**
+   * Predicate whether the item can be dropped into the equipment item slots.
+   * This way only the correct items can be dropped.
+   * For example: Only rings can be dropped into the ring item slots.
+   */
+  equipmentEnterPredicate(): (drag: CdkDrag, drop: CdkDropList) => boolean {
     return (drag: CdkDrag<{ objectID: number }>, drop: CdkDropList<InventorySlot>) => {
       const id = drop.id;
       const regex = /inventory-(\d+)/;
