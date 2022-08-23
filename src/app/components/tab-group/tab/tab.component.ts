@@ -14,8 +14,8 @@ export class TabComponent {
   @Input() set active(value: boolean) {
     this._active = value;
     this.classes = value ? 'block' : 'hidden';
-    console.log(value);
   }
+
   get active(): boolean {
     return this._active;
   }

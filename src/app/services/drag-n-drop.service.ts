@@ -18,9 +18,7 @@ import { ItemDataService } from './item-data.service';
 })
 export class DragNDropService {
   $indexToHide: BehaviorSubject<number> = new BehaviorSubject(-1);
-  constructor(private itemDataService: ItemDataService) {
-    console.log(itemDataService);
-  }
+  constructor(private itemDataService: ItemDataService) {}
 
   /**
    * Event handler for the drop event on all item-slots.
@@ -34,7 +32,6 @@ export class DragNDropService {
     let amount: number;
     let variation: number;
     let variationUpdateCount: number;
-    console.log(event);
 
     if (event.previousContainer.id.startsWith('inventory')) {
       // If the item came from the inventory, get the data from the data of the container and reset or swap the items
@@ -142,10 +139,6 @@ export class DragNDropService {
 
       const dragItemData = this.itemDataService.getData(drag.data.objectID);
       const dropItemData = this.itemDataService.getData(drop.data.objectID);
-
-      if (dragItemData == null || dropItemData == null) {
-        console.log(dragItemData, drop);
-      }
 
       // If the types are the same, you are allowed to swap the items
       return dragItemData.objectType === dropItemData.objectType;
