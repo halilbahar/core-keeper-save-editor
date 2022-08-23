@@ -1,1 +1,14 @@
-<app-card>hello</app-card>
+<app-card class="!grid grid-cols-2 gap-2">
+  <app-item
+    *ngFor="let item of this.equipmentSlots; let i = index"
+    [objectID]="item.objectID"
+    [amount]="item.amount"
+    [drag]="true"
+    [hide]="this.indexToHide === i"
+    cdkDropList
+    [cdkDropListData]="item"
+    (cdkDropListDropped)="this.dragNDropService.onDrop($event)"
+    (cdkDropListEntered)="this.dragNDropService.onEnter($event)"
+    (cdkDropListExited)="this.dragNDropService.onExit($event)"
+    id="inventory-{{ 51 + i }}"></app-item>
+</app-card>
