@@ -7,6 +7,7 @@
     [hide]="this.indexToHide === i"
     cdkDropList
     [cdkDropListData]="item"
+    [cdkDropListEnterPredicate]="this.dragNDropService.enterPredicate()"
     (cdkDropListDropped)="this.dragNDropService.onDrop($event)"
     (cdkDropListEntered)="this.dragNDropService.onEnter($event)"
     (cdkDropListExited)="this.dragNDropService.onExit($event)"

@@ -1,15 +1,26 @@
-import { CdkDragDrop, CdkDragEnter, CdkDragExit } from '@angular/cdk/drag-drop';
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDragEnter,
+  CdkDragExit,
+  CdkDropList
+} from '@angular/cdk/drag-drop';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+import { ItemCategories } from '~enums';
 import { InventorySlot, ItemData } from '~models';
+
+import { ItemDataService } from './item-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DragNDropService {
   $indexToHide: BehaviorSubject<number> = new BehaviorSubject(-1);
-  constructor() {}
+  constructor(private itemDataService: ItemDataService) {
+    console.log(itemDataService);
+  }
 
   /**
    * Event handler for the drop event on all item-slots.
@@ -79,5 +90,35 @@ export class DragNDropService {
    */
   onExit(event: CdkDragExit<unknown>) {
     this.$indexToHide.next(-1);
+  }
+
+  enterPredicate(): (drag: CdkDrag, drop: CdkDropList) => boolean {
+    return (drag: CdkDrag<{ objectID: number }>, drop: CdkDropList<InventorySlot>) => {
+      const id = drop.id;
+      const regex = /inventory-(\d+)/;
+      const match = id.match(regex);
+      const index = match[1];
+      const itemData = this.itemDataService.getData(drag.data.objectID);
+      const itemObjectType = itemData.objectType;
+      const indexAllowedObjectTypes = {
+        '51': ItemCategories.Helm,
+        '52': ItemCategories.Necklace,
+        '53': ItemCategories.BreastArmor,
+        '54': ItemCategories.PantsArmor,
+        '55': ItemCategories.Ring,
+        '56': ItemCategories.Ring,
+        '57': ItemCategories.Offhand,
+        '58': ItemCategories.Bag
+      };
+
+      // If we find an index which is in indexAllowedObjectTypes that means we are handling a equipment predicate.
+      // We check if it is the correct objectType
+      if (indexAllowedObjectTypes[index] != null) {
+        return indexAllowedObjectTypes[index] === itemObjectType;
+      }
+
+      // Else it is an item for the inventory
+      return true;
+    };
   }
 }
