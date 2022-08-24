@@ -16,6 +16,7 @@ export class ItemComponent {
   @HostBinding('style') style: string = `--individual-scale: ${this._scale};`;
   @Input() drag: boolean = false;
   @Input() hide: boolean = false;
+  @Input() placeholder: number = -1;
 
   itemData: ItemData;
   durabilityProgress?: number;

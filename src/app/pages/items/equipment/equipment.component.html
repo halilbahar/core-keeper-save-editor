@@ -5,6 +5,7 @@
     [amount]="item.amount"
     [drag]="true"
     [hide]="this.indexToHide === 51 + i"
+    [placeholder]="this.placeholder[i]"
     cdkDropList
     [cdkDropListData]="item"
     [cdkDropListEnterPredicate]="this.dragNDropService.equipmentEnterPredicate()"

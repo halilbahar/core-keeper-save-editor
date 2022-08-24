@@ -13,6 +13,8 @@ import { CharacterService, DragNDropService } from '~services';
 export class EquipmentComponent implements OnInit {
   equipmentSlots: InventorySlot[];
   indexToHide: number;
+  placeholder = [0, 1, 2, 3, 4, 4, 5, 6];
+
   constructor(
     private characterService: CharacterService,
     public dragNDropService: DragNDropService
