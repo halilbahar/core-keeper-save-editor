@@ -1,0 +1,22 @@
+:host {
+  --individual-scale: 3;
+  --size: calc(12px * var(--individual-scale));
+  background-color: #704b27;
+  border: 2px solid;
+  border-image: url('~src/assets/border/skills/skill_border_base.png') 2;
+  border-image-width: 6px;
+  border-image-outset: 2px;
+  image-rendering: pixelated;
+  @apply flex items-center gap-2;
+}
+
+.skill-icon {
+  width: var(--size);
+  height: var(--size);
+}
+
+.skill-number {
+  font-weight: 100;
+  font-size: calc(0.5rem * var(--individual-scale));
+  transform: translateY(calc(1px * var(--individual-scale)));
+}
