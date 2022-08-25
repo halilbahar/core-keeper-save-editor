@@ -19,6 +19,9 @@ import { ItemComponent } from './pages/items/item/item.component';
 import { ItemsComponent } from './pages/items/items.component';
 import { SkillComponent } from './pages/skill-page/components/skill/skill.component';
 import { SkillPageComponent } from './pages/skill-page/skill.page.component';
+import { TalentComponent } from './pages/skill-page/components/talent/talent.component';
+import { TalentTreeComponent } from './pages/skill-page/components/talent-tree/talent-tree.component';
+import { SkillListComponent } from './pages/skill-page/components/skill-list/skill-list.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { SkillPageComponent } from './pages/skill-page/skill.page.component';
     ItemsComponent,
     SkillPageComponent,
     CharacterComponent,
-    ItemDetailComponent
+    ItemDetailComponent,
+    TalentComponent,
+    TalentTreeComponent,
+    SkillListComponent
   ],
   imports: [BrowserModule, FormsModule, OverlayModule, DragDropModule],
   providers: [],
