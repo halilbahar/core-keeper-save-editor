@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+import { Bag } from '~enums';
 import { Character } from '~models';
 
 // eslint-disable-next-line no-restricted-imports
@@ -10,28 +11,24 @@ import DefaultCharacter from '../../assets/default_character.json';
   providedIn: 'root'
 })
 export class CharacterService {
-  $character: BehaviorSubject<Character>;
-  $index: BehaviorSubject<number>;
+  $character: BehaviorSubject<Character> = new BehaviorSubject(null);
+  $index: BehaviorSubject<number> = new BehaviorSubject(null);
+  $bag: BehaviorSubject<Bag> = new BehaviorSubject(null);
 
   constructor() {
     const defaultCharacter = DefaultCharacter as unknown as Character;
     defaultCharacter.characterGuid = crypto.randomUUID().replace(/-/g, '');
-    this.$character = new BehaviorSubject<Character>(defaultCharacter);
-    this.$index = new BehaviorSubject<number>(0);
+    this.setCharacter(defaultCharacter, 0);
   }
 
   /**
-   * Set the current Character which the application will edit
-   * @param character Character
+   * Set the current Character which the application will edit and the index how the file was encrypted
    */
-  setCharacter(character: Character): void {
+  setCharacter(character: Character, index: number): void {
     this.$character.next(character);
-  }
-
-  /**
-   * Set the index, so we know how to encrypt it later
-   */
-  setIndex(index: number): void {
     this.$index.next(index);
+    const objectID = character.inventory[58].objectID;
+    const bag = objectID in Bag ? objectID : Bag.None;
+    this.$bag.next(bag);
   }
 }

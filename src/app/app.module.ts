@@ -19,6 +19,7 @@ import { ItemComponent } from './pages/items/item/item.component';
 import { ItemsComponent } from './pages/items/items.component';
 import { SkillComponent } from './pages/skills/skill/skill.component';
 import { SkillsComponent } from './pages/skills/skills.component';
+import { InventoryPipe } from './pipes/inventory.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SkillsComponent } from './pages/skills/skills.component';
     ItemsComponent,
     SkillsComponent,
     CharacterComponent,
-    ItemDetailComponent
+    ItemDetailComponent,
+    InventoryPipe
   ],
   imports: [BrowserModule, FormsModule, OverlayModule, DragDropModule],
   providers: [],

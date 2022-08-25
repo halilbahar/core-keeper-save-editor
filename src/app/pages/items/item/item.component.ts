@@ -12,8 +12,9 @@ export class ItemComponent {
   private _objectID: number;
   private _scale: number = 1;
   private _amount: number;
+  private _placeholder: number = -1;
 
-  @HostBinding('style') style: string = `--individual-scale: ${this._scale};`;
+  @HostBinding('style') style: string;
   @Input() drag: boolean = false;
   @Input() hide: boolean = false;
 
@@ -25,7 +26,7 @@ export class ItemComponent {
 
   @Input() set scale(value) {
     this._scale = value;
-    this.style = `--individual-scale: ${this._scale};`;
+    this.updateStyles();
   }
 
   @Input() set objectID(value) {
@@ -41,12 +42,21 @@ export class ItemComponent {
     }
   }
 
+  @Input() set placeholder(value) {
+    this._placeholder = value;
+    this.updateStyles();
+  }
+
   get amount(): number {
     return this._amount;
   }
 
   get scale(): number {
     return this._scale;
+  }
+
+  get placeholder(): number {
+    return this._placeholder;
   }
 
   private mapColor(progress: number): string {
@@ -61,5 +71,9 @@ export class ItemComponent {
       lowDurability.b + Math.round(Math.abs(fullDurability.b - lowDurability.b) * 0.01 * progress);
 
     return `rgb(${r},${g},${b})`;
+  }
+
+  private updateStyles(): void {
+    this.style = `--individual-scale: ${this._scale};`;
   }
 }

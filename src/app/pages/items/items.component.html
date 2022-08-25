@@ -1,5 +1,8 @@
-<app-item-browser></app-item-browser>
-<div class="flex flex-col gap-6">
-  <app-inventory></app-inventory>
+<app-item-browser class="flex-shrink-0"></app-item-browser>
+<div class="flex flex-1 flex-col gap-6" cdkDropListGroup>
+  <div class="flex gap-8">
+    <app-inventory></app-inventory>
+    <app-equipment></app-equipment>
+  </div>
   <app-item-detail></app-item-detail>
 </div>
