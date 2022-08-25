@@ -17,8 +17,8 @@ import { ItemBrowserComponent } from './pages/items/item-browser/item-browser.co
 import { ItemDetailComponent } from './pages/items/item-detail/item-detail.component';
 import { ItemComponent } from './pages/items/item/item.component';
 import { ItemsComponent } from './pages/items/items.component';
-import { SkillComponent } from './pages/skills/skill/skill.component';
-import { SkillsComponent } from './pages/skills/skills.component';
+import { SkillComponent } from './pages/skill-page/components/skill/skill.component';
+import { SkillPageComponent } from './pages/skill-page/skill.page.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { SkillsComponent } from './pages/skills/skills.component';
     TabGroupComponent,
     TabComponent,
     ItemsComponent,
-    SkillsComponent,
+    SkillPageComponent,
     CharacterComponent,
     ItemDetailComponent
   ],
