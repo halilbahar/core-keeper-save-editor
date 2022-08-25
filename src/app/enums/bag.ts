@@ -1,4 +1,5 @@
 export enum Bag {
+  None = 0,
   CavePouch = 8400,
   GhormsStomachBag = 8401,
   ScarletShellBackpack = 8402,

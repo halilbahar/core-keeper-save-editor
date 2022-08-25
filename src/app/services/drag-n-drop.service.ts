@@ -11,6 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ItemCategories } from '~enums';
 import { InventorySlot, ItemData } from '~models';
 
+import { CharacterService } from './character.service';
 import { ItemDataService } from './item-data.service';
 
 @Injectable({
@@ -18,7 +19,10 @@ import { ItemDataService } from './item-data.service';
 })
 export class DragNDropService {
   $indexToHide: BehaviorSubject<number> = new BehaviorSubject(-1);
-  constructor(private itemDataService: ItemDataService) {}
+  constructor(
+    private itemDataService: ItemDataService,
+    private characterService: CharacterService
+  ) {}
 
   /**
    * Event handler for the drop event on all item-slots.
@@ -65,6 +69,13 @@ export class DragNDropService {
 
     // If the item is dropped the exit event never gets called, thus the index is still set. Reset it
     this.$indexToHide.next(-1);
+
+    // If the one of the item slots are the 58th one (bag) update the bag subject so we can adjust the inventory size
+    if (event.container.id === 'inventory-58') {
+      this.characterService.$bag.next(event.container.data.objectID);
+    } else if (event.previousContainer.id === 'inventory-58') {
+      this.characterService.$bag.next(event.previousContainer.data.objectID);
+    }
   }
 
   /**

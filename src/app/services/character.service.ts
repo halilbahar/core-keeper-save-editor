@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+import { Bag } from '~enums';
 import { Character } from '~models';
 
 // eslint-disable-next-line no-restricted-imports
@@ -12,12 +13,14 @@ import DefaultCharacter from '../../assets/default_character.json';
 export class CharacterService {
   $character: BehaviorSubject<Character>;
   $index: BehaviorSubject<number>;
+  $bag: BehaviorSubject<Bag>;
 
   constructor() {
     const defaultCharacter = DefaultCharacter as unknown as Character;
     defaultCharacter.characterGuid = crypto.randomUUID().replace(/-/g, '');
-    this.$character = new BehaviorSubject<Character>(defaultCharacter);
-    this.$index = new BehaviorSubject<number>(0);
+    this.$character = new BehaviorSubject(defaultCharacter);
+    this.$index = new BehaviorSubject(0);
+    this.$bag = new BehaviorSubject(Bag.None);
   }
 
   /**

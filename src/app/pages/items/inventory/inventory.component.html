@@ -1,7 +1,7 @@
 <app-card>
   <div class="item-grid">
     <app-item
-      *ngFor="let inventorySlot of this.inventory; let i = index"
+      *ngFor="let inventorySlot of this.inventory | inventory: bag; let i = index"
       id="inventory-{{ i }}"
       [objectID]="inventorySlot.objectID"
       [amount]="inventorySlot.amount"

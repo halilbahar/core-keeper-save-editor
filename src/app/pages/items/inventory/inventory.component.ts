@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+import { Bag } from '~enums';
 import { InventorySlot } from '~models';
 import { CharacterService, DragNDropService, SelectedItemService } from '~services';
 
@@ -12,6 +13,7 @@ import { CharacterService, DragNDropService, SelectedItemService } from '~servic
 })
 export class InventoryComponent implements OnInit {
   inventory: InventorySlot[];
+  bag: Bag;
   indexToHide: number = -1;
 
   constructor(
@@ -21,9 +23,10 @@ export class InventoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.characterService.$character.pipe(untilDestroyed(this)).subscribe(value => {
-      this.inventory = value.inventory.slice(0, 49 + 1);
-    });
+    this.characterService.$bag.pipe(untilDestroyed(this)).subscribe(value => (this.bag = value));
+    this.characterService.$character
+      .pipe(untilDestroyed(this))
+      .subscribe(value => (this.inventory = value.inventory.slice(0, 49 + 1)));
 
     this.dragNDropService.$indexToHide
       .pipe(untilDestroyed(this))
