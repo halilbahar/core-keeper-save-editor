@@ -38,8 +38,13 @@ export class ItemBrowserComponent implements OnInit {
       });
     this.filterItems();
 
-    for (let i = 0; i < 66; i++) {
+    // Push inventory
+    for (let i = 0; i < 50; i++) {
       this.inventory_ids.push(`inventory-${i}`);
+    }
+    // Push equipment
+    for (let i = 0; i < 8; i++) {
+      this.inventory_ids.push(`inventory-${i + 51}`);
     }
   }
 
