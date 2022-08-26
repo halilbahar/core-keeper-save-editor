@@ -32,4 +32,16 @@ export class SkillListComponent implements OnInit {
   onSKillClick(skillID: number): void {
     this.skillTalentService.setSelectedSkill(skillID);
   }
+
+  onLevelIncreaseClick(): void {}
+
+  onLevelDecreaseClick(): void {}
+
+  getSelectedSkillName(): string {
+    return this.skillTalentService.getSkillName(this.selectedSkillID);
+  }
+
+  getSkillLevel(skillID: number): number {
+    return this.skillTalentService.getLevelByXp(skillID, this.skills[skillID].value);
+  }
 }

@@ -32,8 +32,4 @@ export class SkillComponent {
   get value(): number {
     return this._value;
   }
-
-  getSkillName(): string {
-    return this.skillTalentService.getSkillName(this.skillID);
-  }
 }

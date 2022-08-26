@@ -4,7 +4,15 @@
       *ngFor="let skill of this.skills"
       (click)="this.onSKillClick(skill.skillID)"
       [skillID]="skill.skillID"
-      [value]="skill.value"
+      [value]="this.getSkillLevel(skill.skillID)"
       [selected]="this.selectedSkillID === skill.skillID"></app-skill>
+  </div>
+  <div *ngIf="this.selectedSkillID != null" class="flex flex-col gap-2 items-center mt-2 font-bold">
+    <div>{{ this.getSelectedSkillName() }}</div>
+    <div class="flex justify-around">
+      <div>-</div>
+      <div>{{ this.getSkillLevel(this.selectedSkillID) }}</div>
+      <div>+</div>
+    </div>
   </div>
 </app-card>

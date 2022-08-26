@@ -5,6 +5,27 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class SkillTalentService {
+  // Mining,
+  // Running,
+  // Melee Combat,
+  // Vitality,
+  // Crafting,
+  // Range Combat,
+  // Gardening,
+  // Fishing,
+  // Cooking
+  private _skillData = [
+    [1.067000031, 50],
+    [1.057999969, 200],
+    [1.046000004, 50],
+    [1.057999969, 2000],
+    [1.046000004, 30],
+    [1.039499998, 50],
+    [1.041000009, 15],
+    [1.036999941, 5],
+    [1.046000004, 10]
+  ];
+
   private _$selectedSkill: Subject<number> = new Subject();
   readonly $selectedSkill: Observable<number> = this._$selectedSkill.asObservable();
   private _lastSelectedSkillID: number;
@@ -26,7 +47,7 @@ export class SkillTalentService {
       'Meele Combat',
       'Vitality',
       'Crafting',
-      'Range Combat',
+      'Ranged Combat',
       'Gardening',
       'Fishing',
       'Cooking'
@@ -35,30 +56,17 @@ export class SkillTalentService {
   }
 
   public getXpForLevel(skillId: number, level: number): number {
-    // Mining,
-    // Running,
-    // Melee Combat,
-    // Vitality,
-    // Crafting,
-    // Range Combat,
-    // Gardening,
-    // Fishing,
-    // Cooking
-    const gameData = [
-      [1.067000031, 50],
-      [1.057999969, 200],
-      [1.046000004, 50],
-      [1.057999969, 2000],
-      [1.046000004, 30],
-      [1.039499998, 50],
-      [1.041000009, 15],
-      [1.036999941, 5],
-      [1.046000004, 10]
-    ];
-
-    const multiplier = gameData[skillId][0];
-    const skillBase = gameData[skillId][1];
+    const multiplier = this._skillData[skillId][0];
+    const skillBase = this._skillData[skillId][1];
 
     return Math.ceil(((1 - Math.pow(multiplier, level)) * skillBase) / (1 - multiplier));
+  }
+
+  public getLevelByXp(skillId: number, xp: number): number {
+    const getBaseLog = (x: number, y: number): number => Math.log(y) / Math.log(x);
+    const multiplier = this._skillData[skillId][0];
+    const skillBase = this._skillData[skillId][1];
+
+    return Math.floor(getBaseLog(multiplier, (skillBase + xp * multiplier - xp) / skillBase));
   }
 }
