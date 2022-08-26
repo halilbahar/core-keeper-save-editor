@@ -7,9 +7,16 @@ import { Observable, Subject } from 'rxjs';
 export class SkillTalentService {
   private _$selectedSkill: Subject<number> = new Subject();
   readonly $selectedSkill: Observable<number> = this._$selectedSkill.asObservable();
+  private _lastSelectedSkillID: number;
 
   setSelectedSkill(skillID: number) {
+    if (skillID === this._lastSelectedSkillID) {
+      this._$selectedSkill.next(null);
+      this._lastSelectedSkillID = null;
+      return;
+    }
     this._$selectedSkill.next(skillID);
+    this._lastSelectedSkillID = skillID;
   }
 
   public getSkillName(skillID: number): string {
