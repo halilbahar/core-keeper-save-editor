@@ -95,14 +95,22 @@ if __name__ == '__main__':
                 if 'objectInfo' in file_content and not has_blacklisted_term:
                     doc = UnityDocument.load_yaml(filepath)
                     mono_behaviour = doc.filter(class_names=('MonoBehaviour',), attributes=('objectInfo',))
+                    mono_behaviour2 = doc.filter(class_names=('MonoBehaviour',),
+                                                 attributes=('givesConditionsWhenEquipped',))
 
                     if len(mono_behaviour) > 1:
                         logging.warning('Multiple MonoBehaviour found in %s', filepath)
+
+                    if len(mono_behaviour2) > 1:
+                        logging.warning('Multiple Conditions MonoBehaviour found in %s', filepath)
 
                     if len(mono_behaviour) == 0:
                         continue
 
                     object_info = mono_behaviour[0].objectInfo
+
+                    if len(mono_behaviour2) > 0:
+                        object_info['givesConditionsWhenEquipped'] = mono_behaviour2[0].givesConditionsWhenEquipped
                     id_ = object_info['objectID']
                     if id_ is not None:
                         prefabs[id_] = object_info
@@ -253,7 +261,7 @@ if __name__ == '__main__':
         if not found_image:
             continue
 
-        data.append({
+        single_data = {
             'objectID': object_info['objectID'],
             'name': translations[item]['name'],
             'description': translations[item]['description'],
@@ -263,10 +271,21 @@ if __name__ == '__main__':
             'isStackable': object_info['isStackable'],
             'iconIndex': index
             # 'variation': object_info['variation'],
-        })
+        }
+
+        if object_info.__contains__('givesConditionsWhenEquipped'):
+            single_data['condition'] = []
+            for condition in object_info['givesConditionsWhenEquipped']:
+                single_data['condition'].append({
+                    'id': condition['id'],
+                    'value': condition['value']
+                })
+
+        data.append(single_data)
         index += 1
 
     # Create json
+    os.makedirs('out', exist_ok=True)
     with open('out/item-data.json', 'w') as file:
         file.write(json.dumps(data))
 
