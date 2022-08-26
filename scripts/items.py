@@ -97,12 +97,16 @@ if __name__ == '__main__':
                     mono_behaviour = doc.filter(class_names=('MonoBehaviour',), attributes=('objectInfo',))
                     mono_behaviour2 = doc.filter(class_names=('MonoBehaviour',),
                                                  attributes=('givesConditionsWhenEquipped',))
+                    mono_behaviour3 = doc.filter(class_names=('MonoBehaviour',), attributes=('damage',))
 
                     if len(mono_behaviour) > 1:
                         logging.warning('Multiple MonoBehaviour found in %s', filepath)
 
                     if len(mono_behaviour2) > 1:
                         logging.warning('Multiple Conditions MonoBehaviour found in %s', filepath)
+
+                    if len(mono_behaviour3) > 1:
+                        logging.warning('Multiple Damage MonoBehaviour found in %s', filepath)
 
                     if len(mono_behaviour) == 0:
                         continue
@@ -111,6 +115,10 @@ if __name__ == '__main__':
 
                     if len(mono_behaviour2) > 0:
                         object_info['givesConditionsWhenEquipped'] = mono_behaviour2[0].givesConditionsWhenEquipped
+
+                    if len(mono_behaviour3) > 0:
+                        object_info['damage'] = mono_behaviour3[0].damage
+
                     id_ = object_info['objectID']
                     if id_ is not None:
                         prefabs[id_] = object_info
@@ -273,13 +281,17 @@ if __name__ == '__main__':
             # 'variation': object_info['variation'],
         }
 
-        if object_info.__contains__('givesConditionsWhenEquipped'):
+        if object_info.__contains__('givesConditionsWhenEquipped') and len(
+                object_info['givesConditionsWhenEquipped']) > 0:
             single_data['condition'] = []
             for condition in object_info['givesConditionsWhenEquipped']:
                 single_data['condition'].append({
                     'id': condition['id'],
                     'value': condition['value']
                 })
+
+        if object_info.__contains__('damage'):
+            single_data['damage'] = object_info['damage']
 
         data.append(single_data)
         index += 1
