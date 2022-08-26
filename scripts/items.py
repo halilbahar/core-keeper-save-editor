@@ -284,6 +284,8 @@ if __name__ == '__main__':
         data.append(single_data)
         index += 1
 
+    # Sort by objectID
+    data.sort(key=lambda x: x.get('objectID'))
     # Create json
     os.makedirs('out', exist_ok=True)
     with open('out/item-data.json', 'w') as file:
