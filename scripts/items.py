@@ -114,7 +114,11 @@ if __name__ == '__main__':
                     object_info = mono_behaviour[0].objectInfo
 
                     if len(mono_behaviour2) > 0:
-                        object_info['givesConditionsWhenEquipped'] = mono_behaviour2[0].givesConditionsWhenEquipped
+                        givesConditionsWhenEquipped = []
+                        for mono_behaviour_with_conditions in mono_behaviour2:
+                            for condition in mono_behaviour_with_conditions.givesConditionsWhenEquipped:
+                                givesConditionsWhenEquipped.append(condition)
+                        object_info['givesConditionsWhenEquipped'] = givesConditionsWhenEquipped
 
                     if len(mono_behaviour3) > 0:
                         object_info['damage'] = mono_behaviour3[0].damage
