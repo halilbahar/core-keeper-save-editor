@@ -28,4 +28,8 @@ export class SkillListComponent implements OnInit {
       this.selectedSkillID = value;
     });
   }
+
+  onSKillClick(skillID: number): void {
+    this.skillTalentService.setSelectedSkill(skillID);
+  }
 }

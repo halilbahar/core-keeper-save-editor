@@ -8,6 +8,13 @@
   border-image-outset: 2px;
   image-rendering: pixelated;
   @apply flex items-center gap-2;
+
+  &.selected {
+    border: 2px solid;
+    border-image: url('~src/assets/border/skills/skill_border_selected.png') 1;
+    border-image-width: 3px;
+    border-image-outset: 1px;
+  }
 }
 
 .skill-icon {

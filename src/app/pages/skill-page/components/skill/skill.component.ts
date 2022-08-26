@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
+
 import { SkillTalentService } from 'src/app/services/skill-talent.service';
 
 @Component({
@@ -9,6 +10,10 @@ import { SkillTalentService } from 'src/app/services/skill-talent.service';
 export class SkillComponent {
   private _skillID: number;
   private _value: number;
+
+  @HostBinding('class.selected')
+  @Input()
+  selected: boolean = false;
 
   constructor(private skillTalentService: SkillTalentService) {}
 
