@@ -3,6 +3,7 @@ import { Condition } from './condition';
 import { InventorySlot } from './inventory-slot';
 import { Server } from './server';
 import { Skill } from './skill';
+import { SkillTalentTree } from './skill-talent-tree';
 
 export interface Character {
   version: number;
@@ -19,7 +20,7 @@ export interface Character {
   collectedSouls: [];
   maxHealth: number;
   serverConnectCount: number;
-  skillTalentTreeDatas: [];
+  skillTalentTreeDatas: SkillTalentTree[];
   characterType: number;
   discoveredBiomes: [];
   discoveredObjects2: InventorySlot[];

@@ -27,7 +27,7 @@
   .item-amount {
     font-weight: 100;
     position: absolute;
-    bottom: 0;
+    bottom: calc(1px * var(--factor));
     right: calc(1px * var(--factor));
     font-size: calc(0.5rem * var(--factor));
     line-height: calc(0.5rem * var(--factor));

@@ -56,7 +56,44 @@
   },
   "discoveredObjects": [],
   "servers": [],
-  "skills": [],
+  "skills": [
+    {
+      "skillID": 0,
+      "value": 0
+    },
+    {
+      "skillID": 1,
+      "value": 0
+    },
+    {
+      "skillID": 2,
+      "value": 0
+    },
+    {
+      "skillID": 3,
+      "value": 0
+    },
+    {
+      "skillID": 4,
+      "value": 0
+    },
+    {
+      "skillID": 5,
+      "value": 0
+    },
+    {
+      "skillID": 6,
+      "value": 0
+    },
+    {
+      "skillID": 7,
+      "value": 0
+    },
+    {
+      "skillID": 8,
+      "value": 0
+    }
+  ],
   "activatedCrystals": [],
   "inventory": [
     {
@@ -462,7 +499,44 @@
   "collectedSouls": [],
   "maxHealth": 100,
   "serverConnectCount": 0,
-  "skillTalentTreeDatas": [],
+  "skillTalentTreeDatas": [
+    {
+      "skillTreeID": 0,
+      "points": [0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+      "skillTreeID": 1,
+      "points": [0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+      "skillTreeID": 2,
+      "points": [0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+      "skillTreeID": 3,
+      "points": [0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+      "skillTreeID": 4,
+      "points": [0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+      "skillTreeID": 5,
+      "points": [0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+      "skillTreeID": 6,
+      "points": [0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+      "skillTreeID": 8,
+      "points": [0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+      "skillTreeID": 9,
+      "points": [0, 0, 0, 0, 0, 0, 0]
+    }
+  ],
   "characterType": 0,
   "discoveredBiomes": [],
   "discoveredObjects2": [],

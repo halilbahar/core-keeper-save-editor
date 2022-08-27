@@ -1,0 +1,54 @@
+.skill-title {
+  color: #ffd186;
+  text-shadow: 0 3px 0 #000;
+}
+
+.current-level {
+  @apply font-thin text-xl;
+  text-shadow: 0 3px 0 #000;
+  background-color: transparent;
+  appearance: none;
+  outline: none;
+  background-color: #915b26;
+  text-align: center;
+  padding: 3px;
+  padding-left: 6px;
+  box-shadow: 0px 3px 0 0px #624a22, inset 0 3px 0 0px #d29b7c, inset 3px 0 0 0px #d29b7c,
+    inset -3px 0 0 0 #b58047, inset 0 -3px 0 0px #b58047;
+  text-shadow: 0 3px 0 #624a22;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+
+.level-button {
+  @apply transition-all w-8 flex justify-center items-center select-none p-2;
+  background-color: #915b26;
+  box-shadow: 0px 3px 0 0px #624a22, inset 0 3px 0 0px #d29b7c, inset 3px 0 0 0px #d29b7c,
+    inset -3px 0 0 0 #b58047, inset 0 -3px 0 0px #b58047;
+
+  img {
+    width: 9px;
+    height: 9px;
+    filter: drop-shadow(0px 3px 0 #624a22);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 5px 0 0px #624a22, inset 0 3px 0 0px #d29b7c, inset 3px 0 0 0px #d29b7c,
+      inset -3px 0 0 0 #b58047, inset 0 -3px 0 0px #b58047;
+  }
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0px 1px 0 0px #624a22, inset 0 3px 0 0px #d29b7c, inset 3px 0 0 0px #d29b7c,
+      inset -3px 0 0 0 #b58047, inset 0 -3px 0 0px #b58047;
+  }
+}
