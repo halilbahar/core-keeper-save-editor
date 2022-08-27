@@ -16,7 +16,7 @@ import { InventoryComponent } from './pages/items/components/inventory/inventory
 import { ItemBrowserComponent } from './pages/items/components/item-browser/item-browser.component';
 import { ItemDetailComponent } from './pages/items/components/item-detail/item-detail.component';
 import { ItemComponent } from './pages/items/components/item/item.component';
-import { ItemsComponent } from './pages/items/items.component';
+import { ItemsComponent } from './pages/items/items.page.component';
 import { SkillComponent } from './pages/skills/skill/skill.component';
 import { SkillsComponent } from './pages/skills/skills.component';
 import { InventoryPipe } from './pipes/inventory.pipe';
