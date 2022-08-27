@@ -53,7 +53,12 @@ export class SkillListComponent implements OnInit {
     );
   }
 
+  onLevelInputChange(event): void {
+    this.setSelectedSkillLevel(+event.target.value);
+  }
+
   setSelectedSkillLevel(level: number): void {
+    const newLevel = level < 100 ? (level > 0 ? level : 0) : 100;
     this.characterService.setCharacter({
       ...this.character,
       skills: this.character.skills.map(skill => {
@@ -61,7 +66,7 @@ export class SkillListComponent implements OnInit {
           ...skill,
           value:
             skill.skillID === this.selectedSkillID
-              ? this.skillTalentService.getXpForLevel(this.selectedSkillID, level)
+              ? this.skillTalentService.getXpForLevel(this.selectedSkillID, newLevel)
               : skill.value
         };
       })
