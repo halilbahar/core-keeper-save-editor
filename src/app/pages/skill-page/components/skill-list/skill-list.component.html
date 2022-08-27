@@ -8,12 +8,12 @@
       [selected]="this.selectedSkillID === skill.skillID"
       [maxed]="this.getSkillLevel(skill.skillID) >= 100"></app-skill>
   </div>
-  <div *ngIf="this.selectedSkillID != null" class="flex flex-col gap-2 items-center mt-2 font-bold">
-    <div>{{ this.getSelectedSkillName() }}</div>
-    <div class="flex justify-around">
-      <div>-</div>
-      <div>{{ this.getSkillLevel(this.selectedSkillID) }}</div>
-      <div>+</div>
+  <div *ngIf="this.selectedSkillID != null" class="flex flex-col gap-2 items-center mt-6 font-bold">
+    <div class="skill-title">{{ this.getSelectedSkillName() }}</div>
+    <div class="w-full flex justify-between px-10">
+      <div (click)="this.onLevelDecreaseClick()" class="level-button">-</div>
+      <div class="current-level">{{ this.getSkillLevel(this.selectedSkillID) }}</div>
+      <div (click)="this.onLevelIncreaseClick()" class="level-button">+</div>
     </div>
   </div>
 </app-card>

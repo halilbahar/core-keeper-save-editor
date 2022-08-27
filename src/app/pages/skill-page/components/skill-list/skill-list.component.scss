@@ -1,0 +1,14 @@
+.skill-title {
+  color: #ffd186;
+  text-shadow: 0 3px 0 #000;
+}
+
+.current-level {
+  @apply font-thin text-xl;
+  text-shadow: 0 3px 0 #000;
+}
+
+.level-button {
+  @apply text-xl transition-transform hover:scale-150 active:scale-90 select-none;
+  text-shadow: 0 3px 0 #000;
+}
