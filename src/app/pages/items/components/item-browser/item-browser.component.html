@@ -9,10 +9,8 @@
       placeholder="Search..." />
     <select [ngModel]="this.selectedCategory" (ngModelChange)="this.onCategorySelect($event)">
       <option value="-1">all</option>
-      <option
-        *ngFor="let category of this.getCategoryNames()"
-        value="{{ this.itemCategories[category] }}">
-        {{ category }}
+      <option *ngFor="let category of this.categories" value="{{ category.id }}">
+        {{ category.name }}
       </option>
     </select>
   </div>
@@ -20,9 +18,10 @@
   <div class="item-grid">
     <app-item
       cdkDropList
-      *ngFor="let objectID of this.filteredObjectIDs"
+      *ngFor="let item of this.itemData"
       [cdkDropListConnectedTo]="this.inventory_ids"
-      [objectID]="objectID"
-      [drag]="true"></app-item>
+      [objectID]="item.itemData.objectID"
+      [drag]="true"
+      [class.!hidden]="item.hide"></app-item>
   </div>
 </app-card>
