@@ -8,4 +8,7 @@
   <app-tab navItemTitle="Character">
     <app-character></app-character>
   </app-tab>
+  <app-tab navItemTitle="debug" *ngIf="!this.prod">
+    <app-debug></app-debug>
+  </app-tab>
 </app-tab-group>
