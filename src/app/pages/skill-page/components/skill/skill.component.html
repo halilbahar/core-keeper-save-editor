@@ -1,4 +1,9 @@
-<img class="skill-icon" src="/assets/skill_icons/skill_{{ this.skillID }}.gif" />
-<div class="skill-number">
-  {{ this.value }}
+<img
+  class="skill-icon"
+  src="/assets/skill_icons/skill_{{ this.skillID }}{{ this.maxed ? '_maxed' : undefined }}.gif" />
+<div class="flex items-center justify-start">
+  <div class="skill-number" *ngIf="!this.maxed">
+    {{ this.value }}
+  </div>
+  <div class="skill-maxed-icon" *ngIf="this.maxed"></div>
 </div>

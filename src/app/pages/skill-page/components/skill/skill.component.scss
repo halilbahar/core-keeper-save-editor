@@ -7,23 +7,49 @@
   border-image-width: 6px;
   border-image-outset: 2px;
   image-rendering: pixelated;
-  @apply flex items-center gap-2;
+  @apply flex items-center;
 
-  &.selected {
-    border: 2px solid;
+  &.selected:not(.maxed) {
     border-image: url('~src/assets/border/skills/skill_border_selected.png') 1;
-    border-image-width: 3px;
-    border-image-outset: 1px;
+    border-image-width: 3.5px;
+    border-image-outset: 2px;
+  }
+
+  &.maxed:not(.selected) {
+    border-image: url('~src/assets/border/skills/skill_border_maxed.png') 2;
+    border-image-width: 6px;
+    border-image-outset: 2px;
+    background-color: #e2a12a;
+  }
+
+  &.maxed {
+    &.selected {
+      border-image: url('~src/assets/border/skills/skill_border_selected_maxed.png') 2;
+      border-image-width: 6px;
+      border-image-outset: 2px;
+      background-color: #e2a12a;
+    }
   }
 }
 
 .skill-icon {
   width: var(--size);
   height: var(--size);
+  margin-left: calc(1px * var(--individual-scale));
 }
 
 .skill-number {
   font-weight: 100;
   font-size: calc(0.45rem * var(--individual-scale));
   transform: translateY(calc(1px * var(--individual-scale)));
+  margin-left: calc(1px * var(--individual-scale));
+}
+
+.skill-maxed-icon {
+  background-image: url('~src/assets/skill_maxed.png');
+  background-size: cover;
+  width: calc(9px * var(--individual-scale));
+  height: calc(9px * var(--individual-scale));
+  image-rendering: pixelated;
+  margin-right: calc(1px * var(--individual-scale));
 }

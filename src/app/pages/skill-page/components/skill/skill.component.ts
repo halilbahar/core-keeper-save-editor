@@ -15,6 +15,10 @@ export class SkillComponent {
   @Input()
   selected: boolean = false;
 
+  @HostBinding('class.maxed')
+  @Input()
+  maxed: boolean = false;
+
   constructor(private skillTalentService: SkillTalentService) {}
 
   @Input() set skillID(value) {

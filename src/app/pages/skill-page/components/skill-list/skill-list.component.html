@@ -5,7 +5,8 @@
       (click)="this.onSKillClick(skill.skillID)"
       [skillID]="skill.skillID"
       [value]="this.getSkillLevel(skill.skillID)"
-      [selected]="this.selectedSkillID === skill.skillID"></app-skill>
+      [selected]="this.selectedSkillID === skill.skillID"
+      [maxed]="this.getSkillLevel(skill.skillID) >= 100"></app-skill>
   </div>
   <div *ngIf="this.selectedSkillID != null" class="flex flex-col gap-2 items-center mt-2 font-bold">
     <div>{{ this.getSelectedSkillName() }}</div>
