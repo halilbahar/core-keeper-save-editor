@@ -26,8 +26,7 @@ Now you can execute:
 
 [source,bash]
 ----
-python3 items.py
-python3 talents.py
+./script.py
 ----
 
 The extracted data should be in `/out`.
@@ -36,7 +35,7 @@ To override the old data in the projects do:
 
 [source,bash]
 ----
-python3 deploy.py
+./deploy.py
 ----
 
 === How it works

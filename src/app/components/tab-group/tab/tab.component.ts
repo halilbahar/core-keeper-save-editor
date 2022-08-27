@@ -15,6 +15,7 @@ export class TabComponent {
     this._active = value;
     this.classes = value ? 'block' : 'hidden';
   }
+
   get active(): boolean {
     return this._active;
   }
