@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime, Subject } from 'rxjs';
+import { debounceTime, filter, Subject } from 'rxjs';
 
 import { ItemCategories } from '~enums';
+import { ItemData } from '~models';
 import { ItemDataService } from '~services';
 
 @UntilDestroy()
@@ -14,7 +15,7 @@ import { ItemDataService } from '~services';
 export class ItemBrowserComponent implements OnInit {
   private $modelChanged: Subject<string> = new Subject();
 
-  filteredObjectIDs: number[] = [];
+  itemData: { itemData: ItemData; hide: boolean }[] = [];
   itemCategories = ItemCategories;
 
   filterTerm: string = '';
@@ -30,13 +31,19 @@ export class ItemBrowserComponent implements OnInit {
    */
   ngOnInit(): void {
     this.$modelChanged
-      .pipe(debounceTime(500))
+      .pipe(debounceTime(150))
       .pipe(untilDestroyed(this))
       .subscribe(data => {
         this.filterTerm = data;
         this.filterItems();
       });
     this.filterItems();
+
+    // Get all items once
+    this.itemData = Object.values(this.itemDataService.items).map(itemData => ({
+      itemData,
+      hide: false
+    }));
 
     // Push inventory
     for (let i = 0; i < 50; i++) {
@@ -70,24 +77,16 @@ export class ItemBrowserComponent implements OnInit {
    * and by name / objectID
    */
   filterItems() {
-    this.filteredObjectIDs = [];
-    let items = [];
-    const allItems = Object.values(this.itemDataService.items);
-    // Check if we need to filter by category
-    if (this.selectedCategory !== -1) {
-      items = allItems.filter(item => item.objectType == this.selectedCategory);
-    } else {
-      items = [...allItems];
-    }
-
-    // Exclude everything that does not match (either as number or as string)
-    for (let item of items) {
+    for (const item of this.itemData) {
+      const itemData = item.itemData;
       const isANumber = isNaN(Number(this.filterTerm));
       if (
-        item.name.toLowerCase().includes(this.filterTerm.toLowerCase()) ||
-        (isANumber && item.objectID === Number(this.filterTerm))
+        itemData.name.toLowerCase().includes(this.filterTerm.toLowerCase()) ||
+        (isANumber && itemData.objectID === Number(this.filterTerm))
       ) {
-        this.filteredObjectIDs.push(item.objectID);
+        item.hide = false;
+      } else {
+        item.hide = true;
       }
     }
   }
