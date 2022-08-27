@@ -20,3 +20,8 @@
       class="bg-red-600 h-full"></div>
   </div>
 </div>
+<img
+  *ngIf="this.placeholder !== -1 && !this.itemData"
+  class="absolute h-full w-full p-1"
+  src="/assets/equipment-placeholder/{{ this.placeholder }}.png"
+  alt="" />

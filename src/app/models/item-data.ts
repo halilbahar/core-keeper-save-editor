@@ -7,4 +7,6 @@ export interface ItemData {
   rarity: number;
   isStackable: number;
   iconIndex: number;
+  damage?: number;
+  condition?: { id: number; value: number }[];
 }

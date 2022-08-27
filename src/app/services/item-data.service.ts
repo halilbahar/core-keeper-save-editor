@@ -10,15 +10,10 @@ import ItemDataJson from '../../assets/item-data.json';
   providedIn: 'root'
 })
 export class ItemDataService {
-  readonly items: ItemData[] = ItemDataJson;
-
-  constructor() {}
+  readonly items: { [key: number]: ItemData } = ItemDataJson;
 
   getData(objectID: number): ItemData {
-    for (let item of this.items) {
-      if (Object.values(item)[0] === objectID) return item;
-    }
-    return null;
+    return this.items[objectID] || null;
   }
 
   getRarityColor(rarity: ItemRarity): string {

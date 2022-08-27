@@ -38,8 +38,13 @@ export class ItemBrowserComponent implements OnInit {
       });
     this.filterItems();
 
-    for (let i = 0; i < 66; i++) {
+    // Push inventory
+    for (let i = 0; i < 50; i++) {
       this.inventory_ids.push(`inventory-${i}`);
+    }
+    // Push equipment
+    for (let i = 0; i < 8; i++) {
+      this.inventory_ids.push(`inventory-${i + 51}`);
     }
   }
 
@@ -67,12 +72,12 @@ export class ItemBrowserComponent implements OnInit {
   filterItems() {
     this.filteredObjectIDs = [];
     let items = [];
-
+    const allItems = Object.values(this.itemDataService.items);
     // Check if we need to filter by category
     if (this.selectedCategory !== -1) {
-      items = this.itemDataService.items.filter(item => item.objectType == this.selectedCategory);
+      items = allItems.filter(item => item.objectType == this.selectedCategory);
     } else {
-      items = [...this.itemDataService.items];
+      items = [...allItems];
     }
 
     // Exclude everything that does not match (either as number or as string)
