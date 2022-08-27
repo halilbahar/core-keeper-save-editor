@@ -59,18 +59,10 @@ export class SkillListComponent implements OnInit {
 
   setSelectedSkillLevel(level: number): void {
     const newLevel = level < 100 ? (level > 0 ? level : 0) : 100;
-    this.characterService.setCharacter({
-      ...this.character,
-      skills: this.character.skills.map(skill => {
-        return {
-          ...skill,
-          value:
-            skill.skillID === this.selectedSkillID
-              ? this.skillTalentService.getXpForLevel(this.selectedSkillID, newLevel)
-              : skill.value
-        };
-      })
-    });
+    this.skills[this.selectedSkillID].value = this.skillTalentService.getXpForLevel(
+      this.selectedSkillID,
+      newLevel
+    );
   }
 
   getSelectedSkillName(): string {
