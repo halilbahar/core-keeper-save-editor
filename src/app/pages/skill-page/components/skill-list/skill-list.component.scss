@@ -1,14 +1,70 @@
+:host {
+  --individual-scale: 3;
+}
+
 .skill-title {
   color: #ffd186;
-  text-shadow: 0 3px 0 #000;
+  text-shadow: 0 calc(1px * var(--individual-scale)) 0 #000;
 }
 
 .current-level {
   @apply font-thin text-xl;
-  text-shadow: 0 3px 0 #000;
+  text-shadow: 0 calc(1px * var(--individual-scale)) 0 #000;
+  background-color: transparent;
+  appearance: none;
+  outline: none;
+  background-color: #915b26;
+  text-align: center;
+  padding: calc(1px * var(--individual-scale));
+  padding-left: calc(2px * var(--individual-scale));
+  box-shadow: 0px calc(1px * var(--individual-scale)) 0 0px #624a22,
+    inset 0 calc(1px * var(--individual-scale)) 0 0px #d29b7c,
+    inset calc(1px * var(--individual-scale)) 0 0 0px #d29b7c,
+    inset calc(-1px * var(--individual-scale)) 0 0 0 #b58047,
+    inset 0 calc(-1px * var(--individual-scale)) 0 0px #b58047;
+  text-shadow: 0 calc(1px * var(--individual-scale)) 0 #624a22;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
 }
 
 .level-button {
-  @apply text-xl transition-transform hover:scale-150 active:scale-90 select-none;
-  text-shadow: 0 3px 0 #000;
+  @apply transition-all w-8 flex justify-center items-center select-none p-2;
+  background-color: #915b26;
+  box-shadow: 0px calc(1px * var(--individual-scale)) 0 0px #624a22,
+    inset 0 calc(1px * var(--individual-scale)) 0 0px #d29b7c,
+    inset calc(1px * var(--individual-scale)) 0 0 0px #d29b7c,
+    inset calc(-1px * var(--individual-scale)) 0 0 0 #b58047,
+    inset 0 calc(-1px * var(--individual-scale)) 0 0px #b58047;
+
+  img {
+    width: calc(3px * var(--individual-scale));
+    height: calc(3px * var(--individual-scale));
+    filter: drop-shadow(0px calc(1px * var(--individual-scale)) 0 #624a22);
+  }
+
+  &:hover {
+    transform: translateY(calc(-0.66px * var(--individual-scale)));
+    box-shadow: 0px calc(1.7px * var(--individual-scale)) 0 0px #624a22,
+      inset 0 calc(1px * var(--individual-scale)) 0 0px #d29b7c,
+      inset calc(1px * var(--individual-scale)) 0 0 0px #d29b7c,
+      inset calc(-1px * var(--individual-scale)) 0 0 0 #b58047,
+      inset 0 calc(-1px * var(--individual-scale)) 0 0px #b58047;
+  }
+
+  &:active {
+    transform: translateY(calc(0.66px * var(--individual-scale)));
+    box-shadow: 0px calc(0.3px * var(--individual-scale)) 0 0px #624a22,
+      inset 0 calc(1px * var(--individual-scale)) 0 0px #d29b7c,
+      inset calc(1px * var(--individual-scale)) 0 0 0px #d29b7c,
+      inset calc(-1px * var(--individual-scale)) 0 0 0 #b58047,
+      inset 0 calc(-1px * var(--individual-scale)) 0 0px #b58047;
+  }
 }
