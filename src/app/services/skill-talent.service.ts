@@ -59,7 +59,8 @@ export class SkillTalentService {
     const multiplier = this._skillData[skillId][0];
     const skillBase = this._skillData[skillId][1];
 
-    return Math.ceil(((1 - Math.pow(multiplier, level)) * skillBase) / (1 - multiplier));
+    // TODO: figure out if this formular is actually correct
+    return Math.ceil(((1 - Math.pow(multiplier, level)) * skillBase) / (1 - multiplier)) + 1; // +1 a the end isn't part of the formular, but it's nessessary to avoid a rounding issue
   }
 
   public getLevelByXp(skillId: number, xp: number): number {
@@ -67,6 +68,7 @@ export class SkillTalentService {
     const multiplier = this._skillData[skillId][0];
     const skillBase = this._skillData[skillId][1];
 
+    // TODO: figure out if this formular is actually correct
     return Math.floor(getBaseLog(multiplier, (skillBase + xp * multiplier - xp) / skillBase));
   }
 }
