@@ -37,10 +37,30 @@ export class CharacterService {
       const skill = character.skills.find(skill => skill.skillID === i);
       if (skill == null) {
         character.skills.push({ skillID: i, value: 0 });
+        character.skillTalentTreeDatas.push({
+          skillTreeID: i,
+          points: [0, 0, 0, 0, 0, 0, 0]
+        });
+      } else {
+        const skillTree = character.skillTalentTreeDatas.find(talent => talent.skillTreeID === i);
+        // If nothing was skilled, the skillTree is not initialized so we create one
+        if (skillTree == null) {
+          character.skillTalentTreeDatas.push({
+            skillTreeID: i,
+            points: [0, 0, 0, 0, 0, 0, 0]
+          });
+        } else {
+          // If you only level up the first talent, the other ones are not created, fill them up
+          for (let i = skillTree.points.length; i < 7; i++) {
+            skillTree.points[i] = 0;
+          }
+        }
       }
     }
 
     // And afterwards sort them so it looks like the game ui when rendering them in a loop
-    character.skills.sort();
+    character.skills.sort((a, b) => a.skillID - b.skillID);
+    character.skillTalentTreeDatas.sort((a, b) => a.skillTreeID - b.skillTreeID);
+    console.log(character);
   }
 }
