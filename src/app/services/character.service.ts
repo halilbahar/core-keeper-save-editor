@@ -30,5 +30,17 @@ export class CharacterService {
     const objectID = character.inventory[58].objectID;
     const bag = objectID in Bag ? objectID : Bag.None;
     this.$bag.next(bag);
+
+    // Skill are added later to the file, when earned the first xp
+    // Create them if they dont exist
+    for (let i = 0; i < 9; i++) {
+      const skill = character.skills.find(skill => skill.skillID === i);
+      if (skill == null) {
+        character.skills.push({ skillID: i, value: 0 });
+      }
+    }
+
+    // And afterwards sort them so it looks like the game ui when rendering them in a loop
+    character.skills.sort();
   }
 }
