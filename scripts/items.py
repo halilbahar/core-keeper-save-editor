@@ -212,7 +212,7 @@ if __name__ == '__main__':
     # With that object_id we try to find the correct prefab
     # If we have a match we will look up the texture file and extract the image
     # At the end we will assemble a big sprite-sheet with a big json
-    data = []
+    data = {}
     images = []
     index = 0
     for item in translations:
@@ -297,15 +297,15 @@ if __name__ == '__main__':
         if object_info.__contains__('damage'):
             single_data['damage'] = object_info['damage']
 
-        data.append(single_data)
+        data[object_info['objectID']] = single_data
         index += 1
 
-    # Sort by objectID
-    data.sort(key=lambda x: x.get('objectID'))
+    # Sort by key (objectID)
+    sorted_data = dict(sorted(data.items(), key=lambda x: x[0]))
     # Create json
     os.makedirs('out', exist_ok=True)
     with open('out/item-data.json', 'w') as file:
-        file.write(json.dumps(data))
+        file.write(json.dumps(sorted_data))
 
     # Create spritesheet
     image = Image.new('RGBA', (len(data) * 16, 16))
