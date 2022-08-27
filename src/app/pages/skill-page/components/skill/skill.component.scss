@@ -1,6 +1,7 @@
 :host {
-  --individual-scale: 3;
-  --size: calc(12px * var(--individual-scale));
+  --individual-scale: 1.5;
+  --factor: calc(var(--individual-scale) * var(--spritesheet-scale-factor));
+  --size: calc(12px * var(--factor));
   background-color: #704b27;
   border: 2px solid;
   border-image: url('~src/assets/border/skills/skill_border_base.png') 2;
@@ -35,21 +36,21 @@
 .skill-icon {
   width: var(--size);
   height: var(--size);
-  margin-left: calc(1px * var(--individual-scale));
+  margin-left: calc(1px * var(--factor));
 }
 
 .skill-number {
   font-weight: 100;
-  font-size: calc(0.45rem * var(--individual-scale));
-  transform: translateY(calc(1px * var(--individual-scale)));
-  margin-left: calc(1px * var(--individual-scale));
+  font-size: calc(0.45rem * var(--factor));
+  transform: translateY(calc(1px * var(--factor)));
+  margin-left: calc(1px * var(--factor));
 }
 
 .skill-maxed-icon {
   background-image: url('~src/assets/skill_maxed.png');
   background-size: cover;
-  width: calc(9px * var(--individual-scale));
-  height: calc(9px * var(--individual-scale));
+  width: calc(9px * var(--factor));
+  height: calc(9px * var(--factor));
   image-rendering: pixelated;
-  margin-right: calc(1px * var(--individual-scale));
+  margin-right: calc(1px * var(--factor));
 }
