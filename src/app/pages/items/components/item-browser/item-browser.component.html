@@ -9,10 +9,8 @@
       placeholder="Search..." />
     <select [ngModel]="this.selectedCategory" (ngModelChange)="this.onCategorySelect($event)">
       <option value="-1">all</option>
-      <option
-        *ngFor="let category of this.getCategoryNames()"
-        value="{{ this.itemCategories[category] }}">
-        {{ category }}
+      <option *ngFor="let category of this.categories" value="{{ category.id }}">
+        {{ category.name }}
       </option>
     </select>
   </div>

@@ -17,6 +17,27 @@ export class ItemBrowserComponent implements OnInit {
 
   itemData: { itemData: ItemData; hide: boolean }[] = [];
   itemCategories = ItemCategories;
+  categories = [
+    { name: 'Helm', id: 100 },
+    { name: 'Chest Armor', id: 101 },
+    { name: 'Pants Armor', id: 102 },
+    { name: 'Necklace', id: 103 },
+    { name: 'Ring', id: 104 },
+    { name: 'Offhand', id: 105 },
+    { name: 'Bag', id: 106 },
+    { name: 'Meele Weapon', id: 500 },
+    { name: 'Ranged Weapon', id: 501 },
+    { name: 'Pickaxe', id: 603 },
+    { name: 'Shovel', id: 600 },
+    { name: 'Hoe', id: 601 },
+    { name: 'Fishing Rod', id: 605 },
+    { name: 'Watering can', id: 1200 },
+    { name: 'Paint Tool', id: 604 },
+    { name: 'Food', id: 1100 },
+    { name: 'Valuable', id: 1300 },
+    { name: 'Castable Items', id: 602 },
+    { name: 'Placable Item', id: 800 }
+  ];
 
   filterTerm: string = '';
   selectedCategory: number = -1;
@@ -80,6 +101,13 @@ export class ItemBrowserComponent implements OnInit {
     for (const item of this.itemData) {
       const itemData = item.itemData;
       const isANumber = isNaN(Number(this.filterTerm));
+
+      // If the item is not from the selected categories, go to the next item
+      if (this.selectedCategory !== -1 && this.selectedCategory !== item.itemData.objectType) {
+        item.hide = true;
+        continue;
+      }
+
       if (
         itemData.name.toLowerCase().includes(this.filterTerm.toLowerCase()) ||
         (isANumber && itemData.objectID === Number(this.filterTerm))
@@ -89,13 +117,5 @@ export class ItemBrowserComponent implements OnInit {
         item.hide = true;
       }
     }
-  }
-
-  /**
-   * @returns all labels of ItemCategories
-   */
-  getCategoryNames(): string[] {
-    // This way the numbered version is filtered out
-    return Object.values(ItemCategories).filter(value => typeof value === 'string') as string[];
   }
 }
