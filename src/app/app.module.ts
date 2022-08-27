@@ -10,6 +10,7 @@ import { TabGroupComponent } from '~components/tab-group/tab-group.component';
 import { TabComponent } from '~components/tab-group/tab/tab.component';
 
 import { AppComponent } from './app.component';
+import { DebugComponent } from './components/debug/debug.component';
 import { ItemTooltipDirective } from './directives';
 import { CharacterComponent } from './pages/character/character.component';
 import { EquipmentComponent } from './pages/items/components/equipment/equipment.component';
@@ -45,7 +46,8 @@ import { InventoryPipe } from './pipes/inventory.pipe';
     TalentComponent,
     TalentTreeComponent,
     SkillListComponent,
-    InventoryPipe
+    InventoryPipe,
+    DebugComponent
   ],
   imports: [BrowserModule, FormsModule, OverlayModule, DragDropModule],
   providers: [],
