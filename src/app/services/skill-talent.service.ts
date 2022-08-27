@@ -40,7 +40,7 @@ export class SkillTalentService {
     this._lastSelectedSkillID = skillID;
   }
 
-  public getSkillName(skillID: number): string {
+  getSkillName(skillID: number): string {
     const skillNames = [
       'Mining',
       'Running',
@@ -55,20 +55,25 @@ export class SkillTalentService {
     return skillNames[skillID];
   }
 
-  public getXpForLevel(skillId: number, level: number): number {
+  getXpForLevel(skillId: number, level: number): number {
     const multiplier = this._skillData[skillId][0];
     const skillBase = this._skillData[skillId][1];
 
-    // TODO: figure out if this formular is actually correct
-    return Math.ceil(((1 - Math.pow(multiplier, level)) * skillBase) / (1 - multiplier)) + 1; // +1 a the end isn't part of the formular, but it's nessessary to avoid a rounding issue
+    return Math.ceil(((1 - Math.pow(multiplier, level)) * skillBase) / (1 - multiplier));
   }
 
-  public getLevelByXp(skillId: number, xp: number): number {
-    const getBaseLog = (x: number, y: number): number => Math.log(y) / Math.log(x);
+  getLevelByXp(skillId: number, xp: number): number {
     const multiplier = this._skillData[skillId][0];
     const skillBase = this._skillData[skillId][1];
 
-    // TODO: figure out if this formular is actually correct
-    return Math.floor(getBaseLog(multiplier, (skillBase + xp * multiplier - xp) / skillBase));
+    const level = Math.floor(
+      Math.log2(1 - ((1 - multiplier) * xp) / skillBase) / Math.log2(multiplier)
+    );
+
+    if (level > 100) {
+      return 100;
+    }
+
+    return level;
   }
 }
