@@ -10,17 +10,10 @@ import ItemDataJson from '../../assets/item-data.json';
   providedIn: 'root'
 })
 export class ItemDataService {
-  private itemsMap: { [key: number]: ItemData } = {};
-  readonly items: ItemData[] = ItemDataJson;
-
-  constructor() {
-    for (let item of this.items) {
-      this.itemsMap[+item.objectID] = item;
-    }
-  }
+  readonly items: { [key: number]: ItemData } = ItemDataJson;
 
   getData(objectID: number): ItemData {
-    return this.itemsMap[objectID] || null;
+    return this.items[objectID] || null;
   }
 
   getRarityColor(rarity: ItemRarity): string {

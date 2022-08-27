@@ -72,12 +72,12 @@ export class ItemBrowserComponent implements OnInit {
   filterItems() {
     this.filteredObjectIDs = [];
     let items = [];
-
+    const allItems = Object.values(this.itemDataService.items);
     // Check if we need to filter by category
     if (this.selectedCategory !== -1) {
-      items = this.itemDataService.items.filter(item => item.objectType == this.selectedCategory);
+      items = allItems.filter(item => item.objectType == this.selectedCategory);
     } else {
-      items = [...this.itemDataService.items];
+      items = [...allItems];
     }
 
     // Exclude everything that does not match (either as number or as string)
