@@ -16,9 +16,17 @@ export class CharacterService {
   $bag: BehaviorSubject<Bag> = new BehaviorSubject(null);
 
   constructor() {
-    const defaultCharacter = DefaultCharacter as unknown as Character;
+    const defaultCharacter = DefaultCharacter as Character;
     defaultCharacter.characterGuid = crypto.randomUUID().replace(/-/g, '');
-    this.setCharacter(defaultCharacter, 0);
+
+    const characerJsonInStorage = localStorage.getItem('core-keeper-save-editor.character');
+    const characterIndexInStorage = localStorage.getItem('core-keeper-save-editor.index');
+    if (characerJsonInStorage != null && characterIndexInStorage != null) {
+      const character = JSON.parse(characerJsonInStorage) as Character;
+      this.setCharacter(character, +characterIndexInStorage);
+    } else {
+      this.setCharacter(defaultCharacter, 0);
+    }
   }
 
   /**
@@ -61,6 +69,17 @@ export class CharacterService {
     // And afterwards sort them so it looks like the game ui when rendering them in a loop
     character.skills.sort((a, b) => a.skillID - b.skillID);
     character.skillTalentTreeDatas.sort((a, b) => a.skillTreeID - b.skillTreeID);
-    console.log(character);
+  }
+
+  /**
+   * Save the current character into local storage.
+   * This value will be loaded when you load the site again (constructor of this service)
+   */
+  store(): void {
+    const character = this.$character.value;
+    const characterJson = JSON.stringify(character);
+    const characterIndex = this.$index.value;
+    localStorage.setItem('core-keeper-save-editor.character', characterJson);
+    localStorage.setItem('core-keeper-save-editor.index', characterIndex + '');
   }
 }
