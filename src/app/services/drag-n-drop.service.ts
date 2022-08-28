@@ -76,6 +76,9 @@ export class DragNDropService {
     } else if (event.previousContainer.id === 'inventory-58') {
       this.characterService.$bag.next(event.previousContainer.data.objectID);
     }
+
+    // Update the local storage
+    this.characterService.store();
   }
 
   /**
