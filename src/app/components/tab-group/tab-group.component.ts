@@ -32,9 +32,10 @@ export class TabGroupComponent {
     const match = filename.match(regex);
     const index = +match[1];
 
-    this.aesService
-      .decryptCharacterSaveFile(file, index)
-      .then(character => this.characterService.setCharacter(character, index));
+    this.aesService.decryptCharacterSaveFile(file, index).then(character => {
+      this.characterService.setCharacter(character, index);
+      this.characterService.store();
+    });
   }
 
   /**

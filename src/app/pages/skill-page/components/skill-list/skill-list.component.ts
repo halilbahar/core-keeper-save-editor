@@ -63,6 +63,9 @@ export class SkillListComponent implements OnInit {
       this.selectedSkillID,
       newLevel
     );
+
+    // Update the localstorage after changing a skill
+    this.characterService.store();
   }
 
   getSelectedSkillName(): string {
