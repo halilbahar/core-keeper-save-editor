@@ -304,7 +304,9 @@ if __name__ == '__main__':
         if object_info.__contains__('damage'):
             single_data['damage'] = object_info['damage']
 
-        data[object_info['objectID']] = single_data
+        data[int(object_info['objectID'])] = {
+            int(object_info['variation']): single_data
+        }
         index += 1
 
     log.info('Reading ConditionID...')
