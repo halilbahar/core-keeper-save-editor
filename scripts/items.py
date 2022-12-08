@@ -217,6 +217,7 @@ if __name__ == '__main__':
     object_ids = get_object_ids()
     set_bonuses = get_set_bonuses()
     data = {}
+    duplicate_entries = {}
     images: [Image] = []
     icon_index = 0
 
@@ -316,8 +317,14 @@ if __name__ == '__main__':
             continue
 
         if data.get(object_id) is not None:
-            logger.warning("Skipping %d due to duplicate entry" % object_id)
+            logger.info("Skipping %d due to duplicate entry" % object_id)
+            duplicate_entry_count = duplicate_entries.get(object_id)
+            if duplicate_entry_count is None:
+                duplicate_entries[object_id] = 1
+            else:
+                duplicate_entries[object_id] = duplicate_entry_count + 1
             continue
+
         data[object_id] = single_data
         images.append(cropped_image)
         icon_index += 1
@@ -335,3 +342,9 @@ if __name__ == '__main__':
         image.paste(single_image, (index * 16, 0))
 
     image.save('out/item-spritesheet.png')
+
+    # Display which object id was multiple times found but added 1 time
+    for duplicate_object_id, duplicate_count in duplicate_entries.items():
+        logger.warning(
+            "ObjectID %s was ignored %d times due to being a duplicate entry" % (duplicate_object_id, duplicate_count)
+        )
