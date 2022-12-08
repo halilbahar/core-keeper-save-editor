@@ -89,6 +89,24 @@ def get_objectinfo_monobehaviour() -> [dict]:
         if len(monobehaviour_damage) > 0:
             prefab_objectinfo['damage'] = monobehaviour_damage[0].damage
 
+        monobehaviour_turns_into_food = prefab_doc.filter(class_names=('MonoBehaviour',), attributes=('turnsIntoFood',))
+        if len(monobehaviour_turns_into_food) > 1:
+            logging.warning('Multiple TurnsIntoFood MonoBehaviour found in %s', prefab_path)
+
+        if len(monobehaviour_turns_into_food) > 0:
+            monobehaviour_values = prefab_doc.filter(class_names=('MonoBehaviour',), attributes=('Values',))
+            if len(monobehaviour_values) > 1:
+                logging.warning('Multiple Values MonoBehaviour found in %s', prefab_path)
+
+            prefab_objectinfo['ingredient'] = {
+                'brightColor': monobehaviour_turns_into_food[0].brightColor,
+                'brightestColor': monobehaviour_turns_into_food[0].brightestColor,
+                'darkColor': monobehaviour_turns_into_food[0].darkColor,
+                'darkestColor': monobehaviour_turns_into_food[0].darkestColor,
+                'turnsIntoFood': monobehaviour_turns_into_food[0].turnsIntoFood,
+                'values': monobehaviour_values[0].Values
+            }
+
         objectinfo_monobehaviour.append(prefab_objectinfo)
 
     util.set_cache('objectinfo_monobehaviour', objectinfo_monobehaviour)
