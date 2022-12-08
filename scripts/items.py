@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import textwrap
 from glob import glob, iglob
 
 import yaml
@@ -175,6 +176,37 @@ def get_object_ids() -> dict:
     return object_ids
 
 
+def get_set_bonuses():
+    set_bonuses_doc = UnityDocument.load_yaml('dump/CoreKeeper/ExportedProject/Assets/Resources/SetBonusesTable.asset')
+    mono_behaviour = set_bonuses_doc.data[0]
+    mono_behvaiour_set_bonuses = mono_behaviour.setBonuses
+    set_bonuses = []
+    for set_bonus in mono_behvaiour_set_bonuses:
+        pieces = []
+        # 'avaiablePices' is a string which contains multiple hex strings. These are 8 characters long
+        # Example for avaiablePices: 382100009c21000000220000
+        # Example for object_id_hex: ['38210000', '9c210000', '00220000']
+        object_id_hex = textwrap.wrap(str(set_bonus['availablePieces']), 8)
+        # We can't parse the hex string as it is, we need to format before that
+        for hex_string in object_id_hex:
+            # Example for hex_string: 38210000
+            # Example for normalized_hex_string 00002138
+            # So we need to split hex so we get 4 elements of the length 2 and reverse the order
+            hex_list = textwrap.wrap(hex_string, 2)
+            hex_list.reverse()
+            object_id = int("0x%s" % ''.join(hex_list), 0)
+            pieces.append(object_id)
+
+        set_bonuses.append({
+            'id': set_bonus['setBonusID'],
+            'rarity': set_bonus['rarity'],
+            'data': set_bonus['setBonusDatas'],
+            'pieces': pieces
+        })
+
+    return set_bonuses
+
+
 if __name__ == '__main__':
     logging.basicConfig()
     logger = logging.getLogger(__name__)
@@ -183,9 +215,16 @@ if __name__ == '__main__':
     textures = get_textures()
     item_translations = get_item_translations()
     object_ids = get_object_ids()
+    set_bonuses = get_set_bonuses()
     data = {}
     images: [Image] = []
     icon_index = 0
+
+    # Create a dict where we can later retrieve the set_bonus.id by object_id
+    set_bonus_ids = {}
+    for set_bonus in set_bonuses:
+        for piece in set_bonus['pieces']:
+            set_bonus_ids[piece] = set_bonus['id']
 
     for objectinfo in objectinfo_monobehaviour:
         object_id = objectinfo['objectID']
@@ -215,10 +254,16 @@ if __name__ == '__main__':
                     'id': condition['id'],
                     'value': condition['value']
                 })
+
         # Add damage if there is a 'damage' property
         damage = objectinfo.get('damage')
         if damage is not None:
             single_data['damage'] = damage
+
+        # Add setBonusId if this items belongs to one
+        set_bonus_id = set_bonus_ids.get(object_id)
+        if set_bonus_id is not None:
+            single_data['setBonusId'] = set_bonus_id
 
         icon = objectinfo['icon']
         icon_offset = objectinfo['iconOffset']
