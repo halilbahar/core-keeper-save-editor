@@ -11,7 +11,8 @@
       "~models": ["./src/app/models/index.ts"],
       "~enums": ["./src/app/enums/index.ts"],
       "~services": ["./src/app/services/index.ts"],
-      "~env": ["./src/environments/environment.ts"]
+      "~env": ["./src/environments/environment.ts"],
+      "~config": ["./src/app/config/index.ts"]
     },
     "forceConsistentCasingInFileNames": true,
     "strict": false,
