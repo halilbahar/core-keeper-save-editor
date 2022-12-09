@@ -9,4 +9,5 @@ export interface ItemData {
   iconIndex: number;
   damage?: number;
   condition?: { id: number; value: number }[];
+  setBonusId?: number;
 }
