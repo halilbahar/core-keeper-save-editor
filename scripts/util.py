@@ -54,3 +54,15 @@ def get_translations() -> [Translation]:
 
     set_cache('language', translations)
     return translations
+
+
+def get_enum(path) -> dict:
+    result = {}
+    # Get all the object ids from the enum file with regex
+    with open(os.path.join(path)) as file:
+        for match in ENUM_PATTERN.finditer(file.read()):
+            enum_name = match.group(1)
+            enum_value = match.group(2)
+            result[int(enum_value)] = enum_name
+
+    return result

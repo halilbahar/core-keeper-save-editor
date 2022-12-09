@@ -165,15 +165,11 @@ def get_item_translations():
 
 
 def get_object_ids() -> dict:
-    object_ids = {}
-    # Get all the object ids from the enum file with regex
-    with open(os.path.join('dump/CoreKeeper/ExportedProject/Assets/MonoScript/Pug.Base/ObjectID.cs'), 'r') as file:
-        for match in util.ENUM_PATTERN.finditer(file.read()):
-            object_name = match.group(1)
-            object_id = match.group(2)
-            object_ids[int(object_id)] = object_name
+    return util.get_enum('dump/CoreKeeper/ExportedProject/Assets/MonoScript/Pug.Base/ObjectID.cs')
 
-    return object_ids
+
+def get_condition_ids() -> dict:
+    return util.get_enum('dump/CoreKeeper/ExportedProject/Assets/MonoScript/Pug.Base/ConditionID.cs')
 
 
 def get_set_bonuses():
@@ -197,14 +193,38 @@ def get_set_bonuses():
             object_id = int("0x%s" % ''.join(hex_list), 0)
             pieces.append(object_id)
 
+        # Remove the duration as it is constant to 0
+        set_bonus_datas = set_bonus['setBonusDatas']
+        for set_bonus_data in set_bonus_datas:
+            set_bonus_data['conditionData'].pop('duration', None)
+
         set_bonuses.append({
             'id': set_bonus['setBonusID'],
             'rarity': set_bonus['rarity'],
-            'data': set_bonus['setBonusDatas'],
+            'data': set_bonus_datas,
             'pieces': pieces
         })
 
     return set_bonuses
+
+
+def get_conditions():
+    translations = get_translations()
+    condition_ids_enum = {v: k for k, v in get_condition_ids().items()}
+    condition_translation = {}
+
+    # Find all the translations that start with 'Conditions/'
+    # After that split them: 'Conditions/AcidDamage' is split into _ = 'Conditions' and condition_name = 'AcidDamage'
+    # Use the condition_name to get the id of that condition
+    for translation in translations:
+        term = translation['term']
+        translation_value = translation['value']
+        if term.startswith('Conditions/'):
+            _, condition_name = term.split('/')
+            condition_id = condition_ids_enum[condition_name]
+            condition_translation[condition_id] = translation_value
+
+    return condition_translation
 
 
 if __name__ == '__main__':
@@ -216,7 +236,7 @@ if __name__ == '__main__':
     item_translations = get_item_translations()
     object_ids = get_object_ids()
     set_bonuses = get_set_bonuses()
-    data = {}
+    item_data = {}
     duplicate_entries = {}
     images: [Image] = []
     icon_index = 0
@@ -313,10 +333,14 @@ if __name__ == '__main__':
                 area = (cropped_x, cropped_y, cropped_x2, cropped_y2)
                 cropped_image = image.crop(area)
 
+        # If we found no image we skip this and don't add anything
         if not found_image or cropped_image is None:
+            logger.warning("Skipping %d due to no image" % object_id)
             continue
 
-        if data.get(object_id) is not None:
+        # If there is already an entry with the given object_id we skip it and increment a number so we can later
+        # display how many duplicate entries there were
+        if item_data.get(object_id) is not None:
             logger.info("Skipping %d due to duplicate entry" % object_id)
             duplicate_entry_count = duplicate_entries.get(object_id)
             if duplicate_entry_count is None:
@@ -325,23 +349,28 @@ if __name__ == '__main__':
                 duplicate_entries[object_id] = duplicate_entry_count + 1
             continue
 
-        data[object_id] = single_data
+        item_data[object_id] = single_data
         images.append(cropped_image)
         icon_index += 1
 
-    # Sort by key (objectID)
-    # sorted_data = dict(sorted(data.items(), key=lambda x: x[0]))
-    # Create json
     os.makedirs('out', exist_ok=True)
-    with open('out/item-data.json', 'w') as file:
-        file.write(json.dumps(data))
-
     # Create spritesheet
     image = Image.new('RGBA', (icon_index * 16, 16))
     for index, single_image in enumerate(images):
         image.paste(single_image, (index * 16, 0))
-
     image.save('out/item-spritesheet.png')
+
+    # Sort by key (objectID)
+    sorted_item_data = dict(sorted(item_data.items(), key=lambda x: x[0]))
+
+    # Create the final result.json by combined all the extracted data:
+    with open('out/data.json', 'w') as file:
+        result_json = json.dumps({
+            'items': item_data,
+            'setBonuses': set_bonuses,
+            'conditions': get_conditions()
+        })
+        file.write(result_json)
 
     # Display which object id was multiple times found but added 1 time
     for duplicate_object_id, duplicate_count in duplicate_entries.items():
