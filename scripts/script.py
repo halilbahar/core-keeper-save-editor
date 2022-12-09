@@ -103,17 +103,17 @@ if __name__ == '__main__':
                 if 'objectInfo' in file_content and not has_blacklisted_term:
                     doc = UnityDocument.load_yaml(filepath)
                     mono_behaviour = doc.filter(class_names=('MonoBehaviour',), attributes=('objectInfo',))
-                    mono_behaviour2 = doc.filter(class_names=('MonoBehaviour',),
-                                                 attributes=('givesConditionsWhenEquipped',))
-                    mono_behaviour3 = doc.filter(class_names=('MonoBehaviour',), attributes=('damage',))
+                    mono_behaviour_gives_conditions_whenEquipped = doc.filter(class_names=('MonoBehaviour',),
+                                                                              attributes=('givesConditionsWhenEquipped',))
+                    mono_behaviour_damage = doc.filter(class_names=('MonoBehaviour',), attributes=('damage',))
 
                     if len(mono_behaviour) > 1:
                         logging.warning('Multiple MonoBehaviour found in %s', filepath)
 
-                    if len(mono_behaviour2) > 1:
+                    if len(mono_behaviour_gives_conditions_whenEquipped) > 1:
                         logging.warning('Multiple Conditions MonoBehaviour found in %s', filepath)
 
-                    if len(mono_behaviour3) > 1:
+                    if len(mono_behaviour_damage) > 1:
                         logging.warning('Multiple Damage MonoBehaviour found in %s', filepath)
 
                     if len(mono_behaviour) == 0:
@@ -121,15 +121,15 @@ if __name__ == '__main__':
 
                     object_info = mono_behaviour[0].objectInfo
 
-                    if len(mono_behaviour2) > 0:
+                    if len(mono_behaviour_gives_conditions_whenEquipped) > 0:
                         givesConditionsWhenEquipped = []
-                        for mono_behaviour_with_conditions in mono_behaviour2:
+                        for mono_behaviour_with_conditions in mono_behaviour_gives_conditions_whenEquipped:
                             for condition in mono_behaviour_with_conditions.givesConditionsWhenEquipped:
                                 givesConditionsWhenEquipped.append(condition)
                         object_info['givesConditionsWhenEquipped'] = givesConditionsWhenEquipped
 
-                    if len(mono_behaviour3) > 0:
-                        object_info['damage'] = mono_behaviour3[0].damage
+                    if len(mono_behaviour_damage) > 0:
+                        object_info['damage'] = mono_behaviour_damage[0].damage
 
                     id_ = object_info['objectID']
                     if id_ is not None:
@@ -304,7 +304,9 @@ if __name__ == '__main__':
         if object_info.__contains__('damage'):
             single_data['damage'] = object_info['damage']
 
-        data[object_info['objectID']] = single_data
+        data[int(object_info['objectID'])] = {
+            int(object_info['variation']): single_data
+        }
         index += 1
 
     log.info('Reading ConditionID...')
