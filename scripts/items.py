@@ -176,7 +176,7 @@ def get_set_bonuses():
     set_bonuses_doc = UnityDocument.load_yaml('dump/CoreKeeper/ExportedProject/Assets/Resources/SetBonusesTable.asset')
     mono_behaviour = set_bonuses_doc.data[0]
     mono_behvaiour_set_bonuses = mono_behaviour.setBonuses
-    set_bonuses = []
+    set_bonuses = {}
     for set_bonus in mono_behvaiour_set_bonuses:
         pieces = []
         # 'avaiablePices' is a string which contains multiple hex strings. These are 8 characters long
@@ -198,12 +198,13 @@ def get_set_bonuses():
         for set_bonus_data in set_bonus_datas:
             set_bonus_data['conditionData'].pop('duration', None)
 
-        set_bonuses.append({
-            'id': set_bonus['setBonusID'],
+        set_bonus_id = set_bonus['setBonusID']
+        set_bonuses[set_bonus_id] = {
+            'id': set_bonus_id,
             'rarity': set_bonus['rarity'],
             'data': set_bonus_datas,
             'pieces': pieces
-        })
+        }
 
     return set_bonuses
 
@@ -243,9 +244,9 @@ if __name__ == '__main__':
 
     # Create a dict where we can later retrieve the set_bonus.id by object_id
     set_bonus_ids = {}
-    for set_bonus in set_bonuses:
+    for set_bonus_id, set_bonus in set_bonuses.items():
         for piece in set_bonus['pieces']:
-            set_bonus_ids[piece] = set_bonus['id']
+            set_bonus_ids[piece] = set_bonus_id
 
     for objectinfo in objectinfo_monobehaviour:
         object_id = objectinfo['objectID']
@@ -366,7 +367,7 @@ if __name__ == '__main__':
     # Create the final result.json by combined all the extracted data:
     with open('out/data.json', 'w') as file:
         result_json = json.dumps({
-            'items': item_data,
+            'items': sorted_item_data,
             'setBonuses': set_bonuses,
             'conditions': get_conditions()
         })
