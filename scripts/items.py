@@ -83,13 +83,14 @@ def get_objectinfo_monobehaviour() -> [dict]:
                     gives_conditions_when_equipped.append(condition)
             prefab_objectinfo['givesConditionsWhenEquipped'] = gives_conditions_when_equipped
 
-        monobehaviour_damage = prefab_doc.filter(class_names=('MonoBehaviour',), attributes=('damage',))
+        monobehaviour_damage = prefab_doc.filter(class_names=('MonoBehaviour',), attributes=('damage', 'isRange'))
 
         if len(monobehaviour_damage) > 1:
             logging.warning('Multiple Damage MonoBehaviour found in %s', prefab_path)
         # Add damage to objectinfo
         if len(monobehaviour_damage) > 0:
             prefab_objectinfo['damage'] = monobehaviour_damage[0].damage
+            prefab_objectinfo['isRange'] = monobehaviour_damage[0].isRange
 
         monobehaviour_turns_into_food = prefab_doc.filter(class_names=('MonoBehaviour',), attributes=('turnsIntoFood',))
         if len(monobehaviour_turns_into_food) > 1:
@@ -281,10 +282,14 @@ if __name__ == '__main__':
         # Add damage if there is a 'damage' property
         damage = objectinfo.get('damage')
         if damage is not None:
+            is_range = objectinfo.get('isRange')
             damage_tenth = damage * 0.1
             damage_min = damage - math.floor(damage_tenth)
             damage_max = damage + math.floor(damage_tenth)
-            single_data['damage'] = [damage_min, damage_max]
+            single_data['damage'] = {
+                'range': [damage_min, damage_max],
+                'isRange': is_range == 1
+            }
 
         # Add setBonusId if this items belongs to one
         set_bonus_id = set_bonus_ids.get(object_id)
