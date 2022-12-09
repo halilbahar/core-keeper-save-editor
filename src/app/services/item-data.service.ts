@@ -3,14 +3,17 @@ import { Injectable } from '@angular/core';
 import { ItemRarity } from '~enums';
 import { ItemData } from '~models';
 
-// eslint-disable-next-line no-restricted-imports
-import ItemDataJson from '../../assets/item-data.json';
+import { ExtractedDataService } from './extracted-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemDataService {
-  readonly items: { [key: number]: ItemData } = ItemDataJson;
+  readonly items: { [key: number]: ItemData };
+
+  constructor(extractedData: ExtractedDataService) {
+    this.items = extractedData.data.items;
+  }
 
   getData(objectID: number): ItemData {
     return this.items[objectID] || null;
