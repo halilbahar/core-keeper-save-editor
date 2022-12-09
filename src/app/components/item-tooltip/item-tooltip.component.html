@@ -2,4 +2,8 @@
   <h3 class="text-xl" [ngStyle]="{ color: this.rarityColor }">{{ this.item.name }}</h3>
   <span class="text-xl text-gray-400">#{{ this.item.objectID.toString().padStart(4, '0') }}</span>
 </div>
+<p class="text-xl font-semibold" *ngIf="this.item.damage">
+  {{ this.item.damage.range[0] }}-{{ this.item.damage.range[1] }}
+  {{ this.item.damage.isRange ? 'range' : 'meele' }} damage
+</p>
 <p class="text-xl">{{ this.item.description }}</p>
