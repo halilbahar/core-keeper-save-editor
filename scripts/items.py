@@ -1,5 +1,6 @@
 import json
 import logging
+import math
 import os
 import textwrap
 from glob import glob, iglob
@@ -280,7 +281,10 @@ if __name__ == '__main__':
         # Add damage if there is a 'damage' property
         damage = objectinfo.get('damage')
         if damage is not None:
-            single_data['damage'] = damage
+            damage_tenth = damage * 0.1
+            damage_min = damage - math.ceil(damage_tenth)
+            damage_max = damage + math.floor(damage_tenth)
+            single_data['damage'] = [damage_min, damage_max]
 
         # Add setBonusId if this items belongs to one
         set_bonus_id = set_bonus_ids.get(object_id)
