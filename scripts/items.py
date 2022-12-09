@@ -282,7 +282,7 @@ if __name__ == '__main__':
         damage = objectinfo.get('damage')
         if damage is not None:
             damage_tenth = damage * 0.1
-            damage_min = damage - math.ceil(damage_tenth)
+            damage_min = damage - math.floor(damage_tenth)
             damage_max = damage + math.floor(damage_tenth)
             single_data['damage'] = [damage_min, damage_max]
 
