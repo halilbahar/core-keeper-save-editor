@@ -7,7 +7,7 @@ import { InventorySlot } from '~models';
   providedIn: 'root'
 })
 export class SelectedItemService {
-  private _$selectedItem: Subject<number> = new Subject();
+  private _$selectedItem = new BehaviorSubject<number>(null);
   readonly $selectedItem: Observable<number> = this._$selectedItem.asObservable();
 
   constructor() {}
