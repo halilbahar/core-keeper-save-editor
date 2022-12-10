@@ -1,7 +1,7 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
 import { ItemData } from '~models';
-import { ItemDataService } from '~services';
+import { ItemDataService, SelectedItemService } from '~services';
 
 @Component({
   selector: 'app-item',
@@ -24,7 +24,10 @@ export class ItemComponent {
   durabilityProgress?: number;
   durabilityBarColor?: string;
 
-  constructor(private itemDataService: ItemDataService) {}
+  constructor(
+    private itemDataService: ItemDataService,
+    public selectedItemService: SelectedItemService
+  ) {}
 
   @Input() set scale(value) {
     this._scale = value;
