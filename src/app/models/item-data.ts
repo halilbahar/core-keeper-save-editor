@@ -8,7 +8,7 @@ export interface ItemData {
   isStackable: number;
   iconIndex: number;
   damage?: ItemDamage;
-  condition?: ItemCondition[];
+  whenEquipped?: ConditionWhenEquipped[];
   setBonusId?: number;
 }
 
@@ -17,7 +17,7 @@ export interface ItemDamage {
   isRange: boolean;
 }
 
-export interface ItemCondition {
+export interface ConditionWhenEquipped {
   id: number;
   value: number;
 }

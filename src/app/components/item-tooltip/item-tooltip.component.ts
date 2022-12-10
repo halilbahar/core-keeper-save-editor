@@ -11,13 +11,15 @@ import { ItemDataService } from '~services';
 export class ItemTooltipComponent implements OnInit {
   @Input() item: ItemData;
   rarityColor: string;
-  conditions: string[];
+  conditionsWhenEquipped: string[];
 
   constructor(private itemDataService: ItemDataService) {}
 
   ngOnInit(): void {
     this.rarityColor = this.itemDataService.getRarityColor(this.item.rarity);
-    const condition = this.item.condition;
-    this.conditions = condition ? this.itemDataService.transformConditionIdToLabel(condition) : [];
+    const whenEquipped = this.item.whenEquipped;
+    this.conditionsWhenEquipped = whenEquipped
+      ? this.itemDataService.transformConditionIdToLabel(whenEquipped)
+      : [];
   }
 }

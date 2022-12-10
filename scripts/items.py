@@ -272,9 +272,9 @@ if __name__ == '__main__':
         # Add condition array if there is a 'givesConditionsWhenEquipped' attribute
         conditions = objectinfo.get('givesConditionsWhenEquipped')
         if conditions is not None and len(conditions) > 0:
-            single_data['condition'] = []
+            single_data['whenEquipped'] = []
             for condition in conditions:
-                single_data['condition'].append({
+                single_data['whenEquipped'].append({
                     'id': condition['id'],
                     'value': condition['value']
                 })
