@@ -35,16 +35,23 @@ export class ItemDataService {
    */
   getItemDetail(objectId: number): ItemDetail {
     const item = this.getData(objectId);
-    console.log(objectId);
     const paddedObjectId = objectId.toString().padStart(4, '0');
     const { name, description } = item;
     const rarityColor = this.getRarityColor(item.rarity);
     const whenEquipped = item.whenEquipped;
     const conditionsWhenEquipped = whenEquipped
       ? this.transformConditionIdToLabel(whenEquipped)
-      : [];
+      : undefined;
+    const setBonus = item.setBonusId ? this.getSetBonusInformation(item.setBonusId) : undefined;
 
-    return { objectId: paddedObjectId, name, description, rarityColor, conditionsWhenEquipped };
+    return {
+      objectId: paddedObjectId,
+      name,
+      description,
+      rarityColor,
+      conditionsWhenEquipped,
+      setBonus
+    };
   }
 
   /**
@@ -91,14 +98,24 @@ export class ItemDataService {
     return conditionStrings;
   }
 
-  // getSetBonusInformation(setBonusId): [string[], string[]] {
-  //   const setBonusData = this.setBonus[setBonusId];
-  //   setBonusData.data.map(data => {
-  //     return `${data.requiredPieces} set: ${this.transformConditionIdToLabel([
-  //       data.conditionData
-  //     ])}`;
-  //   });
-  //   console.log(setBonusData);
-  //   return [[''], ['']];
-  // }
+  /**
+   * Base on the setBonusId return the condition label (how many pieces needed and what effect) and which pieces belong to this set.
+   * @param setBonusId of the setBonus
+   * @returns condition label and pieces
+   */
+  private getSetBonusInformation(setBonusId: number): { conditions: string[]; pieces: string[] } {
+    const setBonusData = this.setBonus[setBonusId];
+
+    const conditions = setBonusData.data.map(data => {
+      const { conditionID, value } = data.conditionData;
+      // transformConditionIdToLabel needs an array but we have a single item,
+      // pass the single item as an array and get the first element afterwards
+      const conditionLabel = this.transformConditionIdToLabel([{ id: conditionID, value }])[0];
+      return `${data.requiredPieces} set: ${conditionLabel}`;
+    });
+
+    const pieces = setBonusData.pieces.map(objectId => this.getData(objectId).name);
+
+    return { conditions, pieces };
+  }
 }
