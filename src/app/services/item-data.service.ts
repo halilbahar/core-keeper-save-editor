@@ -36,7 +36,7 @@ export class ItemDataService {
   getItemDetail(objectId: number): ItemDetail {
     const item = this.getData(objectId);
     const paddedObjectId = objectId.toString().padStart(4, '0');
-    const { name, description } = item;
+    const { name, description, rarity } = item;
     const rarityColor = this.getRarityColor(item.rarity);
     const whenEquipped = item.whenEquipped;
     const conditionsWhenEquipped = whenEquipped
@@ -45,9 +45,11 @@ export class ItemDataService {
     const setBonus = item.setBonusId ? this.getSetBonusInformation(item.setBonusId) : undefined;
 
     return {
-      objectId: paddedObjectId,
+      objectId,
+      paddedObjectId,
       name,
       description,
+      rarity,
       rarityColor,
       conditionsWhenEquipped,
       setBonus
