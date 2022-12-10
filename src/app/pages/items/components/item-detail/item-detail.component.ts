@@ -25,23 +25,24 @@ export class ItemDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedItemService.$selectedItem.pipe(untilDestroyed(this)).subscribe(index => {
-      // If the index is set (it can be null due to BehaviourSubject needing an initial value)
-      // Show the item in the given slot
-      if (index != null) {
-        // If an item is already selected and we select the same item again, we deselect it this time
-        if (this.itemDetail != null && this.itemIndex === index) {
-          this.reset();
+      // We we have a null index (initial state) don't do anything
+      if (index == null) {
+        return;
+      }
+
+      // If a index of -1 is given, reset (display nothing)
+      if (index === -1) {
+        this.reset();
+      } else {
+        // Show the item in the given slot. The only exception is for empty item slots (objectID === 0). These we don't display.
+        const inventorySlot = this.characterService.$character.value.inventory[index];
+        if (inventorySlot.objectID !== 0) {
+          this.itemDetail = this.itemDataService.getItemDetail(inventorySlot.objectID);
+          this.inventorySlot = inventorySlot;
+          this.itemIndex = index;
+          this.rarityLabel = ItemRarity[this.itemDetail.rarity];
         } else {
-          // Otherwise we just select the given item slot. The only exception is for empty item slots (objectID === 0). These we don't display.
-          const inventorySlot = this.characterService.$character.value.inventory[index];
-          if (inventorySlot.objectID !== 0) {
-            this.itemDetail = this.itemDataService.getItemDetail(inventorySlot.objectID);
-            this.inventorySlot = inventorySlot;
-            this.itemIndex = index;
-            this.rarityLabel = ItemRarity[this.itemDetail.rarity];
-          } else {
-            this.reset();
-          }
+          this.reset();
         }
       }
     });

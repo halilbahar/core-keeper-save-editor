@@ -14,6 +14,7 @@ export class ItemComponent {
   private _amount: number;
   private _placeholder: number = -1;
   private _isArmor: boolean = false;
+  private _isSelected: boolean = false;
 
   @HostBinding('style') style: string;
   @Input() drag: boolean = false;
@@ -53,6 +54,11 @@ export class ItemComponent {
     this.updateStyles();
   }
 
+  @Input() set isSelected(value) {
+    this._isSelected = value;
+    this.updateStyles();
+  }
+
   get scale(): number {
     return this._scale;
   }
@@ -85,8 +91,13 @@ export class ItemComponent {
 
   private updateStyles(): void {
     let rarity = this.itemData?.rarity;
+    // Poor: -1 and Common: 0 have the same border
     if (rarity == null || rarity == -1) {
       rarity = 0;
+    }
+    // If the item is selected, use the -1 border (selected item border)
+    if (this._isSelected) {
+      rarity = -1;
     }
 
     const backgroundColor = this._isArmor ? 'transparent' : '#3d260d';
