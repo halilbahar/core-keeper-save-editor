@@ -12,7 +12,8 @@ import { CharacterService, DragNDropService, SelectedItemService } from '~servic
 })
 export class EquipmentComponent implements OnInit {
   equipmentSlots: InventorySlot[];
-  indexToHide: number;
+  indexToHide: number = -1;
+  indexToSelect: number = -1;
   placeholder = [0, 1, 2, 3, 4, 4, 5, 6];
 
   constructor(
@@ -29,13 +30,19 @@ export class EquipmentComponent implements OnInit {
     this.dragNDropService.$indexToHide
       .pipe(untilDestroyed(this))
       .subscribe(indexToHide => (this.indexToHide = indexToHide));
+
+    this.selectedItemService.$selectedItem
+      .pipe(untilDestroyed(this))
+      .subscribe(index => (this.indexToSelect = index));
   }
 
   /**
-   * Event handler for the on click event on items
+   * Event handler for the on click event on items. If the same invetory slot gets clicked again, deselect by sending a value of -1.
    * @param index of the inventory slot
    */
   onItemClick(index: number): void {
-    this.selectedItemService.setSelectedItem(index);
+    const currentIndex = this.selectedItemService.$selectedItem.value;
+    const newIndex = currentIndex === index ? -1 : index;
+    this.selectedItemService.$selectedItem.next(newIndex);
   }
 }

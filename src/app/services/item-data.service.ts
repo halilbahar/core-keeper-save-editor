@@ -36,7 +36,7 @@ export class ItemDataService {
   getItemDetail(objectId: number): ItemDetail {
     const item = this.getData(objectId);
     const paddedObjectId = objectId.toString().padStart(4, '0');
-    const { name, description } = item;
+    const { name, description, rarity, initialAmount, isStackable } = item;
     const rarityColor = this.getRarityColor(item.rarity);
     const whenEquipped = item.whenEquipped;
     const conditionsWhenEquipped = whenEquipped
@@ -45,9 +45,13 @@ export class ItemDataService {
     const setBonus = item.setBonusId ? this.getSetBonusInformation(item.setBonusId) : undefined;
 
     return {
-      objectId: paddedObjectId,
+      objectId,
+      paddedObjectId,
       name,
       description,
+      initialAmount,
+      isStackable,
+      rarity,
       rarityColor,
       conditionsWhenEquipped,
       setBonus
@@ -88,8 +92,15 @@ export class ItemDataService {
       const conditionStringTemplate = this.conditionLabels[itemCondition.id];
 
       if (conditionStringTemplate.includes('{0}')) {
-        const prefix = itemCondition.value >= 0 ? '+' : '-';
-        conditionStrings.push(conditionStringTemplate.replace('{0}', prefix + itemCondition.value));
+        const prefix = itemCondition.value >= 0 ? '+' : '';
+        // When the template has '{0}%' instead of '{0}' we need to divide the value by 10
+        // If it has no '{0}%' the replace will have done nothing and we can replace '{0}' which will succeed
+        let result = conditionStringTemplate.replace(
+          '{0}%',
+          prefix + itemCondition.value / 10 + '%'
+        );
+        result = result.replace('{0}', prefix + itemCondition.value);
+        conditionStrings.push(result);
       } else {
         conditionStrings.push(conditionStringTemplate);
       }

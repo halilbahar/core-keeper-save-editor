@@ -1,7 +1,13 @@
+import { ItemRarity } from '~enums';
+
 export interface ItemDetail {
-  objectId: string;
+  objectId: number;
+  paddedObjectId: string;
   name: string;
   description: string;
+  initialAmount: number;
+  isStackable: number;
+  rarity: ItemRarity;
   rarityColor: string;
   conditionsWhenEquipped?: string[];
   conditionsWhenEaten?: string[];

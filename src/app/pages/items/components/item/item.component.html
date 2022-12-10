@@ -6,6 +6,7 @@
   [cdkDragDisabled]="!this.drag"
   [appItemTooltip]="this.objectID"
   [class.hidden]="this.hide"
+  (cdkDragStarted)="this.selectedItemService.$selectedItem.next(-1)"
   style="--index:{{ this.itemData?.iconIndex }}; --individual-scale: {{ this.scale }};">
   <div
     class="item-amount"
