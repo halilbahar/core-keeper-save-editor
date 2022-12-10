@@ -6,4 +6,7 @@
   {{ this.item.damage.range[0] }}-{{ this.item.damage.range[1] }}
   {{ this.item.damage.isRange ? 'range' : 'meele' }} damage
 </p>
+<p class="text-xl font-semibold" *ngFor="let condition of this.conditions">
+  {{ condition }}
+</p>
 <p class="text-xl">{{ this.item.description }}</p>
