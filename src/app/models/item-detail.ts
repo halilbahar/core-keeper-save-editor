@@ -5,6 +5,8 @@ export interface ItemDetail {
   paddedObjectId: string;
   name: string;
   description: string;
+  initialAmount: number;
+  isStackable: number;
   rarity: ItemRarity;
   rarityColor: string;
   conditionsWhenEquipped?: string[];
