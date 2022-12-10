@@ -6,6 +6,7 @@
     [drag]="true"
     [hide]="this.indexToHide === 51 + i"
     [placeholder]="this.placeholder[i]"
+    [isArmor]="true"
     cdkDropList
     [cdkDropListData]="item"
     [cdkDropListEnterPredicate]="this.dragNDropService.equipmentEnterPredicate()"

@@ -3,10 +3,9 @@
   --size: calc(var(--spritesheet-scaled-size) * var(--individual-scale));
   --factor: calc(var(--individual-scale) * var(--spritesheet-scale-factor));
   @apply flex justify-center items-center w-max h-max relative box-content;
-  background-image: url('~src/assets/item-frame.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  image-rendering: pixelated;
+  border: 2px solid;
+  border-image: var(--border) 1 stretch;
+  background-color: var(--background);
   height: var(--size);
   width: var(--size);
   padding: calc(0.125rem * var(--factor));
