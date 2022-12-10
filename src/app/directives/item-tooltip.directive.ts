@@ -3,13 +3,12 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 import { ItemTooltipComponent } from '~components/item-tooltip/item-tooltip.component';
-import { ItemData } from '~models';
 
 @Directive({
   selector: '[appItemTooltip]'
 })
 export class ItemTooltipDirective {
-  @Input() tooltipItemData: ItemData;
+  @Input() appItemTooltip: number;
 
   private overlayRef: OverlayRef;
 
@@ -33,7 +32,7 @@ export class ItemTooltipDirective {
 
     const portal = new ComponentPortal(ItemTooltipComponent);
     const componentRef = this.overlayRef.attach(portal);
-    componentRef.instance.item = this.tooltipItemData;
+    componentRef.instance.objectId = this.appItemTooltip;
   }
 
   @HostListener('mouseleave', [])

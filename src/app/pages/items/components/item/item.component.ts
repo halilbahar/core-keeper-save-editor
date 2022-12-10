@@ -47,12 +47,16 @@ export class ItemComponent {
     this.updateStyles();
   }
 
-  get amount(): number {
-    return this._amount;
-  }
-
   get scale(): number {
     return this._scale;
+  }
+
+  get objectID(): number {
+    return this._objectID;
+  }
+
+  get amount(): number {
+    return this._amount;
   }
 
   get placeholder(): number {

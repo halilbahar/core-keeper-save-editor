@@ -1,11 +1,10 @@
 <div
   class="icon"
   *ngIf="this.itemData"
-  appItemTooltip
   cdkDrag
   [cdkDragData]="this.itemData"
   [cdkDragDisabled]="!this.drag"
-  [tooltipItemData]="this.itemData"
+  [appItemTooltip]="this.objectID"
   [class.hidden]="this.hide"
   style="--index:{{ this.itemData?.iconIndex }}; --individual-scale: {{ this.scale }};">
   <div

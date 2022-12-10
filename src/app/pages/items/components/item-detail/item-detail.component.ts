@@ -30,7 +30,8 @@ export class ItemDetailComponent implements OnInit {
         this.itemIndex = index;
         this.item = this.itemDataService.getData(this.inventorySlot.objectID);
         this.rarity = ItemRarity[this.item.rarity];
-        this.rarityColor = this.itemDataService.getRarityColor(this.item.rarity);
+        // this.rarityColor = this.itemDataService.getRarityColor(this.item.rarity);
+        this.rarityColor = '#000000';
       }
     });
   }

@@ -1,5 +1,6 @@
 export * from './item-data';
 export * from './set-bonus';
+export * from './item-detail';
 export * from './extracted-data';
 
 export * from './save-file/skill';

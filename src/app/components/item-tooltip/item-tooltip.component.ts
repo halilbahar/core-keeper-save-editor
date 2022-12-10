@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { ItemData } from '~models';
+import { ItemDetail } from '~models';
 import { ItemDataService } from '~services';
 
 @Component({
@@ -9,17 +9,12 @@ import { ItemDataService } from '~services';
   styleUrls: ['./item-tooltip.component.scss']
 })
 export class ItemTooltipComponent implements OnInit {
-  @Input() item: ItemData;
-  rarityColor: string;
-  conditionsWhenEquipped: string[];
+  itemDetail: ItemDetail;
+  @Input() objectId: number;
 
   constructor(private itemDataService: ItemDataService) {}
 
   ngOnInit(): void {
-    this.rarityColor = this.itemDataService.getRarityColor(this.item.rarity);
-    const whenEquipped = this.item.whenEquipped;
-    this.conditionsWhenEquipped = whenEquipped
-      ? this.itemDataService.transformConditionIdToLabel(whenEquipped)
-      : [];
+    this.itemDetail = this.itemDataService.getItemDetail(this.objectId);
   }
 }

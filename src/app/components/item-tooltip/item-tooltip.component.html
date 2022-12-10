@@ -1,12 +1,14 @@
 <div class="flex gap-1 items-center">
-  <h3 class="text-xl" [ngStyle]="{ color: this.rarityColor }">{{ this.item.name }}</h3>
-  <span class="text-xl text-gray-400">#{{ this.item.objectID.toString().padStart(4, '0') }}</span>
+  <h3 class="text-xl" [ngStyle]="{ color: this.itemDetail.rarityColor }">
+    {{ this.itemDetail.name }}
+  </h3>
+  <span class="text-xl text-gray-400">#{{ this.itemDetail.objectId }}</span>
 </div>
-<p class="text-xl font-semibold" *ngIf="this.item.damage">
-  {{ this.item.damage.range[0] }}-{{ this.item.damage.range[1] }}
-  {{ this.item.damage.isRange ? 'range' : 'meele' }} damage
+<p class="text-xl font-semibold" *ngIf="this.itemDetail.damage">
+  {{ this.itemDetail.damage.range[0] }}-{{ this.itemDetail.damage.range[1] }}
+  {{ this.itemDetail.damage.isRange ? 'range' : 'meele' }} damage
 </p>
-<p class="text-xl font-semibold" *ngFor="let condition of this.conditionsWhenEquipped">
+<p class="text-xl font-semibold" *ngFor="let condition of this.itemDetail.conditionsWhenEquipped">
   {{ condition }}
 </p>
-<p class="text-xl">{{ this.item.description }}</p>
+<p class="text-xl">{{ this.itemDetail.description }}</p>
