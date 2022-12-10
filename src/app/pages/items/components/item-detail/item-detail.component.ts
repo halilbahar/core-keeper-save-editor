@@ -39,6 +39,8 @@ export class ItemDetailComponent implements OnInit {
             this.inventorySlot = inventorySlot;
             this.itemIndex = index;
             this.rarityLabel = ItemRarity[this.itemDetail.rarity];
+          } else {
+            this.reset();
           }
         }
       }
