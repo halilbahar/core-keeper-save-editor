@@ -6,4 +6,5 @@ export interface ItemDetail {
   conditionsWhenEquipped?: string[];
   conditionsWhenEaten?: string[];
   damage?: { range: [number, number]; isRange: boolean };
+  setBonus?: { conditions: string[]; pieces: string[] };
 }

@@ -1,7 +1,7 @@
 export interface SetBonus {
   id: number;
   rarity: number;
-  data: SetBonusData;
+  data: SetBonusData[];
   pieces: number[];
 }
 
