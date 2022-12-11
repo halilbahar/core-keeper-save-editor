@@ -214,7 +214,7 @@ def get_set_bonuses():
 def get_conditions():
     translations = get_translations()
     condition_ids_enum = {v: k for k, v in get_condition_ids().items()}
-    condition_translation = {}
+    condition_id_to_translation = {}
 
     # Find all the translations that start with 'Conditions/'
     # After that split them: 'Conditions/AcidDamage' is split into _ = 'Conditions' and condition_name = 'AcidDamage'
@@ -225,9 +225,34 @@ def get_conditions():
         if term.startswith('Conditions/'):
             _, condition_name = term.split('/')
             condition_id = condition_ids_enum[condition_name]
-            condition_translation[condition_id] = translation_value
+            condition_id_to_translation[condition_id] = translation_value
 
-    return condition_translation
+    condition_table_doc = UnityDocument.load_yaml(
+        'dump/CoreKeeper/ExportedProject/Assets/Resources/ConditionsTable.asset'
+    )
+    mono_behaviour = condition_table_doc.data[0]
+    condition_results = {}
+
+    # Now that we have the ids -> text we can loop over the conditionsTable
+    for condition in mono_behaviour.conditions:
+        condition_id = condition['Id']
+        # Ignore Null, ApplySnare, ImmuneToDamageAfterLogin
+        # if condition_id == 0 or condition_id == 26:
+        if condition_id in (0, 26, 187):
+            continue
+
+        id_to_use_same_desc = condition['useSameDescAsId']
+        if id_to_use_same_desc != 0:
+            condition_description = condition_id_to_translation[id_to_use_same_desc]
+        else:
+            condition_description = condition_id_to_translation[condition_id]
+
+        condition_results[condition_id] = {
+            'description': condition_description,
+            'isUnique': condition['isUnique'] == 1
+        }
+
+    return condition_results
 
 
 if __name__ == '__main__':
