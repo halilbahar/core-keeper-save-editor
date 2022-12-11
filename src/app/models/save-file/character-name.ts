@@ -4,6 +4,7 @@ export interface CharacterName {
 }
 
 export interface CharacterNameBytes {
+  utf8LengthInBytes: number;
   offset0000: {
     byte0000: number;
     byte0001: number;
