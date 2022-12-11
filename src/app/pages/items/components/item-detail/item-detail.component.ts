@@ -48,8 +48,26 @@ export class ItemDetailComponent implements OnInit {
     });
   }
 
-  onAmountChange(event): void {
+  /**
+   * Whenever the user is done editing the input field, this function will be called.
+   * It Will check if the value is between 0 and item-max-durability or 999 when it is a stackable item.
+   * When the value of the input field is valid, we change the inventoryslot
+   * @param event
+   */
+  onAmountChange(event: Event): void {
     console.log(event);
+    const traget = event.target as HTMLInputElement;
+    const amount = parseInt(traget.value);
+
+    const { isStackable, initialAmount } = this.itemDetail;
+    const maxAmount = isStackable ? 999 : initialAmount;
+
+    if (amount <= 0 || amount > maxAmount) {
+      // We can't cancel this event. So have to reset the value manually
+      traget.value = '' + this.inventorySlot.amount;
+    } else {
+      this.inventorySlot.amount = amount;
+    }
   }
 
   /**
