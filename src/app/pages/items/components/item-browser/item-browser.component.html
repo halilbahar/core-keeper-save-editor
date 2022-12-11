@@ -20,8 +20,7 @@
       cdkDropList
       *ngFor="let item of this.itemData"
       [cdkDropListConnectedTo]="this.inventory_ids"
-      [objectID]="item.itemData.objectID"
-      [drag]="true"
+      [options]="{ objectID: item.itemData.objectID }"
       [class.!hidden]="item.hide"></app-item>
   </div>
 </app-card>

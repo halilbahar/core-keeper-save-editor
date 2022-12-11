@@ -3,11 +3,12 @@
     <app-item
       *ngFor="let inventorySlot of this.inventory | inventory: bag; let i = index"
       id="inventory-{{ i }}"
-      [objectID]="inventorySlot.objectID"
-      [amount]="inventorySlot.amount"
-      [drag]="true"
+      [options]="{
+        objectID: inventorySlot.objectID,
+        amount: inventorySlot.amount,
+        isSelected: this.indexToSelect === i
+      }"
       [hide]="this.indexToHide === i"
-      [isSelected]="this.indexToSelect === i"
       cdkDropList
       [cdkDropListData]="inventorySlot"
       [cdkDropListEnterPredicate]="this.dragNDropService.InventoryEnterPredicate()"
