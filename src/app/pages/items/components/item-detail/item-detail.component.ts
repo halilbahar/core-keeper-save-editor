@@ -55,7 +55,6 @@ export class ItemDetailComponent implements OnInit {
    * @param event
    */
   onAmountChange(event: Event): void {
-    console.log(event);
     const traget = event.target as HTMLInputElement;
     const amount = parseInt(traget.value);
 
