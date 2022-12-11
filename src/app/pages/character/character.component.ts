@@ -13,11 +13,14 @@ import { CharacterService } from '~services';
 export class CharacterComponent implements OnInit {
   character: Character;
   currentName: string;
+  isHardcore: boolean;
+  index: number;
   constructor(private characterService: CharacterService) {}
 
   ngOnInit(): void {
     this.characterService.$character.pipe(untilDestroyed(this)).subscribe(character => {
       this.character = character;
+      this.isHardcore = character.characterType === 1;
 
       const encodedBytes = [];
       for (let i = 0; i < 16; i++) {
@@ -31,6 +34,10 @@ export class CharacterComponent implements OnInit {
       const encodedName = Uint8Array.from(encodedBytes);
       this.currentName = new TextDecoder('utf-8').decode(encodedName);
     });
+
+    this.characterService.$index
+      .pipe(untilDestroyed(this))
+      .subscribe(index => (this.index = index + 1));
   }
 
   /**
@@ -38,7 +45,7 @@ export class CharacterComponent implements OnInit {
    * This can only happen if the encoded array is not longer than 16
    * @param event
    */
-  onChange(event: Event): void {
+  onNameChange(event: Event): void {
     const target = event.target as HTMLInputElement;
     const encoded = new TextEncoder().encode(target.value);
 
@@ -56,6 +63,34 @@ export class CharacterComponent implements OnInit {
         name.bytes.offset0000['byte00' + lastDigits] = value;
       }
 
+      this.characterService.store();
+    }
+  }
+
+  /**
+   * Event handler for the checkbox. When the state changes we update the character
+   * @param event
+   */
+  onHardcoreChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.character.characterType = target.checked ? 1 : 0;
+    this.characterService.store();
+  }
+
+  /**
+   * When the index changes, we save it so we can recall it when we export the file
+   * @param event
+   */
+  onIndexChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const index = +target.value;
+
+    if (index < 1 || 30 < index) {
+      target.value = '' + this.index;
+    } else {
+      // We display the Slot index which starts by 1. The files on the other hand start with 0
+      const correctIndex = index - 1;
+      this.characterService.$index.next(correctIndex);
       this.characterService.store();
     }
   }
