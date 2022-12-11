@@ -1,13 +1,14 @@
 <app-card class="!grid grid-cols-2 gap-2">
   <app-item
     *ngFor="let item of this.equipmentSlots; let i = index"
-    [objectID]="item.objectID"
-    [amount]="item.amount"
-    [drag]="true"
+    [options]="{
+      objectID: item.objectID,
+      amount: item.amount,
+      isSelected: this.indexToSelect === 51 + 1,
+      placeholder: this.placeholder[i],
+      isArmor: true
+    }"
     [hide]="this.indexToHide === 51 + i"
-    [isSelected]="this.indexToSelect === 51 + i"
-    [placeholder]="this.placeholder[i]"
-    [isArmor]="true"
     cdkDropList
     [cdkDropListData]="item"
     [cdkDropListEnterPredicate]="this.dragNDropService.equipmentEnterPredicate()"

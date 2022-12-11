@@ -17,7 +17,7 @@ export class ItemComponent {
   private _isSelected: boolean = false;
 
   @HostBinding('style') style: string;
-  @Input() drag: boolean = false;
+  @Input() drag: boolean = true;
   @Input() hide: boolean = false;
 
   itemData: ItemData;
@@ -29,36 +29,36 @@ export class ItemComponent {
     public selectedItemService: SelectedItemService
   ) {}
 
-  @Input() set scale(value) {
-    this._scale = value;
-    this.updateStyles();
-  }
+  @Input() set options({
+    scale = 1,
+    objectID,
+    amount,
+    placeholder = -1,
+    isArmor = false,
+    isSelected = false
+  }: {
+    scale?: number;
+    objectID: number;
+    amount?: number;
+    placeholder?: number;
+    isArmor?: boolean;
+    isSelected?: boolean;
+  }) {
+    this._scale = scale;
+    this._objectID = objectID;
+    this._amount = amount;
+    this._placeholder = placeholder;
+    this._isArmor = isArmor;
+    this._isSelected = isSelected;
+    this.durabilityProgress = null;
+    this.durabilityBarColor = null;
 
-  @Input() set objectID(value) {
-    this._objectID = value;
-    this.itemData = this.itemDataService.getData(value);
-    this.updateStyles();
-  }
-
-  @Input() set amount(value) {
-    this._amount = value;
-    if (value && this.itemData?.initialAmount > 1) {
-      this.durabilityProgress = (value / this.itemData.initialAmount) * 100;
+    this.itemData = this.itemDataService.getData(objectID);
+    if (amount && this.itemData?.initialAmount > 1) {
+      this.durabilityProgress = (amount / this.itemData.initialAmount) * 100;
       this.durabilityBarColor = this.mapColor(this.durabilityProgress);
     }
-  }
 
-  @Input() set placeholder(value) {
-    this._placeholder = value;
-  }
-
-  @Input() set isArmor(value) {
-    this._isArmor = value;
-    this.updateStyles();
-  }
-
-  @Input() set isSelected(value) {
-    this._isSelected = value;
     this.updateStyles();
   }
 

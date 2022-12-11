@@ -9,7 +9,7 @@ import { ExtractedDataService } from './extracted-data.service';
   providedIn: 'root'
 })
 export class ItemDataService {
-  private readonly conditionLabels: { [key: number]: string };
+  private readonly conditionLabels: { [key: string]: { description: string; isUnique: boolean } };
   private readonly setBonus: { [key: string]: SetBonus };
   readonly items: { [key: number]: ItemData };
 
@@ -36,7 +36,7 @@ export class ItemDataService {
   getItemDetail(objectId: number): ItemDetail {
     const item = this.getData(objectId);
     const paddedObjectId = objectId.toString().padStart(4, '0');
-    const { name, description, rarity, initialAmount, isStackable } = item;
+    const { name, description, rarity, initialAmount, isStackable, damage } = item;
     const rarityColor = this.getRarityColor(item.rarity);
     const whenEquipped = item.whenEquipped;
     const conditionsWhenEquipped = whenEquipped
@@ -54,6 +54,7 @@ export class ItemDataService {
       rarity,
       rarityColor,
       conditionsWhenEquipped,
+      damage,
       setBonus
     };
   }
@@ -83,13 +84,17 @@ export class ItemDataService {
   /**
    * Turn the given item conditions from key (id), value to a string which describes the condition with the given value.
    * @param itemConditions to transform
-   * @returns list of described conditions
+   * @returns list of tuples: [Description, IsUnique]
    */
-  private transformConditionIdToLabel(itemConditions: ConditionWhenEquipped[]): string[] {
-    const conditionStrings: string[] = [];
+  private transformConditionIdToLabel(
+    itemConditions: ConditionWhenEquipped[]
+  ): [string, boolean][] {
+    const conditionStrings = [];
 
     for (let itemCondition of itemConditions) {
-      const conditionStringTemplate = this.conditionLabels[itemCondition.id];
+      const conditionLabel = this.conditionLabels[itemCondition.id];
+      const conditionStringTemplate = conditionLabel.description;
+      const isUnique = conditionLabel.isUnique;
 
       if (conditionStringTemplate.includes('{0}')) {
         const prefix = itemCondition.value >= 0 ? '+' : '';
@@ -100,9 +105,9 @@ export class ItemDataService {
           prefix + itemCondition.value / 10 + '%'
         );
         result = result.replace('{0}', prefix + itemCondition.value);
-        conditionStrings.push(result);
+        conditionStrings.push([result, isUnique]);
       } else {
-        conditionStrings.push(conditionStringTemplate);
+        conditionStrings.push([conditionStringTemplate, isUnique]);
       }
     }
 
@@ -121,7 +126,7 @@ export class ItemDataService {
       const { conditionID, value } = data.conditionData;
       // transformConditionIdToLabel needs an array but we have a single item,
       // pass the single item as an array and get the first element afterwards
-      const conditionLabel = this.transformConditionIdToLabel([{ id: conditionID, value }])[0];
+      const conditionLabel = this.transformConditionIdToLabel([{ id: conditionID, value }])[0][0];
       return `${data.requiredPieces} set: ${conditionLabel}`;
     });
 

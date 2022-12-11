@@ -2,8 +2,8 @@
   <div class="flex gap-2 mb-2 items-center">
     <app-item
       class="pointer-events-none"
-      [objectID]="this.inventorySlot.objectID"
-      [scale]="2"></app-item>
+      [options]="{ objectID: this.inventorySlot.objectID, scale: 2 }"
+      [drag]="false"></app-item>
     <div class="flex flex-col justify-center">
       <div class="flex gap-2">
         <h3 class="text-xl title-shadow" [ngStyle]="{ color: this.itemDetail.rarityColor }">
@@ -16,10 +16,30 @@
       </h4>
     </div>
   </div>
+  <p class="font-semibold" *ngIf="this.itemDetail.damage">
+    {{ this.itemDetail.damage.range[0] }}-{{ this.itemDetail.damage.range[1] }}
+    {{ this.itemDetail.damage.isRange ? 'range' : 'meele' }} damage
+  </p>
+  <p
+    class="font-semibold"
+    *ngFor="let condition of this.itemDetail.conditionsWhenEquipped"
+    [style.color]="condition[1] ? '#00ff00' : 'inherit'">
+    {{ condition[0] }}
+  </p>
+  <ng-container *ngIf="this.itemDetail.setBonus as setBonus">
+    <p class="font-semibold" style="color: #fdfb2c" *ngFor="let condition of setBonus.conditions">
+      {{ condition }}
+    </p>
+    <p class="font-semibold" *ngFor="let piece of setBonus.pieces">{{ piece }}</p>
+  </ng-container>
   <p class="text-xl">{{ this.itemDetail.description }}</p>
-  <div>
-    <input type="number" (input)="this.onAmountChange($event)" class="text-black" />
+  <div *ngIf="this.itemDetail.isStackable || this.itemDetail.initialAmount !== 1">
+    <input
+      type="number"
+      class="appearance-none"
+      [value]="this.inventorySlot.amount"
+      (change)="this.onAmountChange($event)" />
     /
-    <span>500</span>
+    {{ this.itemDetail.isStackable ? 999 : this.itemDetail.initialAmount }}
   </div>
 </app-card>

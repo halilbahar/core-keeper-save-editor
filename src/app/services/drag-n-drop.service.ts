@@ -18,6 +18,18 @@ import { ItemDataService } from './item-data.service';
   providedIn: 'root'
 })
 export class DragNDropService {
+  private readonly regex = /inventory-(\d+)/;
+  private readonly indexAllowedObjectTypes = {
+    51: ItemCategories.Helm,
+    52: ItemCategories.Necklace,
+    53: ItemCategories.BreastArmor,
+    54: ItemCategories.PantsArmor,
+    55: ItemCategories.Ring,
+    56: ItemCategories.Ring,
+    57: ItemCategories.Offhand,
+    58: ItemCategories.Bag
+  };
+
   $indexToHide: BehaviorSubject<number> = new BehaviorSubject(-1);
   constructor(
     private itemDataService: ItemDataService,
@@ -111,26 +123,15 @@ export class DragNDropService {
   equipmentEnterPredicate(): (drag: CdkDrag, drop: CdkDropList) => boolean {
     return (drag: CdkDrag<{ objectID: number }>, drop: CdkDropList<InventorySlot>) => {
       const id = drop.id;
-      const regex = /inventory-(\d+)/;
-      const match = id.match(regex);
-      const index = match[1];
+      const match = id.match(this.regex);
+      const index = parseInt(match[1]);
       const itemData = this.itemDataService.getData(drag.data.objectID);
       const itemObjectType = itemData.objectType;
-      const indexAllowedObjectTypes = {
-        '51': ItemCategories.Helm,
-        '52': ItemCategories.Necklace,
-        '53': ItemCategories.BreastArmor,
-        '54': ItemCategories.PantsArmor,
-        '55': ItemCategories.Ring,
-        '56': ItemCategories.Ring,
-        '57': ItemCategories.Offhand,
-        '58': ItemCategories.Bag
-      };
 
       // If we find an index which is in indexAllowedObjectTypes that means we are handling a equipment predicate.
       // We check if it is the correct objectType
-      if (indexAllowedObjectTypes[index] != null) {
-        return indexAllowedObjectTypes[index] === itemObjectType;
+      if (this.indexAllowedObjectTypes[index] != null) {
+        return this.indexAllowedObjectTypes[index] === itemObjectType;
       }
 
       // Else it is an item for the inventory
@@ -146,16 +147,20 @@ export class DragNDropService {
    */
   InventoryEnterPredicate(): (drag: CdkDrag, drop: CdkDropList) => boolean {
     return (drag: CdkDrag<{ objectID: number }>, drop: CdkDropList<InventorySlot>) => {
-      // If the item comes from the item-browser, allow everything or if the item slot is empty
-      if (!drag.dropContainer.id.startsWith('inventory-') || drop.data.objectID === 0) {
-        return true;
-      }
+      // If the item comes from the item-browser (0 <= index <= 49), allow everything
+      const index = parseInt(drag.dropContainer.id.split('-')[1]);
+      if (0 <= index && index <= 49) return true;
+      // If we are here this means that the item being dragged is from the Equipment slots.
+      // We can instantly allow it if the itemslot is empty.
+      if (drop.data.objectID === 0) return true;
 
-      const dragItemData = this.itemDataService.getData(drag.data.objectID);
+      // Otherwise we need to see if they are allowed to swap
+
+      const draggingItemType = this.indexAllowedObjectTypes[index];
       const dropItemData = this.itemDataService.getData(drop.data.objectID);
 
       // If the types are the same, you are allowed to swap the items
-      return dragItemData.objectType === dropItemData.objectType;
+      return draggingItemType === dropItemData.objectType;
     };
   }
 }
