@@ -5,10 +5,15 @@
   </label>
   <label>
     Hardcore:
-    <input type="checkbox" [checked]="this.isHardcore" (change)="this.onHardcoreChange($event)" />
+    <input
+      #isHardcoreCheckbox
+      type="checkbox"
+      [checked]="this.isHardcore"
+      (change)="this.onHardcoreChange($event)" />
   </label>
   <label>
     Saveslot (index):
     <input type="number" [value]="this.index" (change)="this.onIndexChange($event)" />
   </label>
+  <button (click)="this.resetCharacter()">Reset character</button>
 </app-card>

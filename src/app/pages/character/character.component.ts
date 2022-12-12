@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { Character } from '~models';
@@ -15,12 +15,20 @@ export class CharacterComponent implements OnInit {
   currentName: string;
   isHardcore: boolean;
   index: number;
+
+  @ViewChild('isHardcoreCheckbox') checkbox: ElementRef<HTMLInputElement>;
+
   constructor(private characterService: CharacterService) {}
 
   ngOnInit(): void {
     this.characterService.$character.pipe(untilDestroyed(this)).subscribe(character => {
       this.character = character;
       this.isHardcore = character.characterType === 1;
+      // The [checked] property on the input works only the first time.
+      // When this.isHardcore is changed after that (happens when reseting and uploading a character)
+      // So after that we rely on input.checked from the ViewQuery. The ViewQuery is not rdy the first time.
+      const input = this.checkbox?.nativeElement;
+      input && (input.checked = this.isHardcore);
 
       const encodedBytes = [];
       for (let i = 0; i < 16; i++) {
@@ -93,5 +101,13 @@ export class CharacterComponent implements OnInit {
       this.characterService.$index.next(correctIndex);
       this.characterService.store();
     }
+  }
+
+  /**
+   * Load the default character.
+   */
+  resetCharacter(): void {
+    this.characterService.resetToDefaultCharacter();
+    this.characterService.store();
   }
 }
