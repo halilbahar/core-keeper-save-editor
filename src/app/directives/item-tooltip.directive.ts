@@ -1,9 +1,12 @@
+import { CdkDrag } from '@angular/cdk/drag-drop';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ItemTooltipComponent } from '~components/item-tooltip/item-tooltip.component';
 
+@UntilDestroy()
 @Directive({
   selector: '[appItemTooltip]'
 })
@@ -12,10 +15,13 @@ export class ItemTooltipDirective {
 
   private overlayRef: OverlayRef;
 
-  constructor(private overlay: Overlay, private elementRef: ElementRef) {}
+  constructor(private overlay: Overlay, private elementRef: ElementRef, cdkDrag: CdkDrag) {
+    // Listen to the on start event. When dragging starts, dispose this tooltip
+    cdkDrag.started.pipe(untilDestroyed(this)).subscribe(_ => this.destory());
+  }
 
-  @HostListener('mouseenter', ['$event'])
-  onEnter(event): void {
+  @HostListener('mouseenter')
+  onEnter(): void {
     this.overlayRef = this.overlay.create({
       positionStrategy: this.overlay
         .position()
@@ -35,8 +41,12 @@ export class ItemTooltipDirective {
     componentRef.instance.objectId = this.appItemTooltip;
   }
 
-  @HostListener('mouseleave', [])
+  @HostListener('mouseout')
   oneLeave(): void {
+    this.destory();
+  }
+
+  private destory(): void {
     this.overlayRef.dispose();
   }
 }
