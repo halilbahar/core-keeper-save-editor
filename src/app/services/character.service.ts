@@ -16,16 +16,13 @@ export class CharacterService {
   $bag: BehaviorSubject<Bag> = new BehaviorSubject(null);
 
   constructor() {
-    const defaultCharacter = DefaultCharacter as Character;
-    defaultCharacter.characterGuid = crypto.randomUUID().replace(/-/g, '');
-
     const characerJsonInStorage = localStorage.getItem('core-keeper-save-editor.character');
     const characterIndexInStorage = localStorage.getItem('core-keeper-save-editor.index');
     if (characerJsonInStorage != null && characterIndexInStorage != null) {
       const character = JSON.parse(characerJsonInStorage) as Character;
       this.setCharacter(character, +characterIndexInStorage);
     } else {
-      this.setCharacter(defaultCharacter, 0);
+      this.setCharacter(this.getDefaultCharacterWithRandomGUID(), 0);
     }
   }
 
@@ -81,5 +78,23 @@ export class CharacterService {
     const characterIndex = this.$index.value;
     localStorage.setItem('core-keeper-save-editor.character', characterJson);
     localStorage.setItem('core-keeper-save-editor.index', characterIndex + '');
+  }
+
+  /**
+   * Load the default character and update localstorage
+   */
+  resetToDefaultCharacter() {
+    const defaultCharacter = this.getDefaultCharacterWithRandomGUID();
+    this.setCharacter(defaultCharacter, 0);
+  }
+
+  /**
+   * @returns default character with random guid
+   */
+  private getDefaultCharacterWithRandomGUID(): Character {
+    //@ts-ignore
+    const defaultCharacter = window.structuredClone(DefaultCharacter) as Character;
+    defaultCharacter.characterGuid = crypto.randomUUID().replace(/-/g, '');
+    return defaultCharacter;
   }
 }

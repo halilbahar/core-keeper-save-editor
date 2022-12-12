@@ -1,1 +1,19 @@
-<p>character works!</p>
+<app-card class="w-96">
+  <label>
+    Charactername:
+    <input type="text" [value]="this.currentName" (change)="this.onNameChange($event)" />
+  </label>
+  <label>
+    Hardcore:
+    <input
+      #isHardcoreCheckbox
+      type="checkbox"
+      [checked]="this.isHardcore"
+      (change)="this.onHardcoreChange($event)" />
+  </label>
+  <label>
+    Saveslot (index):
+    <input type="number" [value]="this.index" (change)="this.onIndexChange($event)" />
+  </label>
+  <button (click)="this.resetCharacter()">Reset character</button>
+</app-card>
