@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 
 import { TalentData } from '~models';
 import { TalentDataService } from '~services';
@@ -15,6 +15,7 @@ export class TalentComponent {
 
   talent: TalentData;
   @HostBinding('style') style: string;
+  @Output() talentIncreased = new EventEmitter<{ index: number }>();
 
   constructor(public talentDataService: TalentDataService) {}
 
@@ -24,6 +25,13 @@ export class TalentComponent {
     this.style = `border-image: url("assets/border/talents/talent_border_${
       options.points === 5 ? options.skillId : 'base'
     }.png") 1`;
+  }
+
+  @HostListener('click')
+  onClick() {
+    if (this.options.points < 5) {
+      this.talentIncreased.emit({ index: this.options.index });
+    }
   }
 
   get options(): TalentOptions {

@@ -23,8 +23,10 @@ export class TalentTreeComponent {
     return this._options;
   }
 
-  // Eventhandler for talent
-  updatePoints() {}
+  onTalentIncrease({ index }: { index: number }) {
+    this.options.talentTree.points[index]++;
+    this.updateBlocked();
+  }
 
   private updateBlocked() {
     const firstMaxed = this.options.talentTree.points[0] !== 5;
@@ -35,13 +37,14 @@ export class TalentTreeComponent {
     const secondMaxed = this.options.talentTree.points[1] !== 5;
     const thirdMaxed = this.options.talentTree.points[2] !== 5;
     this.blocked[3] = secondMaxed;
-    this.blocked[4] = secondMaxed || thirdMaxed;
+    this.blocked[4] = secondMaxed && thirdMaxed;
     this.blocked[5] = thirdMaxed;
 
     const fourthMaxed = this.options.talentTree.points[3] !== 5;
     const fifthMaxed = this.options.talentTree.points[4] !== 5;
     const sixthMaxed = this.options.talentTree.points[5] !== 5;
-    this.blocked[6] = fourthMaxed || fifthMaxed;
-    this.blocked[7] = fifthMaxed || sixthMaxed;
+    this.blocked[6] = fourthMaxed && fifthMaxed;
+    this.blocked[7] = fifthMaxed && sixthMaxed;
+    console.log(this.blocked);
   }
 }
