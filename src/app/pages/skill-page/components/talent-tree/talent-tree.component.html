@@ -1,1 +1,89 @@
-<p>talent-tree works!</p>
+<app-card>
+  <p>Mining</p>
+  <p>Points: X</p>
+
+  <ng-container *ngIf="this.options.talentTree.points as points">
+    <div class="talent-row">
+      <div class="talent-container">
+        <app-talent
+          [options]="{
+            skillId: this.options.skillId,
+            points: points[0],
+            index: 0,
+            blocked: this.blocked[0]
+          }">
+        </app-talent>
+      </div>
+    </div>
+    <div class="talent-row">
+      <div class="talent-container">
+        <app-talent
+          [options]="{
+            skillId: this.options.skillId,
+            points: points[1],
+            index: 1,
+            blocked: this.blocked[1]
+          }">
+        </app-talent>
+        <app-talent
+          [options]="{
+            skillId: this.options.skillId,
+            points: points[2],
+            index: 2,
+            blocked: this.blocked[2]
+          }">
+        </app-talent>
+      </div>
+    </div>
+    <div class="talent-row">
+      <div class="talent-container">
+        <app-talent
+          [options]="{
+            skillId: this.options.skillId,
+            points: points[3],
+            index: 3,
+            blocked: this.blocked[3]
+          }">
+        </app-talent>
+        <app-talent
+          [options]="{
+            skillId: this.options.skillId,
+            points: points[4],
+            index: 4,
+            blocked: this.blocked[4]
+          }">
+        </app-talent>
+        <app-talent
+          [options]="{
+            skillId: this.options.skillId,
+            points: points[5],
+            index: 5,
+            blocked: this.blocked[5]
+          }">
+        </app-talent>
+      </div>
+    </div>
+    <div class="talent-row">
+      <div class="talent-container">
+        <app-talent
+          [options]="{
+            skillId: this.options.skillId,
+            points: points[6],
+            index: 6,
+            blocked: this.blocked[6]
+          }">
+        </app-talent>
+        <app-talent
+          [options]="{
+            skillId: this.options.skillId,
+            points: points[7],
+            index: 7,
+            blocked: this.blocked[7]
+          }">
+        </app-talent>
+      </div>
+    </div>
+  </ng-container>
+
+  <button>Reset</button>
+</app-card>
