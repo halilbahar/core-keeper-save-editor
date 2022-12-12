@@ -92,8 +92,7 @@ export class CharacterService {
    * @returns default character with random guid
    */
   private getDefaultCharacterWithRandomGUID(): Character {
-    //@ts-ignore
-    const defaultCharacter = window.structuredClone(DefaultCharacter) as Character;
+    const defaultCharacter = JSON.parse(JSON.stringify(DefaultCharacter)) as Character;
     defaultCharacter.characterGuid = crypto.randomUUID().replace(/-/g, '');
     return defaultCharacter;
   }
