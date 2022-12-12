@@ -104,7 +104,7 @@ export class ItemComponent {
     }
 
     const backgroundColor = this._isArmor ? 'transparent' : '#3d260d';
-    const borderUrl = `url("/assets/border/item/${rarity}.png")`;
+    const borderUrl = `url("assets/border/item/${rarity}.png")`;
     this.style = `--individual-scale: ${this._scale}; --background: ${backgroundColor}; --border: ${borderUrl}`;
   }
 }
