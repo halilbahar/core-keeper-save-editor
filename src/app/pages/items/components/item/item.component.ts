@@ -23,6 +23,7 @@ export class ItemComponent {
   itemData: ItemData;
   durabilityProgress?: number;
   durabilityBarColor?: string;
+  isItemInvalid: boolean;
 
   constructor(
     private itemDataService: ItemDataService,
@@ -54,6 +55,8 @@ export class ItemComponent {
     this.durabilityBarColor = null;
 
     this.itemData = this.itemDataService.getData(objectID);
+    // If itemData is null and the objectID is not 0. If it is zero itemData is also null
+    this.isItemInvalid = this.itemData == null && objectID !== 0;
     if (amount && this.itemData?.initialAmount > 1) {
       this.durabilityProgress = (amount / this.itemData.initialAmount) * 100;
       this.durabilityBarColor = this.mapColor(this.durabilityProgress);

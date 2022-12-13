@@ -160,7 +160,7 @@ export class DragNDropService {
       const dropItemData = this.itemDataService.getData(drop.data.objectID);
 
       // If the types are the same, you are allowed to swap the items
-      return draggingItemType === dropItemData.objectType;
+      return draggingItemType === dropItemData?.objectType;
     };
   }
 }
