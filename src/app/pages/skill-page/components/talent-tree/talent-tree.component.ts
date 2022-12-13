@@ -44,7 +44,13 @@ export class TalentTreeComponent implements OnInit {
 
   onTalentIncrease({ index }: { index: number }) {
     this.skillTalentTree.points[index]++;
+    this.characterService.store();
     this.updateBlocked();
+  }
+
+  onResetButtonClick(): void {
+    this.skillTalentTree.points = this.skillTalentTree.points.map(() => 0);
+    this.characterService.store();
   }
 
   private updateBlocked() {
