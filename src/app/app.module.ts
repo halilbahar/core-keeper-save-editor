@@ -11,6 +11,8 @@ import { TabComponent } from '~components/tab-group/tab/tab.component';
 
 import { AppComponent } from './app.component';
 import { DebugComponent } from './components/debug/debug.component';
+import { FirstVisitDisclaimerComponent } from './components/dialog/first-visit-disclaimer/first-visit-disclaimer.component';
+import { InaccessibleItemsComponent } from './components/dialog/inaccessible-items/inaccessible-items.component';
 import { ItemTooltipDirective } from './directives';
 import { CharacterComponent } from './pages/character/character.component';
 import { EquipmentComponent } from './pages/items/components/equipment/equipment.component';
@@ -47,7 +49,9 @@ import { InventoryPipe } from './pipes/inventory.pipe';
     TalentTreeComponent,
     SkillListComponent,
     InventoryPipe,
-    DebugComponent
+    DebugComponent,
+    InaccessibleItemsComponent,
+    FirstVisitDisclaimerComponent
   ],
   imports: [BrowserModule, FormsModule, OverlayModule, DragDropModule],
   providers: [],
