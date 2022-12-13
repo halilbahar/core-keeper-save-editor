@@ -5,3 +5,4 @@ export * from './drag-n-drop.service';
 export * from './talent-data.service';
 export * from './selected-item.service';
 export * from './extracted-data.service';
+export * from './skill-talent.service';
