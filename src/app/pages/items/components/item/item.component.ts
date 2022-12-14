@@ -13,7 +13,6 @@ export class ItemComponent {
   private _scale: number = 1;
   private _amount: number;
   private _placeholder: number = -1;
-  private _isArmor: boolean = false;
   private _isSelected: boolean = false;
 
   @HostBinding('style') style: string;
@@ -35,21 +34,18 @@ export class ItemComponent {
     objectID,
     amount,
     placeholder = -1,
-    isArmor = false,
     isSelected = false
   }: {
     scale?: number;
     objectID: number;
     amount?: number;
     placeholder?: number;
-    isArmor?: boolean;
     isSelected?: boolean;
   }) {
     this._scale = scale;
     this._objectID = objectID;
     this._amount = amount;
     this._placeholder = placeholder;
-    this._isArmor = isArmor;
     this._isSelected = isSelected;
     this.durabilityProgress = null;
     this.durabilityBarColor = null;
@@ -106,7 +102,7 @@ export class ItemComponent {
       rarity = -1;
     }
 
-    const backgroundColor = this._isArmor ? 'transparent' : '#3d260d';
+    const backgroundColor = this._placeholder !== -1 ? 'transparent' : '#3d260d';
     const borderUrl = `url("assets/border/item/${rarity}.png")`;
     this.style = `--individual-scale: ${this._scale}; --background: ${backgroundColor}; --border: ${borderUrl}`;
   }
