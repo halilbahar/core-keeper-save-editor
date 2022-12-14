@@ -24,6 +24,7 @@
   cdkDrag
   [cdkDragData]="{ objectID: this.objectID }"
   (cdkDragStarted)="this.selectedItemService.$selectedItem.next(-1)"
+  [appItemTooltip]="this.objectID"
   [class.hidden]="this.hide"
   class="h-full"
   *ngIf="this.isItemInvalid"
