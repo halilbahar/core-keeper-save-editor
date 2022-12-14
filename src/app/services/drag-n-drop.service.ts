@@ -126,6 +126,10 @@ export class DragNDropService {
       const match = id.match(this.regex);
       const index = parseInt(match[1]);
       const itemData = this.itemDataService.getData(drag.data.objectID);
+      // If it is a item we can't display, it is not allowed to go in
+      if (itemData == null) {
+        return false;
+      }
       const itemObjectType = itemData.objectType;
 
       // If we find an index which is in indexAllowedObjectTypes that means we are handling a equipment predicate.
