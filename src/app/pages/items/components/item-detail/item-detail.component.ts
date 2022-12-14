@@ -38,9 +38,12 @@ export class ItemDetailComponent implements OnInit {
         const inventorySlot = this.characterService.$character.value.inventory[index];
         if (inventorySlot.objectID !== 0) {
           this.itemDetail = this.itemDataService.getItemDetail(inventorySlot.objectID);
-          this.inventorySlot = inventorySlot;
-          this.itemIndex = index;
-          this.rarityLabel = ItemRarity[this.itemDetail.rarity];
+          // Item may not exist in the item-data
+          if (this.itemDetail != null) {
+            this.inventorySlot = inventorySlot;
+            this.itemIndex = index;
+            this.rarityLabel = ItemRarity[this.itemDetail.rarity];
+          }
         } else {
           this.reset();
         }

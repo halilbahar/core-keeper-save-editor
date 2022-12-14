@@ -29,12 +29,15 @@ export class ItemDataService {
   }
 
   /**
-   * Get all the needed information of a item to display it
+   * Get all the needed information of a item to display it. If the item does not exist, return null.
    * @param objectId of the needed item
    * @returns ItemDetail
    */
   getItemDetail(objectId: number): ItemDetail {
     const item = this.getData(objectId);
+    if (item == null) {
+      return null;
+    }
     const paddedObjectId = objectId.toString().padStart(4, '0');
     const { name, description, rarity, initialAmount, isStackable, damage } = item;
     const rarityColor = this.getRarityColor(item.rarity);

@@ -10,11 +10,13 @@ import { ItemDataService } from '~services';
 })
 export class ItemTooltipComponent implements OnInit {
   itemDetail: ItemDetail;
+  isInvalidItem: boolean;
   @Input() objectId: number;
 
   constructor(private itemDataService: ItemDataService) {}
 
   ngOnInit(): void {
     this.itemDetail = this.itemDataService.getItemDetail(this.objectId);
+    this.isInvalidItem = this.itemDetail == null;
   }
 }
