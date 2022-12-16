@@ -5,6 +5,7 @@
 
 .current-level {
   @apply font-thin text-xl;
+  width: 44px; // chrome automatically sets the width based on the max propety of the input, but firefox does not, so we manually assign a fixed with here
   text-shadow: 0 3px 0 #000;
   background-color: transparent;
   appearance: none;
@@ -21,10 +22,6 @@
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-  }
-
-  &[type='number'] {
-    -moz-appearance: textfield;
   }
 }
 
