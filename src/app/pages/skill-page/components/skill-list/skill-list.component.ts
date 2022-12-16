@@ -64,6 +64,8 @@ export class SkillListComponent implements OnInit {
       newLevel
     );
 
+    this.characterService.$character.next({ ...this.character, skills: this.skills });
+
     // Update the localstorage after changing a skill
     this.characterService.store();
   }
