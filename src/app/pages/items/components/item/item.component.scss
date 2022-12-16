@@ -25,10 +25,11 @@
   image-rendering: pixelated;
 
   .item-amount {
+    pointer-events: none;
     font-weight: 100;
     position: absolute;
-    bottom: calc(1px * var(--factor));
-    right: calc(1px * var(--factor));
+    bottom: 0;
+    right: 0;
     font-size: calc(0.5rem * var(--factor));
     line-height: calc(0.5rem * var(--factor));
     text-shadow: calc(-1px * var(--factor)) 0 0 #000,

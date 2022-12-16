@@ -13,7 +13,9 @@ import { AppComponent } from './app.component';
 import { DebugComponent } from './components/debug/debug.component';
 import { FirstVisitDisclaimerComponent } from './components/dialog/first-visit-disclaimer/first-visit-disclaimer.component';
 import { InaccessibleItemsComponent } from './components/dialog/inaccessible-items/inaccessible-items.component';
+import { TalentTooltipComponent } from './components/talent-tooltip/talent-tooltip.component';
 import { ItemTooltipDirective } from './directives';
+import { TalentTooltipDirective } from './directives/talent-tooltip.directive';
 import { CharacterComponent } from './pages/character/character.component';
 import { EquipmentComponent } from './pages/items/components/equipment/equipment.component';
 import { InventoryComponent } from './pages/items/components/inventory/inventory.component';
@@ -50,6 +52,8 @@ import { InventoryPipe } from './pipes/inventory.pipe';
     SkillListComponent,
     InventoryPipe,
     DebugComponent,
+    TalentTooltipDirective,
+    TalentTooltipComponent,
     InaccessibleItemsComponent,
     FirstVisitDisclaimerComponent
   ],

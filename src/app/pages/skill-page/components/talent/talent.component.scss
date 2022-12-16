@@ -1,0 +1,17 @@
+:host {
+  @apply inline-block h-12 relative;
+  border: 3px solid;
+  background-color: #704b27;
+}
+
+.points {
+  --factor: 2;
+  font-weight: 100;
+  position: absolute;
+  bottom: calc(1px * var(--factor));
+  right: calc(1px * var(--factor));
+  font-size: calc(0.5rem * var(--factor));
+  line-height: calc(0.5rem * var(--factor));
+  text-shadow: calc(-1px * var(--factor)) 0 0 #000,
+    calc(1px * var(--factor)) calc(1px * var(--factor)) 0 #000;
+}

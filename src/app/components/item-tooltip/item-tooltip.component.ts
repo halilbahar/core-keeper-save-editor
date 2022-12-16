@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 
 import { ItemDetail } from '~models';
 import { ItemDataService } from '~services';
@@ -12,6 +12,8 @@ export class ItemTooltipComponent implements OnInit {
   itemDetail: ItemDetail;
   isInvalidItem: boolean;
   @Input() objectId: number;
+
+  @HostBinding('class.tooltip') tooltip = true;
 
   constructor(private itemDataService: ItemDataService) {}
 
