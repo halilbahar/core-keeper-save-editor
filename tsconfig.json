@@ -6,13 +6,27 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "paths": {
-      "~components/*": ["./src/app/components/*"],
-      "~directives/*": ["./src/app/directives/*"],
-      "~models": ["./src/app/models/index.ts"],
-      "~enums": ["./src/app/enums/index.ts"],
-      "~services": ["./src/app/services/index.ts"],
-      "~env": ["./src/environments/environment.ts"],
-      "~config": ["./src/app/config/index.ts"]
+      "~components/*": [
+        "./src/app/components/*"
+      ],
+      "~directives/*": [
+        "./src/app/directives/*"
+      ],
+      "~models": [
+        "./src/app/models/index.ts"
+      ],
+      "~enums": [
+        "./src/app/enums/index.ts"
+      ],
+      "~services": [
+        "./src/app/services/index.ts"
+      ],
+      "~env": [
+        "./src/environments/environment.ts"
+      ],
+      "~config": [
+        "./src/app/config/index.ts"
+      ]
     },
     "forceConsistentCasingInFileNames": true,
     "strict": false,
@@ -26,9 +40,13 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2022",
     "module": "es2020",
-    "lib": ["es2020", "dom"]
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
