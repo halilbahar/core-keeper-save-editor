@@ -1,23 +1,31 @@
-<div class="flex gap-1 items-center">
-  <h3 [ngStyle]="{ color: this.itemDetail.rarityColor }">
-    {{ this.itemDetail.name }}
-  </h3>
-  <span class="text-gray-400">#{{ this.itemDetail.paddedObjectId }}</span>
-</div>
-<p class="font-semibold" *ngIf="this.itemDetail.damage">
-  {{ this.itemDetail.damage.range[0] }}-{{ this.itemDetail.damage.range[1] }}
-  {{ this.itemDetail.damage.isRange ? 'range' : 'meele' }} damage
-</p>
-<p
-  class="font-semibold"
-  *ngFor="let condition of this.itemDetail.conditionsWhenEquipped"
-  [style.color]="condition[1] ? '#00ff00' : 'inherit'">
-  {{ condition[0] }}
-</p>
-<ng-container *ngIf="this.itemDetail.setBonus as setBonus">
-  <p class="font-semibold" style="color: #fdfb2c" *ngFor="let condition of setBonus.conditions">
-    {{ condition }}
+<ng-container *ngIf="!this.isInvalidItem">
+  <div class="flex gap-1 items-center">
+    <h3 [ngStyle]="{ color: this.itemDetail.rarityColor }">
+      {{ this.itemDetail.name }}
+    </h3>
+    <span class="text-gray-400">#{{ this.itemDetail.paddedObjectId }}</span>
+  </div>
+  <p class="font-semibold" *ngIf="this.itemDetail.damage">
+    {{ this.itemDetail.damage.range[0] }}-{{ this.itemDetail.damage.range[1] }}
+    {{ this.itemDetail.damage.isRange ? 'range' : 'meele' }} damage
   </p>
-  <p class="font-semibold" *ngFor="let piece of setBonus.pieces">{{ piece }}</p>
+  <p
+    class="font-semibold"
+    *ngFor="let condition of this.itemDetail.conditionsWhenEquipped"
+    [style.color]="condition[1] ? '#00ff00' : 'inherit'">
+    {{ condition[0] }}
+  </p>
+  <ng-container *ngIf="this.itemDetail.setBonus as setBonus">
+    <p class="font-semibold" style="color: #fdfb2c" *ngFor="let condition of setBonus.conditions">
+      {{ condition }}
+    </p>
+    <p class="font-semibold" *ngFor="let piece of setBonus.pieces">{{ piece }}</p>
+  </ng-container>
+  <p class="text-gray-500">{{ this.itemDetail.description }}</p>
 </ng-container>
-<p class="text-gray-500">{{ this.itemDetail.description }}</p>
+<ng-container *ngIf="this.isInvalidItem">
+  <div>
+    Unknown Item
+    <span class="text-gray-400">#{{ this.objectId }}</span>
+  </div>
+</ng-container>

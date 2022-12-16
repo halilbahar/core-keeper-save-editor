@@ -89,6 +89,30 @@ export class CharacterService {
   }
 
   /**
+   * @param bag
+   * @returns how many slot the given bag has.
+   */
+  getBagSize(bag: Bag): number {
+    if (!Object.values(Bag).includes(bag) || bag === Bag.None) {
+      return 0;
+    }
+
+    switch (bag) {
+      case Bag.CavePouch:
+        return 5;
+      case Bag.ExplorerBackpack:
+        return 10;
+      case Bag.GhormsStomachBag:
+        return 12;
+      case Bag.ScarletShellBackpack:
+        return 15;
+      case Bag.MorphasBubbleBag:
+      case Bag.OctarineBag:
+        return 20;
+    }
+  }
+
+  /**
    * @returns default character with random guid
    */
   private getDefaultCharacterWithRandomGUID(): Character {

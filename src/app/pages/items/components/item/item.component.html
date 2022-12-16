@@ -9,9 +9,11 @@
   (cdkDragStarted)="this.selectedItemService.$selectedItem.next(-1)"
   style="--index:{{ this.itemData?.iconIndex }}; --individual-scale: {{ this.scale }};">
   <div
-    class="item-amount"
+    class="relative w-full h-full"
     *ngIf="this.amount && !this.durabilityProgress && this.itemData.isStackable === 1">
-    {{ this.amount }}
+    <div class="item-amount">
+      {{ this.amount }}
+    </div>
   </div>
   <div *ngIf="this.durabilityProgress" class="durability-progress w-full bg-black absolute">
     <div
@@ -20,6 +22,15 @@
       class="bg-red-600 h-full"></div>
   </div>
 </div>
+<img
+  cdkDrag
+  [cdkDragData]="{ objectID: this.objectID }"
+  (cdkDragStarted)="this.selectedItemService.$selectedItem.next(-1)"
+  [appItemTooltip]="this.objectID"
+  [class.hidden]="this.hide"
+  class="h-full"
+  *ngIf="this.isItemInvalid"
+  src="assets/item-not-found.png" />
 <img
   *ngIf="this.placeholder !== -1 && !this.itemData"
   class="absolute h-full w-full p-1"

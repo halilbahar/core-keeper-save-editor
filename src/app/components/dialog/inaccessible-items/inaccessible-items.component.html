@@ -1,0 +1,10 @@
+<app-card class="w-1/2">
+  <p>
+    There are currently items in inaccessible inventory-slots, due to not having a big enough bag.
+    Please note that these items will be dropped on the ground upon loading this character in-game.
+  </p>
+  <div class="flex justify-end gap-6">
+    <button (click)="this.cancel()">Cancel</button>
+    <button (click)="this.ok()">Ok</button>
+  </div>
+</app-card>
