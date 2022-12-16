@@ -95,6 +95,10 @@ select {
   border-image: url('~src/assets/border/input.png') 1;
 }
 
+input[type='number'] {
+  -moz-appearance: textfield !important;
+}
+
 button {
   @apply transition-all flex justify-center items-center select-none px-2 py-1;
   background-color: #915b26;
