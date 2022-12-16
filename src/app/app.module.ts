@@ -29,6 +29,7 @@ import { TalentTreeComponent } from './pages/skill-page/components/talent-tree/t
 import { TalentComponent } from './pages/skill-page/components/talent/talent.component';
 import { SkillPageComponent } from './pages/skill-page/skill.page.component';
 import { InventoryPipe } from './pipes/inventory.pipe';
+import { AboutComponent } from './pages/about/about.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { InventoryPipe } from './pipes/inventory.pipe';
     TalentTooltipDirective,
     TalentTooltipComponent,
     InaccessibleItemsComponent,
-    FirstVisitDisclaimerComponent
+    FirstVisitDisclaimerComponent,
+    AboutComponent
   ],
   imports: [BrowserModule, FormsModule, OverlayModule, DragDropModule],
   providers: [],
