@@ -61,7 +61,8 @@ h6 {
 }
 
 .item-grid {
-  @apply grid grid-cols-10 gap-2;
+  @apply grid gap-2;
+  grid-template-columns: repeat(10, 1fr);
 }
 
 .cdk-drag-preview {
