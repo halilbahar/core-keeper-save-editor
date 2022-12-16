@@ -9,9 +9,11 @@
   (cdkDragStarted)="this.selectedItemService.$selectedItem.next(-1)"
   style="--index:{{ this.itemData?.iconIndex }}; --individual-scale: {{ this.scale }};">
   <div
-    class="item-amount"
+    class="relative w-full h-full"
     *ngIf="this.amount && !this.durabilityProgress && this.itemData.isStackable === 1">
-    {{ this.amount }}
+    <div class="item-amount">
+      {{ this.amount }}
+    </div>
   </div>
   <div *ngIf="this.durabilityProgress" class="durability-progress w-full bg-black absolute">
     <div
