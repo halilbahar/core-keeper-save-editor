@@ -1,6 +1,6 @@
 <app-card *ngIf="this.skillTalentTree">
-  <p>Mining</p>
-  <p>Points: X</p>
+  <p>{{ this.skillName }}</p>
+  <p>Points: {{ this.pointsToSpend }}</p>
 
   <ng-container *ngIf="this.skillTalentTree.points as points">
     <div class="talent-row">

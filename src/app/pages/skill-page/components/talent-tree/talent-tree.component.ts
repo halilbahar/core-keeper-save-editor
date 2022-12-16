@@ -16,6 +16,9 @@ export class TalentTreeComponent implements OnInit {
   blocked: boolean[] = [];
   skillTalentTree: SkillTalentTree;
   skillId: number;
+  skillLevel: number;
+  pointsToSpend: number;
+  skillName: string;
 
   constructor(
     private characterService: CharacterService,
@@ -29,6 +32,10 @@ export class TalentTreeComponent implements OnInit {
       this.skillTalentService.$selectedSkill.pipe(untilDestroyed(this)).subscribe(value => {
         this.skillId = value;
 
+        const xp = character.skills.find(skill => skill.skillID === value).value;
+        this.skillLevel = this.skillTalentService.getLevelByXp(value, xp);
+        this.skillName = this.skillTalentService.getSkillName(value);
+
         this.skillTalentTree = skillTalentTreeDatas.find(tree => tree.skillTreeID === this.skillId);
         const pointsLength = this.skillTalentTree.points.length;
         if (pointsLength < 8) {
@@ -38,19 +45,25 @@ export class TalentTreeComponent implements OnInit {
           }
         }
         this.updateBlocked();
+        this.updatePointsToSpend();
       });
     });
   }
 
   onTalentIncrease({ index }: { index: number }) {
+    if (this.blocked[index] || this.pointsToSpend <= 0) return;
+
     this.skillTalentTree.points[index]++;
     this.characterService.store();
     this.updateBlocked();
+    this.updatePointsToSpend();
   }
 
   onResetButtonClick(): void {
     this.skillTalentTree.points = this.skillTalentTree.points.map(() => 0);
     this.characterService.store();
+    this.updateBlocked();
+    this.updatePointsToSpend();
   }
 
   private updateBlocked() {
@@ -70,5 +83,19 @@ export class TalentTreeComponent implements OnInit {
     const sixthMaxed = this.skillTalentTree.points[5] !== 5;
     this.blocked[6] = fourthMaxed && fifthMaxed;
     this.blocked[7] = fifthMaxed && sixthMaxed;
+  }
+
+  private updatePointsToSpend() {
+    const levelsForSkill = this.skillLevel >= 100 ? 25 : Math.floor(this.skillLevel / 5);
+    const spentPoints = this.skillTalentTree.points.reduce((sum, point) => sum + point);
+    const pointsDif = levelsForSkill - spentPoints;
+
+    if (pointsDif < 0) {
+      this.onResetButtonClick();
+      this.pointsToSpend = levelsForSkill;
+      return;
+    }
+
+    this.pointsToSpend = pointsDif;
   }
 }
