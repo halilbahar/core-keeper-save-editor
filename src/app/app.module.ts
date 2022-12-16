@@ -12,6 +12,7 @@ import { TabComponent } from '~components/tab-group/tab/tab.component';
 import { AppComponent } from './app.component';
 import { DebugComponent } from './components/debug/debug.component';
 import { ItemTooltipDirective } from './directives';
+import { TalentTooltipDirective } from './directives/talent-tooltip.directive';
 import { CharacterComponent } from './pages/character/character.component';
 import { EquipmentComponent } from './pages/items/components/equipment/equipment.component';
 import { InventoryComponent } from './pages/items/components/inventory/inventory.component';
@@ -25,6 +26,7 @@ import { TalentTreeComponent } from './pages/skill-page/components/talent-tree/t
 import { TalentComponent } from './pages/skill-page/components/talent/talent.component';
 import { SkillPageComponent } from './pages/skill-page/skill.page.component';
 import { InventoryPipe } from './pipes/inventory.pipe';
+import { TalentTooltipComponent } from './components/talent-tooltip/talent-tooltip.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { InventoryPipe } from './pipes/inventory.pipe';
     TalentTreeComponent,
     SkillListComponent,
     InventoryPipe,
-    DebugComponent
+    DebugComponent,
+    TalentTooltipDirective,
+    TalentTooltipComponent
   ],
   imports: [BrowserModule, FormsModule, OverlayModule, DragDropModule],
   providers: [],

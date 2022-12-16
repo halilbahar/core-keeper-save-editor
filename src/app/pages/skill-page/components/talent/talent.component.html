@@ -1,5 +1,10 @@
 <img
   class="h-full"
   src="assets/talents/{{ this.talent.talentId }}.png"
-  [class.opacity-50]="this.options.blocked" />
+  [class.opacity-50]="this.options.blocked"
+  [appTalentTooltip]="{
+    skillId: this.options.skillId,
+    index: this.options.index,
+    points: this.options.points
+  }" />
 <span class="points" *ngIf="!this.options.blocked">{{ this.options.points }}</span>

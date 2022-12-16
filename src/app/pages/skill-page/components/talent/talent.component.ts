@@ -1,5 +1,6 @@
 import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 
+import { TalentTooltipDirective } from '~directives/talent-tooltip.directive';
 import { TalentData } from '~models';
 import { TalentDataService } from '~services';
 
@@ -9,6 +10,12 @@ type TalentOptions = { skillId: number; points: number; index: number; blocked: 
   selector: 'app-talent',
   templateUrl: './talent.component.html',
   styleUrls: ['./talent.component.scss']
+  // hostDirectives: [
+  //   {
+  //     directive: TalentTooltipDirective,
+  //     inputs: [{ skillId: this.options.skillId, index: this.options.index }]
+  //   }
+  // ]
 })
 export class TalentComponent {
   private _options: TalentOptions;
