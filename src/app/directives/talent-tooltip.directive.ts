@@ -14,9 +14,11 @@ import {
   selector: '[appTalentTooltip]'
 })
 export class TalentTooltipDirective {
-  @Input() appTalentTooltip: TalenTooltipOptions;
+  private _appTalentTooltip: TalenTooltipOptions;
 
   private overlayRef: OverlayRef;
+
+  private componentInstance: TalentTooltipComponent;
 
   constructor(private overlay: Overlay, private elementRef: ElementRef) {}
 
@@ -38,12 +40,20 @@ export class TalentTooltipDirective {
 
     const portal = new ComponentPortal(TalentTooltipComponent);
     const componentRef = this.overlayRef.attach(portal);
-    componentRef.instance.options = this.appTalentTooltip;
+    componentRef.instance.options = this._appTalentTooltip;
+    this.componentInstance = componentRef.instance;
   }
 
   @HostListener('mouseout')
   oneLeave(): void {
     this.destory();
+  }
+
+  @Input() set appTalentTooltip(value: TalenTooltipOptions) {
+    this._appTalentTooltip = value;
+    if (this.componentInstance) {
+      this.componentInstance.options = value;
+    }
   }
 
   private destory(): void {
