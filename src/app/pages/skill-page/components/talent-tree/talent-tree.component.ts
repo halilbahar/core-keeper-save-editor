@@ -21,7 +21,6 @@ export class TalentTreeComponent implements OnInit {
   selectedSkillId: number;
   selectedSkillLevel: number;
   pointsToSpend: number;
-  selectedSkillName: string;
 
   constructor(
     private characterService: CharacterService,
@@ -61,11 +60,11 @@ export class TalentTreeComponent implements OnInit {
 
     const xp = this.skills.find(skill => skill.skillID === this.selectedSkillId).value;
     this.selectedSkillLevel = this.skillTalentService.getLevelByXp(this.selectedSkillId, xp);
-    this.selectedSkillName = this.skillTalentService.getSkillName(this.selectedSkillId);
 
     this.selectedSkillTalentTree = this.skillTalentTreeDatas.find(
       tree => tree.skillTreeID === this.selectedSkillId
     );
+
     const pointsLength = this.selectedSkillTalentTree.points.length;
     if (pointsLength < 8) {
       const diff = 8 - pointsLength;

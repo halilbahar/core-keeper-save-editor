@@ -1,6 +1,5 @@
 <app-card *ngIf="this.skills && this.skillTalentTreeDatas && this.selectedSkillId">
-  <p>{{ this.selectedSkillName }}</p>
-  <p>Points: {{ this.pointsToSpend }}</p>
+  <p class="text-center text-xl text-yellow-300 mb-4">Points: {{ this.pointsToSpend }}</p>
 
   <ng-container *ngIf="this.selectedSkillTalentTree.points as points">
     <div class="talent-row">
@@ -93,5 +92,5 @@
     </div>
   </ng-container>
 
-  <button (click)="this.onResetButtonClick()">Reset</button>
+  <button class="mx-auto" (click)="this.onResetButtonClick()">Reset</button>
 </app-card>
