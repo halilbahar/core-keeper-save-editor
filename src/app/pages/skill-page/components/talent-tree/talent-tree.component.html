@@ -1,4 +1,4 @@
-<app-card *ngIf="this.skills && this.skillTalentTreeDatas && this.selectedSkillId">
+<app-card *ngIf="this.skills && this.skillTalentTreeDatas && this.selectedSkillId != null">
   <p class="text-center text-xl text-yellow-300 mb-4">Points: {{ this.pointsToSpend }}</p>
 
   <ng-container *ngIf="this.selectedSkillTalentTree.points as points">

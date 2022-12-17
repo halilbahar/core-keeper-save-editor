@@ -56,7 +56,7 @@ export class TalentTreeComponent implements OnInit {
   }
 
   private update() {
-    if (!this.skills || !this.skillTalentTreeDatas || !this.selectedSkillId) return;
+    if (!this.skills || !this.skillTalentTreeDatas || this.selectedSkillId == null) return;
 
     const xp = this.skills.find(skill => skill.skillID === this.selectedSkillId).value;
     this.selectedSkillLevel = this.skillTalentService.getLevelByXp(this.selectedSkillId, xp);
