@@ -33,7 +33,8 @@ export class ItemTooltipDirective {
             overlayX: 'start',
             overlayY: 'top'
           }
-        ])
+        ]),
+      panelClass: 'pointer-events-none'
     });
 
     const portal = new ComponentPortal(ItemTooltipComponent);
