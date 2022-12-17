@@ -24,6 +24,13 @@ export class InventoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    document.addEventListener('keydown', (event: KeyboardEvent) => {
+      const { key } = event;
+      if (key === 'Backspace' || key === 'Delete') {
+        this.removeSelectedItem();
+      }
+    });
+
     this.characterService.$bag.pipe(untilDestroyed(this)).subscribe(value => (this.bag = value));
     this.characterService.$character
       .pipe(untilDestroyed(this))
@@ -46,5 +53,15 @@ export class InventoryComponent implements OnInit {
     const currentIndex = this.selectedItemService.$selectedItem.value;
     const newIndex = currentIndex === index ? -1 : index;
     this.selectedItemService.$selectedItem.next(newIndex);
+  }
+
+  /**
+   * Removes the currently selected item from the inventor and clears the selection after
+   */
+  removeSelectedItem(): void {
+    if (this.indexToSelect !== -1) {
+      this.characterService.removeItemFromInventory(this.indexToSelect);
+      this.selectedItemService.setSelectedItem(-1);
+    }
   }
 }

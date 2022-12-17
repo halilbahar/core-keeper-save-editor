@@ -73,6 +73,14 @@ export class ItemDetailComponent implements OnInit {
   }
 
   /**
+   * Removes the currently selected item from the inventor and clears the selection after
+   */
+  onDeleteButtonClick(): void {
+    this.characterService.removeItemFromInventory(this.itemIndex);
+    this.selectedItemService.setSelectedItem(-1);
+  }
+
+  /**
    * Reset all the variables. This equivalent to deselecting the current item.
    */
   private reset(): void {

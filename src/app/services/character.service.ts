@@ -113,6 +113,21 @@ export class CharacterService {
   }
 
   /**
+   * Removes the item at the specified index from the inventory
+   */
+  removeItemFromInventory(index: number): void {
+    const inventory = this.$character.value.inventory;
+    inventory[index] = {
+      objectID: 0,
+      amount: 0,
+      variation: 0,
+      variationUpdateCount: 0
+    };
+    this.$character.next({ ...this.$character.value, inventory });
+    this.store();
+  }
+
+  /**
    * @returns default character with random guid
    */
   private getDefaultCharacterWithRandomGUID(): Character {
