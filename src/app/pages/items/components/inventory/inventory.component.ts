@@ -60,8 +60,7 @@ export class InventoryComponent implements OnInit {
    */
   removeSelectedItem(): void {
     // if there is any input-element that has focus we don't want to remove the item, since pressing Delete or Backspace would be intendet for editing the value of the input
-    const domInputeElements = Array.from(document.querySelectorAll<HTMLInputElement>('input'));
-    if (domInputeElements.some(element => element === document.activeElement)) return;
+    if (document.activeElement.tagName === 'INPUT') return;
 
     if (this.indexToSelect !== -1) {
       this.characterService.removeItemFromInventory(this.indexToSelect);
