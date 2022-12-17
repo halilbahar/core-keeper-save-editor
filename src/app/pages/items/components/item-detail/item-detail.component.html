@@ -33,7 +33,7 @@
     <p class="font-semibold" *ngFor="let piece of setBonus.pieces">{{ piece }}</p>
   </ng-container>
   <p class="text-xl">{{ this.itemDetail.description }}</p>
-  <div *ngIf="this.itemDetail.isStackable || this.itemDetail.initialAmount !== 1">
+  <div class="mt-4" *ngIf="this.itemDetail.isStackable || this.itemDetail.initialAmount !== 1">
     <input
       type="number"
       class="appearance-none"
@@ -42,4 +42,5 @@
     /
     {{ this.itemDetail.isStackable ? 999 : this.itemDetail.initialAmount }}
   </div>
+  <button class="mt-4" (click)="this.onDeleteButtonClick()">Remove</button>
 </app-card>
