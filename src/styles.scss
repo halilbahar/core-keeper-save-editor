@@ -61,7 +61,7 @@ h6 {
 }
 
 .item-grid {
-  @apply grid gap-2;
+  @apply grid gap-1;
   grid-template-columns: repeat(10, 1fr);
 }
 

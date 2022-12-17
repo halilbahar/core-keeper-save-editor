@@ -1,20 +1,37 @@
-<app-card>
+<app-card class="!p-0">
   <div class="item-grid">
-    <app-item
-      *ngFor="let inventorySlot of this.inventory | inventory: bag; let i = index"
-      id="inventory-{{ i }}"
-      [options]="{
-        objectID: inventorySlot.objectID,
-        amount: inventorySlot.amount,
-        isSelected: this.indexToSelect === i
-      }"
-      [hide]="this.indexToHide === i"
-      cdkDropList
-      [cdkDropListData]="inventorySlot"
-      [cdkDropListEnterPredicate]="this.dragNDropService.InventoryEnterPredicate()"
-      (cdkDropListDropped)="this.dragNDropService.onDrop($event)"
-      (cdkDropListEntered)="this.dragNDropService.onEnter($event)"
-      (cdkDropListExited)="this.dragNDropService.onExit($event)"
-      (click)="this.onItemClick(i)"></app-item>
+    <ng-container
+      *ngFor="let inventorySlot of this.inventoryToolbar; let i = index"
+      [ngTemplateOutlet]="item"
+      [ngTemplateOutletContext]="{ $implicit: { i: this.i, inventorySlot: this.inventorySlot } }">
+    </ng-container>
   </div>
 </app-card>
+<div class="item-grid p-0" style="padding: 9px">
+  <ng-container
+    *ngFor="let inventorySlot of this.inventory | inventory: this.bag; let i = index"
+    [ngTemplateOutlet]="item"
+    [ngTemplateOutletContext]="{
+      $implicit: { i: i + 10, inventorySlot: inventorySlot, inventory: true }
+    }">
+  </ng-container>
+</div>
+
+<ng-template #item let-options>
+  <app-item
+    [class.item-shadow]="options.inventory"
+    id="inventory-{{ options.i }}"
+    [options]="{
+      objectID: options.inventorySlot.objectID,
+      amount: options.inventorySlot.amount,
+      isSelected: this.indexToSelect === options.i
+    }"
+    [hide]="this.indexToHide === options.i"
+    cdkDropList
+    [cdkDropListData]="options.inventorySlot"
+    [cdkDropListEnterPredicate]="this.dragNDropService.InventoryEnterPredicate()"
+    (cdkDropListDropped)="this.dragNDropService.onDrop($event)"
+    (cdkDropListEntered)="this.dragNDropService.onEnter($event)"
+    (cdkDropListExited)="this.dragNDropService.onExit($event)"
+    (click)="this.onItemClick(options.i)"></app-item>
+</ng-template>

@@ -1,3 +1,7 @@
 :host {
-    @apply h-min;
+  @apply h-min;
+}
+
+.item-shadow {
+  box-shadow: 0px 1px 5px 0px rgb(0, 0, 0, 75);
 }

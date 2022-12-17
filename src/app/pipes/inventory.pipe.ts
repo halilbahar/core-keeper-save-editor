@@ -13,6 +13,9 @@ export class InventoryPipe implements PipeTransform {
   transform(inventory: InventorySlot[], bag: Bag): InventorySlot[] {
     // Get the bagSize and show the inventory based on the bag size.
     const bagSize = this.characterService.getBagSize(bag);
-    return inventory.slice(0, 30 + bagSize);
+    // The inventory variable does not include the toolbar (the first 10 items)
+    // So we need to take the base size (30) and extract the toolbar
+    // After that we add the bagSize and have our inventory size
+    return inventory.slice(0, 30 - 10 + bagSize);
   }
 }

@@ -13,6 +13,7 @@ import { CharacterService, DragNDropService, SelectedItemService } from '~servic
 })
 export class InventoryComponent implements OnInit {
   inventory: InventorySlot[];
+  inventoryToolbar: InventorySlot[];
   bag: Bag;
   indexToHide: number = -1;
   indexToSelect: number = -1;
@@ -32,9 +33,11 @@ export class InventoryComponent implements OnInit {
     });
 
     this.characterService.$bag.pipe(untilDestroyed(this)).subscribe(value => (this.bag = value));
-    this.characterService.$character
-      .pipe(untilDestroyed(this))
-      .subscribe(value => (this.inventory = value.inventory.slice(0, 49 + 1)));
+    this.characterService.$character.pipe(untilDestroyed(this)).subscribe(value => {
+      // End is exclusive, thats is why we '+ 1'
+      this.inventoryToolbar = value.inventory.slice(0, 9 + 1);
+      this.inventory = value.inventory.slice(9 + 1, 49 + 1);
+    });
 
     this.dragNDropService.$indexToHide
       .pipe(untilDestroyed(this))

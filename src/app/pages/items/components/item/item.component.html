@@ -15,7 +15,9 @@
       {{ this.amount }}
     </div>
   </div>
-  <div *ngIf="this.durabilityProgress" class="durability-progress w-full bg-black absolute">
+  <div
+    *ngIf="this.durabilityProgress"
+    class="durability-progress w-full bg-black absolute pointer-events-none">
     <div
       [style.width.%]="this.durabilityProgress"
       [style.backgroundColor]="this.durabilityBarColor"
