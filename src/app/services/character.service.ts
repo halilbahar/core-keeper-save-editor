@@ -121,6 +121,10 @@ export class CharacterService {
     inventory[index].amount = 0;
     inventory[index].variation = 0;
     inventory[index].variationUpdateCount = 0;
+    // Reset bag so the inventory resizes
+    if (index === 58) {
+      this.$bag.next(Bag.None);
+    }
     this.store();
   }
 
