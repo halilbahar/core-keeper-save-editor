@@ -117,13 +117,10 @@ export class CharacterService {
    */
   removeItemFromInventory(index: number): void {
     const inventory = this.$character.value.inventory;
-    inventory[index] = {
-      objectID: 0,
-      amount: 0,
-      variation: 0,
-      variationUpdateCount: 0
-    };
-    this.$character.next({ ...this.$character.value, inventory });
+    inventory[index].objectID = 0;
+    inventory[index].amount = 0;
+    inventory[index].variation = 0;
+    inventory[index].variationUpdateCount = 0;
     this.store();
   }
 
