@@ -171,7 +171,11 @@ def get_item_translations():
 
 
 def get_object_ids() -> dict:
-    return util.get_enum('dump/CoreKeeper/ExportedProject/Assets/MonoScript/Pug.Base/ObjectID.cs')
+    enum = util.get_enum('dump/CoreKeeper/ExportedProject/Assets/MonoScript/Pug.Base/ObjectID.cs')
+    # Edges cases for AmberLarva2 and GiantMushroom2
+    enum[5502] = 'GiantMushroom'
+    enum[5503] = 'AmberLarva'
+    return enum
 
 
 def get_condition_ids() -> dict:

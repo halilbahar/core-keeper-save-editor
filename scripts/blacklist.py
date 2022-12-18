@@ -150,6 +150,9 @@ ITEM_BLACKLIST = [
     2060,  # FishShoal
     5915,  # TempleMuralRaAkar
     5541,  # SmallGrass
+    5607,  # AmberLarva
+    5501,  # GiantMushroom
+    9245,  # SnowballProjectile
     # 0.5.1.2
 ]
 
