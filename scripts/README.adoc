@@ -26,7 +26,7 @@ Now you can execute:
 
 [source,bash]
 ----
-./script.py
+./items.py
 ----
 
 The extracted data should be in `/out`.
@@ -40,4 +40,6 @@ To override the old data in the projects do:
 
 === How it works
 
-To get reliably all the items we have chosen to use the language file as the starting point. We used to extract the data by `prefabs`, but it got out of hand really fast, because we filtered after `objectID` but not only do the items have that property but also `bosses`, `projectile`, etc. All items in the language file are prefixed with `Items/` and description are suffixed with `Desc`. Based on `Items/<InternalEnumName>` we looked up the `objectID`. With that we could search now all the `prefabs` and find the `icon` referenced in that file and create a big spritesheet. All the icons are spread out and not in one spritesheet.
+To get reliably all the items we have chosen to use the `PugDatabase` file as the starting point.
+Based on the database we filter out the object we definetly know we don't need. This includes filter by object type and a blacklist which we tested.
+After that we export all the needed information and icons.

@@ -1,28 +1,37 @@
 #!/usr/bin/env python3
 from os import path
-from PIL import Image
-from shutil import rmtree, copytree, copy2
 from re import sub
+from shutil import copytree, copy2
+
+from PIL import Image
 
 
 # https://stackoverflow.com/a/12514470/11125147
-def copy_to_assets(src, dst=None, symlinks=False, ignore=None):
+def copy_to(src, dst_folder, dst=None):
     if dst is None:
         dst = src
 
     s = path.join('out', src)
-    d = path.join('../src/assets', dst)
+    d = path.join(dst_folder, dst)
     if path.isdir(s):
-        copytree(s, d, symlinks, ignore)
+        copytree(s, d, False, None)
     else:
         copy2(s, d)
 
 
+def copy_to_assets(src):
+    copy_to(src, '../src/assets')
+
+
+def copy_to_config(src):
+    copy_to(src, '../src/app/config')
+
+
 if __name__ == '__main__':
     # Copy files
-    copy_to_assets('item-data.json')
+    copy_to_config('data.json')
+    # copy_to_config('talent-data.json')
     copy_to_assets('item-spritesheet.png')
-    copy_to_assets('talent-data.json')
     item_spritesheet = Image.open('out/item-spritesheet.png')
 
     # Replace variables
@@ -35,6 +44,6 @@ if __name__ == '__main__':
         file.write(file_data)
 
     # Delete old talents
-    rmtree('../src/assets/talents', ignore_errors=True)
+    # rmtree('../src/assets/talents', ignore_errors=True)
     # Copy new talents
-    copy_to_assets('talents')
+    # copy_to_assets('talents')

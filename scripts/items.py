@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import json
 import logging
 import math
@@ -9,6 +11,7 @@ import yaml
 from PIL import Image
 from unityparser import UnityDocument
 
+import blacklist
 import util
 from util import get_translations
 
@@ -64,9 +67,10 @@ def get_objectinfo_monobehaviour() -> [dict]:
         prefab_monobehaviour = prefab_monobehaviour_list[0]
         prefab_objectinfo = prefab_monobehaviour.objectInfo
 
+        object_id = prefab_objectinfo['objectID']
         object_type = prefab_objectinfo['objectType']
         file_id = prefab_objectinfo['icon']['fileID']
-        if object_type in (0, 1, 900, 6000) or file_id == 0:
+        if object_type in (900, 6000) or file_id == 0 or object_id in blacklist.ITEM_BLACKLIST:
             continue
 
         monobehaviour_gives_conditions_when_equipped = prefab_doc.filter(
@@ -278,7 +282,13 @@ if __name__ == '__main__':
     for objectinfo in objectinfo_monobehaviour:
         object_id = objectinfo['objectID']
         object_name = object_ids[object_id]
-        translation = item_translations.get(object_name)
+
+        # Speical handler for Rare and Epic version of food. They don't have a seperate translation
+        if object_name.startswith('Cooked') and (object_name.endswith('Rare') or object_name.endswith('Epic')):
+            translation = item_translations.get(object_name[:-4])
+        else:
+            translation = item_translations.get(object_name)
+
         if translation is None:
             logger.warning("No Translation found for: (%s, %d)" % (object_name, object_id))
             continue
