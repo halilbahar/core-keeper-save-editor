@@ -128,7 +128,6 @@ def get_textures() -> dict:
             with open(filepath, 'r') as stream:
                 metadata = yaml.safe_load(stream)
                 textures[metadata['guid']] = {
-                    # 'texture_importer': metadata['TextureImporter'],
                     'metadata': metadata,
                     'filepath': filepath[:len(filepath) - 5]
                 }
@@ -381,6 +380,15 @@ if __name__ == '__main__':
 
                 area = (cropped_x, cropped_y, cropped_x2, cropped_y2)
                 cropped_image = image.crop(area)
+
+        # Edge case for texture files that are not spritesheets
+        if not found_image and cropped_image is None:
+            if object_id not in blacklist.TEXTURE_WHOLE_IMAGE_BLACKLIST:
+                logger.warning("Edge case: %d. Using whole image" % object_id)
+            found_image = True
+            image = Image.open(texture['filepath'])
+            cropped_image = image.crop((1, 0, 17, 16))
+            cropped_image.show()
 
         # If we found no image we skip this and don't add anything
         if not found_image or cropped_image is None:

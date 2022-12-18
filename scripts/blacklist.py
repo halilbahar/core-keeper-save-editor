@@ -156,6 +156,11 @@ ITEM_BLACKLIST = [
     # 0.5.1.2
 ]
 
+TEXTURE_WHOLE_IMAGE_BLACKLIST = [
+    5081,
+    # 0.5.1.2
+]
+
 DUPLICATE_BLACKLIST = [
     # 0.5.1.2
 ]
