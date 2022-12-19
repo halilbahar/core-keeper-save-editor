@@ -1,3 +1,7 @@
-label {
-    display: block;
+input[type='checkbox'] {
+  @apply w-min;
+}
+
+img {
+    height: 30px;
 }
