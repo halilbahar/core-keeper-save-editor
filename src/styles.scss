@@ -88,7 +88,7 @@ cdk-drop-list-dragging :not(.cdk-drag-placeholder) {
 input[type='text'],
 input[type='number']:not(.current-level),
 select {
-  @apply appearance-none outline-none w-1/2 border;
+  @apply appearance-none outline-none border;
   padding-left: 5px;
   background-color: #32220d;
   border: solid;
