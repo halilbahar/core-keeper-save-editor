@@ -10,7 +10,7 @@ import { ItemTooltipComponent } from '~components/item-tooltip/item-tooltip.comp
 @Directive({
   selector: '[appItemTooltip]'
 })
-export class ItemTooltipDirective {
+export class ItemTooltipDirective implements OnDestroy {
   @Input() appItemTooltip: number;
 
   private overlayRef: OverlayRef;

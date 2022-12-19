@@ -9,7 +9,7 @@
 </app-card>
 <div class="item-grid p-0" style="padding: 9px">
   <ng-container
-    *ngFor="let inventorySlot of this.inventory | inventory: this.bag; let i = index"
+    *ngFor="let inventorySlot of this.inventory | inventory : this.bag; let i = index"
     [ngTemplateOutlet]="item"
     [ngTemplateOutletContext]="{
       $implicit: { i: i + 10, inventorySlot: inventorySlot, inventory: true }
