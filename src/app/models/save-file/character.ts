@@ -17,7 +17,7 @@ export interface Character {
   conditionsList: Condition[];
   hasUnlockedSouls: boolean;
   coinAmount: number;
-  collectedSouls: [];
+  collectedSouls: number[];
   maxHealth: number;
   serverConnectCount: number;
   skillTalentTreeDatas: SkillTalentTree[];

@@ -3,11 +3,15 @@
     class="flex gap-2 sticky top-0 z-10 pt-4 pb-4 -translate-y-6 -mb-6"
     style="background-color: #915b26">
     <input
+      class="w-1/2"
       type="text"
       [ngModel]="this.filterTerm"
       (input)="this.onFilterInput($event)"
       placeholder="Search..." />
-    <select [ngModel]="this.selectedCategory" (ngModelChange)="this.onCategorySelect($event)">
+    <select
+      class="w-1/2"
+      [ngModel]="this.selectedCategory"
+      (ngModelChange)="this.onCategorySelect($event)">
       <option value="-1">all</option>
       <option *ngFor="let category of this.categories" value="{{ category.id }}">
         {{ category.name }}

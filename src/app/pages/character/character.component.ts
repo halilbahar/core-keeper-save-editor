@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+import { Soul } from '~enums';
 import { Character } from '~models';
 import { CharacterService } from '~services';
 
@@ -15,6 +16,10 @@ export class CharacterComponent implements OnInit {
   currentName: string;
   isHardcore: boolean;
   index: number;
+  hasSoulsUnlocked: boolean;
+  hasAzeosUnlocked: boolean;
+  hasOmorothUnlocked: boolean;
+  hasScarabUnlocked: boolean;
 
   @ViewChild('isHardcoreCheckbox') checkbox: ElementRef<HTMLInputElement>;
 
@@ -24,11 +29,10 @@ export class CharacterComponent implements OnInit {
     this.characterService.$character.pipe(untilDestroyed(this)).subscribe(character => {
       this.character = character;
       this.isHardcore = character.characterType === 1;
-      // The [checked] property on the input works only the first time.
-      // When this.isHardcore is changed after that (happens when reseting and uploading a character)
-      // So after that we rely on input.checked from the ViewQuery. The ViewQuery is not rdy the first time.
-      const input = this.checkbox?.nativeElement;
-      input && (input.checked = this.isHardcore);
+      this.hasSoulsUnlocked = character.hasUnlockedSouls;
+      this.hasAzeosUnlocked = character.collectedSouls.find(soulId => soulId === 1) != null;
+      this.hasOmorothUnlocked = character.collectedSouls.find(soulId => soulId === 2) != null;
+      this.hasScarabUnlocked = character.collectedSouls.find(soulId => soulId === 3) != null;
 
       const encodedBytes = [];
       for (let i = 0; i < 16; i++) {
@@ -101,6 +105,51 @@ export class CharacterComponent implements OnInit {
       this.characterService.$index.next(correctIndex);
       this.characterService.store();
     }
+  }
+
+  /**
+   * Event handler for the change event on the enable soul input field.
+   */
+  onEnableSoulsChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.character.hasUnlockedSouls = target.checked;
+    // Reset the souls when disabling souls generally
+    if (!target.checked) {
+      this.hasAzeosUnlocked = false;
+      this.hasOmorothUnlocked = false;
+      this.hasScarabUnlocked = false;
+      this.character.collectedSouls = [];
+    }
+
+    this.characterService.store();
+  }
+
+  /**
+   * Event handler for the given soul.
+   * @param event
+   * @param soul
+   */
+  onSoulsChange(event: Event, soul: Soul): void {
+    const target = event.target as HTMLInputElement;
+    const checked = target.checked;
+    const collectedSouls = this.character.collectedSouls;
+    // Reset the disabledSouls when enabling / disabling souls.
+    // We don't want the game to be in a wrong state
+    this.character.disabledSoulPowers = [];
+
+    if (checked) {
+      collectedSouls.push(soul);
+      collectedSouls.sort();
+    } else {
+      const indexOfSoul = collectedSouls.indexOf(soul);
+      if (indexOfSoul > -1) {
+        // only splice array when item is found
+        // remove one item only
+        collectedSouls.splice(indexOfSoul, 1);
+      }
+    }
+
+    this.characterService.store();
   }
 
   /**

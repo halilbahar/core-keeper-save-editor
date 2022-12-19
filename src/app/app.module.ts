@@ -16,6 +16,7 @@ import { InaccessibleItemsComponent } from './components/dialog/inaccessible-ite
 import { TalentTooltipComponent } from './components/talent-tooltip/talent-tooltip.component';
 import { ItemTooltipDirective } from './directives';
 import { TalentTooltipDirective } from './directives/talent-tooltip.directive';
+import { AboutComponent } from './pages/about/about.component';
 import { CharacterComponent } from './pages/character/character.component';
 import { EquipmentComponent } from './pages/items/components/equipment/equipment.component';
 import { InventoryComponent } from './pages/items/components/inventory/inventory.component';
@@ -29,7 +30,6 @@ import { TalentTreeComponent } from './pages/skill-page/components/talent-tree/t
 import { TalentComponent } from './pages/skill-page/components/talent/talent.component';
 import { SkillPageComponent } from './pages/skill-page/skill.page.component';
 import { InventoryPipe } from './pipes/inventory.pipe';
-import { AboutComponent } from './pages/about/about.component';
 
 @NgModule({
   declarations: [

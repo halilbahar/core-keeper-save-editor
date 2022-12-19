@@ -1,19 +1,62 @@
-<app-card class="w-96">
-  <label>
-    Charactername:
-    <input type="text" [value]="this.currentName" (change)="this.onNameChange($event)" />
-  </label>
-  <label>
-    Hardcore:
+<app-card class="w-96 !grid grid-cols-2 gap-3">
+  <label for="name">Charactername:</label>
+  <input id="name" type="text" [value]="this.currentName" (change)="this.onNameChange($event)" />
+  <label for="hardcore">Hardcore:</label>
+  <input
+    id="hardcore"
+    #isHardcoreCheckbox
+    type="checkbox"
+    [(ngModel)]="this.isHardcore"
+    (change)="this.onHardcoreChange($event)" />
+  <label for="saveslot">Saveslot (index):</label>
+  <input
+    id="saveslot"
+    type="number"
+    [(ngModel)]="this.index"
+    (change)="this.onIndexChange($event)" />
+  <label for="souls">Enable Souls:</label>
+  <input
+    id="souls"
+    type="checkbox"
+    [(ngModel)]="this.hasSoulsUnlocked"
+    (change)="this.onEnableSoulsChange($event)" />
+  <ng-container *ngIf="this.hasSoulsUnlocked">
+    <label for="azeos-soul" class="soul-label">
+      <img src="assets/souls/azeos_{{ this.hasAzeosUnlocked ? 2 : 1 }}.png" alt="Soul of Azeos" />
+      <span>Soul of Azeos</span>
+    </label>
     <input
-      #isHardcoreCheckbox
+      id="azeos-soul"
       type="checkbox"
-      [checked]="this.isHardcore"
-      (change)="this.onHardcoreChange($event)" />
-  </label>
-  <label>
-    Saveslot (index):
-    <input type="number" [value]="this.index" (change)="this.onIndexChange($event)" />
-  </label>
+      class="soul-checkbox"
+      [(ngModel)]="this.hasAzeosUnlocked"
+      (change)="this.onSoulsChange($event, 1)" />
+
+    <label for="omoroth-soul" class="soul-label">
+      <img
+        src="assets/souls/omoroth_{{ this.hasOmorothUnlocked ? 2 : 1 }}.png"
+        alt="Soul of Omoroth" />
+      <span>Soul of Omoroth</span>
+    </label>
+    <input
+      id="omoroth-soul"
+      type="checkbox"
+      class="soul-checkbox"
+      [(ngModel)]="this.hasOmorothUnlocked"
+      (change)="this.onSoulsChange($event, 2)" />
+
+    <label for="scarab-soul" class="soul-label">
+      <img
+        src="assets/souls/ra_akar_{{ this.hasScarabUnlocked ? 2 : 1 }}.png"
+        alt="Soul of Scarab" />
+      <span>Soul of Ra Akar</span>
+    </label>
+    <input
+      id="scarab-soul"
+      type="checkbox"
+      class="soul-checkbox"
+      [(ngModel)]="this.hasScarabUnlocked"
+      (change)="this.onSoulsChange($event, 3)" />
+  </ng-container>
   <button (click)="this.resetCharacter()">Reset character</button>
 </app-card>
