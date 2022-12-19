@@ -8,12 +8,42 @@
     <input
       #isHardcoreCheckbox
       type="checkbox"
-      [checked]="this.isHardcore"
+      [(ngModel)]="this.isHardcore"
       (change)="this.onHardcoreChange($event)" />
   </label>
   <label>
     Saveslot (index):
-    <input type="number" [value]="this.index" (change)="this.onIndexChange($event)" />
+    <input type="number" [(ngModel)]="this.index" (change)="this.onIndexChange($event)" />
   </label>
+  <label>
+    Enable Souls:
+    <input
+      type="checkbox"
+      [(ngModel)]="this.hasSoulsUnlocked"
+      (change)="this.onEnableSoulsChange($event)" />
+  </label>
+  <ng-container *ngIf="this.hasSoulsUnlocked">
+    <label>
+      Enable Soul of Azeos:
+      <input
+        type="checkbox"
+        [(ngModel)]="this.hasAzeosUnlocked"
+        (change)="this.onSoulsChange($event, 1)" />
+    </label>
+    <label>
+      Enable Soul of Omoroth:
+      <input
+        type="checkbox"
+        [(ngModel)]="this.hasOmorothUnlocked"
+        (change)="this.onSoulsChange($event, 2)" />
+    </label>
+    <label>
+      Enable Soul of Scarab:
+      <input
+        type="checkbox"
+        [(ngModel)]="this.hasScarabUnlocked"
+        (change)="this.onSoulsChange($event, 3)" />
+    </label>
+  </ng-container>
   <button (click)="this.resetCharacter()">Reset character</button>
 </app-card>
