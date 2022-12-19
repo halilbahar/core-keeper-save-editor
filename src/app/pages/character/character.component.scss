@@ -2,6 +2,14 @@ input[type='checkbox'] {
   @apply w-min;
 }
 
+.soul-checkbox {
+  @apply appearance-none;
+}
+
+.soul-label {
+  @apply flex items-center gap-3 cursor-pointer;
+}
+
 img {
-    height: 30px;
+  height: 30px;
 }
