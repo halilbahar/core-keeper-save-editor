@@ -177,10 +177,6 @@ def get_object_ids() -> dict:
     return enum
 
 
-def get_condition_ids() -> dict:
-    return util.get_enum('dump/CoreKeeper/ExportedProject/Assets/MonoScript/Pug.Base/ConditionID.cs')
-
-
 def get_set_bonuses():
     set_bonuses_doc = UnityDocument.load_yaml('dump/CoreKeeper/ExportedProject/Assets/Resources/SetBonusesTable.asset')
     mono_behaviour = set_bonuses_doc.data[0]
@@ -216,50 +212,6 @@ def get_set_bonuses():
         }
 
     return set_bonuses
-
-
-def get_conditions():
-    translations = get_translations()
-    condition_ids_enum = {v: k for k, v in get_condition_ids().items()}
-    condition_id_to_translation = {}
-
-    # Find all the translations that start with 'Conditions/'
-    # After that split them: 'Conditions/AcidDamage' is split into _ = 'Conditions' and condition_name = 'AcidDamage'
-    # Use the condition_name to get the id of that condition
-    for translation in translations:
-        term = translation['term']
-        translation_value = translation['value']
-        if term.startswith('Conditions/'):
-            _, condition_name = term.split('/')
-            condition_id = condition_ids_enum[condition_name]
-            condition_id_to_translation[condition_id] = translation_value
-
-    condition_table_doc = UnityDocument.load_yaml(
-        'dump/CoreKeeper/ExportedProject/Assets/Resources/ConditionsTable.asset'
-    )
-    mono_behaviour = condition_table_doc.data[0]
-    condition_results = {}
-
-    # Now that we have the ids -> text we can loop over the conditionsTable
-    for condition in mono_behaviour.conditions:
-        condition_id = condition['Id']
-        # Ignore Null, ApplySnare, ImmuneToDamageAfterLogin
-        # if condition_id == 0 or condition_id == 26:
-        if condition_id in (0, 26, 187):
-            continue
-
-        id_to_use_same_desc = condition['useSameDescAsId']
-        if id_to_use_same_desc != 0:
-            condition_description = condition_id_to_translation[id_to_use_same_desc]
-        else:
-            condition_description = condition_id_to_translation[condition_id]
-
-        condition_results[condition_id] = {
-            'description': condition_description,
-            'isUnique': condition['isUnique'] == 1
-        }
-
-    return condition_results
 
 
 if __name__ == '__main__':
@@ -409,22 +361,21 @@ if __name__ == '__main__':
         images.append(cropped_image)
         icon_index += 1
 
-    os.makedirs('out', exist_ok=True)
+    os.makedirs('out/item', exist_ok=True)
     # Create spritesheet
     image = Image.new('RGBA', (icon_index * 16, 16))
     for index, single_image in enumerate(images):
         image.paste(single_image, (index * 16, 0))
-    image.save('out/item-spritesheet.png')
+    image.save('out/item/item-spritesheet.png')
 
     # Sort by key (objectID)
     sorted_item_data = dict(sorted(item_data.items(), key=lambda x: x[0]))
 
     # Create the final result.json by combined all the extracted data:
-    with open('out/data.json', 'w') as file:
+    with open('out/item/item-data.json', 'w') as file:
         result_json = json.dumps({
             'items': sorted_item_data,
             'setBonuses': set_bonuses,
-            'conditions': get_conditions()
         })
         file.write(result_json)
 
