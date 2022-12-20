@@ -388,7 +388,6 @@ if __name__ == '__main__':
             found_image = True
             image = Image.open(texture['filepath'])
             cropped_image = image.crop((1, 0, 17, 16))
-            cropped_image.show()
 
         # If we found no image we skip this and don't add anything
         if not found_image or cropped_image is None:
