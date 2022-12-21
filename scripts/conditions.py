@@ -47,7 +47,13 @@ if __name__ == '__main__':
         else:
             condition_description = condition_id_to_translation[condition_id]
 
-        if util.effect_id_needs_to_be_divided(effect_id):
+        # (((effect - 2U < 0x40) && ((0xc05420e880310045U >> ((ulonglong)(effect - 2U) & 0x3f) & 1) != 0)) || (effect == 0x47))
+        needs_to_be_divided = (
+                ((effect_id - 2 < 0x40) and ((0xc05420e880310045 >> ((effect_id - 2) & 0x3f) & 1) != 0))
+                or
+                effect_id == 0x47
+        )
+        if effect_id != 0 and needs_to_be_divided:
             condition_description = condition_description.replace("{0}", "{/10}")
 
         condition_results[condition_id] = {

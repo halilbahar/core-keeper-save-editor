@@ -94,14 +94,3 @@ def get_food(first_object_id, second_object_id):
         result_ingredient2 = first_object_id
 
     return result_ingredient1 * 10000 + result_ingredient2
-
-
-def effect_id_needs_to_be_divided(effect_id) -> bool:
-    # (((effect - 2U < 0x40) && ((0xc05420e880310045U >> ((ulonglong)(effect - 2U) & 0x3f) & 1) != 0)) || (effect == 0x47))
-    needs_to_be_divided = (
-            ((effect_id - 2 < 0x40) and ((0xc05420e880310045 >> ((effect_id - 2) & 0x3f) & 1) != 0))
-            or
-            effect_id == 0x47
-    )
-
-    return effect_id != 0 and needs_to_be_divided
