@@ -26,7 +26,7 @@ Now you can execute:
 
 [source,bash]
 ----
-./items.py
+./items.py && ./conditions.py && ./talents.py
 ----
 
 The extracted data should be in `/out`.
