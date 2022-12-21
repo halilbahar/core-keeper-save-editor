@@ -10,6 +10,31 @@ def get_condition_ids() -> dict:
     return util.get_enum('dump/CoreKeeper/ExportedProject/Assets/MonoScript/Pug.Base/ConditionID.cs')
 
 
+def effect_id_needs_to_be_divided(effect_id) -> bool:
+    # (((effect - 2U < 0x40) && ((0xc05420e880310045U >> ((ulonglong)(effect - 2U) & 0x3f) & 1) != 0)) || (effect == 0x47))
+    needs_to_be_divided = (
+            ((effect_id - 2 < 0x40) and ((0xc05420e880310045 >> ((effect_id - 2) & 0x3f) & 1) != 0))
+            or
+            effect_id == 0x47
+    )
+
+    return effect_id != 0 and needs_to_be_divided
+
+
+def condition_id_needs_to_be_divided(condition_id, effect_id) -> bool:
+    # effect_id == 0 and condition_id_needs_to_be_divided
+    # ((0x3f < conditionInfo - 2U) || ((0xc05420e880310045U >> ((ulonglong)(conditionInfo - 2U) & 0x3f) & 1) == 0)) && (conditionInfo != 0x47)
+    needs_to_be_divided = (
+            (
+                    (0x3f < condition_id - 2)
+                    or
+                    ((0xc05420e880310045 >> ((condition_id - 2) & 0x3f) & 1) == 0)
+            ) and condition_id != 0x47
+    )
+
+    return effect_id == 0 and needs_to_be_divided
+
+
 if __name__ == '__main__':
     translations = util.get_translations()
     condition_ids_enum = {v: k for k, v in get_condition_ids().items()}
@@ -47,15 +72,22 @@ if __name__ == '__main__':
         else:
             condition_description = condition_id_to_translation[condition_id]
 
-        # (((effect - 2U < 0x40) && ((0xc05420e880310045U >> ((ulonglong)(effect - 2U) & 0x3f) & 1) != 0)) || (effect == 0x47))
-        needs_to_be_divided = (
-                ((effect_id - 2 < 0x40) and ((0xc05420e880310045 >> ((effect_id - 2) & 0x3f) & 1) != 0))
-                or
-                effect_id == 0x47
-        )
-        if effect_id != 0 and needs_to_be_divided:
-            condition_description = condition_description.replace("{0}", "{/10}")
+        # We will use result like in chmod with the binary numbers
+        # x2 x1
+        # x1 indicates whether this conditions needs to be divided for items
+        # x2 indicates whether this conditions needs to be divided for skills
+        # 00 = 0 -> no division for both
+        # 01 = 1 -> Only divide for items
+        # 10 = 2 -> Only divide for skills
+        # 11 = 3 -> divide for both
+        result = 0
+        if effect_id_needs_to_be_divided(effect_id):
+            result += 1
+        # For now don't add the 2 and hardcode it into talent-data
+        # if condition_id_needs_to_be_divided(condition_id, effect_id):
+        #     result += 2
 
+        condition_description = condition_description.replace("{0}", "{0:%d}" % result)
         condition_results[condition_id] = {
             'description': condition_description,
             'isUnique': condition['isUnique'] == 1

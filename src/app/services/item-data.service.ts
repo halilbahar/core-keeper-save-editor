@@ -42,7 +42,7 @@ export class ItemDataService {
     const rarityColor = this.getRarityColor(item.rarity);
     const whenEquipped = item.whenEquipped;
     const conditionsWhenEquipped = whenEquipped
-      ? this.conditionDataService.transformConditionIdToLabel(whenEquipped)
+      ? this.conditionDataService.transformConditionIdsToLabel(whenEquipped, 'item')
       : undefined;
     const setBonus = item.setBonusId ? this.getSetBonusInformation(item.setBonusId) : undefined;
 
@@ -95,9 +95,10 @@ export class ItemDataService {
       const { conditionID, value } = data.conditionData;
       // transformConditionIdToLabel needs an array but we have a single item,
       // pass the single item as an array and get the first element afterwards
-      const conditionLabel = this.conditionDataService.transformConditionIdToLabel([
-        { id: conditionID, value }
-      ])[0][0];
+      const conditionLabel = this.conditionDataService.transformConditionIdsToLabel(
+        [{ id: conditionID, value }],
+        'item'
+      )[0][0];
       return `${data.requiredPieces} set: ${conditionLabel}`;
     });
 

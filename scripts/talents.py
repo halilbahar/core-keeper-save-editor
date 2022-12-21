@@ -7,6 +7,18 @@ from unityparser import UnityDocument
 
 import util
 
+divide_by_ten = [
+    [0, 0, 0, 0, 1, 0, 0, 1],
+    [0, 0, 1, 1, 0, 1, 1, 1],
+    [1, 0, 0, 0, 1, 0, 0, 0],
+    [0, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 1, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 0, 1, 0, 1]
+]
+
 
 def get_skill_talent_ids() -> dict:
     return util.get_enum('./dump/CoreKeeper/ExportedProject/Assets/MonoScript/Pug.Base/SkillTalentID.cs')
@@ -57,11 +69,13 @@ if __name__ == '__main__':
             name = skill_talent_id_to_translation[skill_talent_id]
             increment = talent['conditionValuePerPoint']
             conditoin_id = talent['givesCondition']
+            tenth = divide_by_ten[skill_id][len(talent_data[skill_id])] == 1
             talent_data[skill_id].append({
                 'talentId': skill_talent_id,
                 'name': name,
                 'increment': increment,
-                'conditionId': conditoin_id
+                'conditionId': conditoin_id,
+                'tenth': tenth
             })
 
             icon_id = talent['icon']['fileID']
