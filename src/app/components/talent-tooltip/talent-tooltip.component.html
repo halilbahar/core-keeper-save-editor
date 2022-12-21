@@ -1,9 +1,9 @@
 <div class="flex gap-1 items-center">
   <h3>
-    {{ this.talent.name }}
+    {{ this.talent?.name }}
   </h3>
   <span class="text-gray-400">#{{ this.talent.talentId }}</span>
 </div>
 <p>
-  {{ this.getDescription() }}
+  {{ this.description }}
 </p>

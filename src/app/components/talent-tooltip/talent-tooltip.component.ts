@@ -1,7 +1,7 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 import { TalentData } from '~models';
-import { TalentDataService } from '~services';
+import { ConditionDataService, TalentDataService } from '~services';
 
 export interface TalenTooltipOptions {
   skillId: number;
@@ -14,22 +14,34 @@ export interface TalenTooltipOptions {
   templateUrl: './talent-tooltip.component.html',
   styleUrls: ['./talent-tooltip.component.scss']
 })
-export class TalentTooltipComponent implements OnInit {
+export class TalentTooltipComponent {
   talent: TalentData;
-  @Input() options: TalenTooltipOptions;
+  description: string;
 
   @HostBinding('class.tooltip') tooltip = true;
 
-  constructor(private talentDataService: TalentDataService) {}
+  constructor(
+    private talentDataService: TalentDataService,
+    private conditionDataService: ConditionDataService
+  ) {}
 
-  ngOnInit(): void {
-    this.talent = this.talentDataService.getData(this.options.skillId, this.options.index);
-  }
-
-  getDescription(): string {
-    return this.talent.description.replace(
-      '{0}',
-      ((this.options.points === 0 ? 1 : this.options.points) * this.talent.increment).toString()
-    );
+  @Input() set options(options: TalenTooltipOptions) {
+    const { index, points, skillId } = options;
+    this.talent = this.talentDataService.getData(skillId, index);
+    const pointsToUse = points === 0 ? 1 : points;
+    const multiplierToUse = this.talent.tenth ? 0.1 : 1;
+    // We have a function that takes in an array.
+    // Instead of creating one that doesn't take an array we give and array and get the first index
+    this.description = this.conditionDataService
+      .transformConditionIdsToLabel(
+        [
+          {
+            id: this.talent.conditionId,
+            value: pointsToUse * this.talent.increment * multiplierToUse
+          }
+        ],
+        'skill'
+      )[0][0]
+      .toString();
   }
 }

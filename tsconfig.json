@@ -6,27 +6,14 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "paths": {
-      "~components/*": [
-        "./src/app/components/*"
-      ],
-      "~directives/*": [
-        "./src/app/directives/*"
-      ],
-      "~models": [
-        "./src/app/models/index.ts"
-      ],
-      "~enums": [
-        "./src/app/enums/index.ts"
-      ],
-      "~services": [
-        "./src/app/services/index.ts"
-      ],
-      "~env": [
-        "./src/environments/environment.ts"
-      ],
-      "~config": [
-        "./src/app/config/index.ts"
-      ]
+      "~components/*": ["./src/app/components/*"],
+      "~directives/*": ["./src/app/directives/*"],
+      "~models": ["./src/app/models/index.ts"],
+      "~enums": ["./src/app/enums/index.ts"],
+      "~services": ["./src/app/services/index.ts"],
+      "~env": ["./src/environments/environment.ts"],
+      "~data": ["./src/app/data/index.ts"],
+      "~config": ["./src/app/config/index.ts"]
     },
     "forceConsistentCasingInFileNames": true,
     "strict": false,
