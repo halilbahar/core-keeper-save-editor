@@ -25,7 +25,7 @@ export class ItemBrowserComponent implements OnInit {
     { name: 'Ring', id: 104 },
     { name: 'Offhand', id: 105 },
     { name: 'Bag', id: 106 },
-    { name: 'Meele Weapon', id: 500 },
+    { name: 'Melee Weapon', id: 500 },
     { name: 'Ranged Weapon', id: 501 },
     { name: 'Pickaxe', id: 603 },
     { name: 'Shovel', id: 600 },

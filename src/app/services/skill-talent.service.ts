@@ -44,7 +44,7 @@ export class SkillTalentService {
     const skillNames = [
       'Mining',
       'Running',
-      'Meele Combat',
+      'Melee Combat',
       'Vitality',
       'Crafting',
       'Ranged Combat',
