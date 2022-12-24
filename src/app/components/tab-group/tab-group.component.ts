@@ -1,7 +1,7 @@
 import { Component, ContentChildren, QueryList } from '@angular/core';
 
 import { InaccessibleItemsComponent } from '~components/dialog/inaccessible-items/inaccessible-items.component';
-import { AesService, CharacterService, DialogService } from '~services';
+import { CharacterService, DialogService } from '~services';
 
 import { TabComponent } from './tab/tab.component';
 
@@ -13,11 +13,7 @@ import { TabComponent } from './tab/tab.component';
 export class TabGroupComponent {
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
 
-  constructor(
-    private aesService: AesService,
-    private characterService: CharacterService,
-    private dialogService: DialogService
-  ) {}
+  constructor(private characterService: CharacterService, private dialogService: DialogService) {}
 
   selectTab(tab: TabComponent): void {
     this.tabs.forEach(t => {
@@ -27,17 +23,18 @@ export class TabGroupComponent {
   }
 
   /**
-   * Import the x.json.enc file with this on file upload event handler.
-   * This finds out what x is and decrypts it with the proper private key.
+   * Import the x.json file with this on file upload event handler.
+   * This finds out what x is.
    */
   onFileUpload(files: FileList): void {
     const file = files.item(0);
     const filename = file.name;
-    const regex = /(\d{1,2})\.json\.enc/;
+    const regex = /(\d{1,2})\.json/;
     const match = filename.match(regex);
     const index = +match[1];
 
-    this.aesService.decryptCharacterSaveFile(file, index).then(character => {
+    this.readFile(file).then(characterString => {
+      const character = JSON.parse(characterString);
       this.characterService.setCharacter(character, index);
       this.characterService.store();
     });
@@ -82,13 +79,25 @@ export class TabGroupComponent {
   private save(): void {
     const character = this.characterService.$character.value;
     const index = this.characterService.$index.value;
-    this.aesService.encryptCharacterSaveFile(character, index).then(bytes => {
-      const blob = new Blob([bytes.buffer], { type: 'application/octet-stream' });
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.download = `${index}.json.enc`;
-      link.click();
-      window.URL.revokeObjectURL(link.href);
+    const blob = new Blob([JSON.stringify(character)], { type: 'application/octet-stream' });
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = `${index}.json`;
+    link.click();
+    window.URL.revokeObjectURL(link.href);
+  }
+
+  /**
+   * Read the content of a file.
+   * @param file
+   * @returns Promise which holds the string
+   */
+  private readFile(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsText(file, 'UTF-8');
+      reader.onload = evt => resolve(evt.target.result as string);
+      reader.onerror = () => reject();
     });
   }
 }
