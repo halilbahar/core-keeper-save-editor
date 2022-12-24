@@ -34,7 +34,8 @@ export class TabGroupComponent {
     const index = +match[1];
 
     this.readFile(file).then(characterString => {
-      const character = JSON.parse(characterString);
+      // The json is invalid when the user consumed an amber larva or giant mushroom. This happens because the int duration field gets the value Infinity.
+      const character = JSON.parse(characterString.replace(/Infinity/g, '"%Infinity%"'));
       this.characterService.setCharacter(character, index);
       this.characterService.store();
     });
@@ -79,7 +80,9 @@ export class TabGroupComponent {
   private save(): void {
     const character = this.characterService.$character.value;
     const index = this.characterService.$index.value;
-    const blob = new Blob([JSON.stringify(character)], { type: 'application/octet-stream' });
+    const blob = new Blob([JSON.stringify(character).replace(/"%Infinity%"/g, 'Infinity')], {
+      type: 'application/octet-stream'
+    });
     const link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);
     link.download = `${index}.json`;
