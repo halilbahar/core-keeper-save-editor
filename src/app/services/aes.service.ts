@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+// import { Injectable } from '@angular/core';
 
 import { Character } from '~models';
 
-@Injectable({
-  providedIn: 'root'
-})
+// We used this class for decrypting files. As the game no longer uses decryption we no longer need this class.
+// But i won't delete this file because it took me many hours to figure this out :)
+// @Injectable({
+//   providedIn: 'root'
+// })
 export class AesService {
   private keys: CryptoKey[] = [];
 
