@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build
-        run: npm run build -- --base-href=core-keeper-save-editor # Remove later --base-href
+        run: npm run build
       - name: Archive artifact
         shell: bash
         run: |
