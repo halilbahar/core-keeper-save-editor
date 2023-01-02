@@ -4,5 +4,5 @@ export enum ItemRarity {
   Uncommon = 1,
   Rare = 2,
   Epic = 3,
-  Legenderay = 4
+  Legendary = 4
 }
