@@ -21,6 +21,7 @@ export class ItemComponent {
 
   itemData: ItemData;
   durabilityProgress?: number;
+  enhancementProgess?: number;
   durabilityBarColor?: string;
   isItemInvalid: boolean;
 
@@ -48,6 +49,7 @@ export class ItemComponent {
     this._placeholder = placeholder;
     this._isSelected = isSelected;
     this.durabilityProgress = null;
+    this.enhancementProgess = null;
     this.durabilityBarColor = null;
 
     this.itemData = this.itemDataService.getData(objectID);
@@ -55,7 +57,14 @@ export class ItemComponent {
     this.isItemInvalid = this.itemData == null && objectID !== 0;
     if (amount && this.itemData?.initialAmount > 1) {
       this.durabilityProgress = (amount / this.itemData.initialAmount) * 100;
-      this.durabilityBarColor = this.mapColor(this.durabilityProgress);
+
+      if (this.durabilityProgress > 100) {
+        this.enhancementProgess =
+          this.durabilityProgress - 100 <= 100 ? this.durabilityProgress - 100 : 100;
+        this.durabilityProgress = 100;
+      }
+
+      if (this) this.durabilityBarColor = this.mapColor(this.durabilityProgress);
     }
 
     this.updateStyles();

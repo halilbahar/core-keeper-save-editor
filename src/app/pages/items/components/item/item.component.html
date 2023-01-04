@@ -15,13 +15,13 @@
       {{ this.amount }}
     </div>
   </div>
-  <div
-    *ngIf="this.durabilityProgress"
-    class="durability-progress w-full bg-black absolute pointer-events-none">
+  <div *ngIf="this.enhancementProgess" class="enhancement-progress">
+    <div [style.width.%]="this.enhancementProgess"></div>
+  </div>
+  <div *ngIf="this.durabilityProgress" class="durability-progress">
     <div
       [style.width.%]="this.durabilityProgress"
-      [style.backgroundColor]="this.durabilityBarColor"
-      class="bg-red-600 h-full"></div>
+      [style.backgroundColor]="this.durabilityBarColor"></div>
   </div>
 </div>
 <img

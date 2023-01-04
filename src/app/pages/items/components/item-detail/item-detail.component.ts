@@ -64,7 +64,7 @@ export class ItemDetailComponent implements OnInit {
     const { isStackable, initialAmount } = this.itemDetail;
     const maxAmount = isStackable ? 999 : initialAmount;
 
-    if (Number.isNaN(amount) || amount <= 0 || amount > maxAmount) {
+    if (Number.isNaN(amount) || amount <= 0 || amount > (isStackable ? maxAmount : maxAmount * 2)) {
       // We can't cancel this event. So have to reset the value manually
       traget.value = '' + this.inventorySlot.amount;
     } else {
