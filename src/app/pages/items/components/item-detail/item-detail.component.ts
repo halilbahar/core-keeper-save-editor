@@ -16,6 +16,7 @@ export class ItemDetailComponent implements OnInit {
   inventorySlot: InventorySlot;
   itemIndex: number;
   rarityLabel: string;
+  isReinforced: boolean;
 
   constructor(
     private characterService: CharacterService,
@@ -43,6 +44,9 @@ export class ItemDetailComponent implements OnInit {
             this.inventorySlot = inventorySlot;
             this.itemIndex = index;
             this.rarityLabel = ItemRarity[this.itemDetail.rarity];
+            this.isReinforced =
+              !this.itemDetail.isStackable &&
+              this.inventorySlot.amount > this.itemDetail.initialAmount;
           }
         } else {
           this.reset();
@@ -70,6 +74,8 @@ export class ItemDetailComponent implements OnInit {
     } else {
       this.inventorySlot.amount = amount;
     }
+    this.isReinforced =
+      !this.itemDetail.isStackable && this.inventorySlot.amount > this.itemDetail.initialAmount;
   }
 
   /**
