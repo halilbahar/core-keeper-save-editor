@@ -4,7 +4,10 @@
   cdkDrag
   [cdkDragData]="this.itemData"
   [cdkDragDisabled]="!this.drag"
-  [appItemTooltip]="this.objectID"
+  [appItemTooltip]="{
+    objectId: this.objectID,
+    displayReinforcementBonus: this.isReinforced
+  }"
   [class.hidden]="this.hide"
   (cdkDragStarted)="this.selectedItemService.$selectedItem.next(-1)"
   style="--index:{{ this.itemData?.iconIndex }}; --individual-scale: {{ this.scale }};">
@@ -28,7 +31,10 @@
   cdkDrag
   [cdkDragData]="{ objectID: this.objectID }"
   (cdkDragStarted)="this.selectedItemService.$selectedItem.next(-1)"
-  [appItemTooltip]="this.objectID"
+  [appItemTooltip]="{
+    objectId: this.objectID,
+    displayReinforcementBonus: this.isReinforced
+  }"
   [class.hidden]="this.hide"
   class="h-full"
   *ngIf="this.isItemInvalid"

@@ -6,12 +6,17 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ItemTooltipComponent } from '~components/item-tooltip/item-tooltip.component';
 
+interface ItemTooltipOptions {
+  objectId: number;
+  displayReinforcementBonus: boolean;
+}
+
 @UntilDestroy()
 @Directive({
   selector: '[appItemTooltip]'
 })
 export class ItemTooltipDirective implements OnDestroy {
-  @Input() appItemTooltip: number;
+  @Input() appItemTooltip: ItemTooltipOptions;
 
   private overlayRef: OverlayRef;
 
@@ -43,7 +48,8 @@ export class ItemTooltipDirective implements OnDestroy {
 
     const portal = new ComponentPortal(ItemTooltipComponent);
     const componentRef = this.overlayRef.attach(portal);
-    componentRef.instance.objectId = this.appItemTooltip;
+    componentRef.instance.objectId = this.appItemTooltip.objectId;
+    componentRef.instance.displayReinforcementBonus = this.appItemTooltip.displayReinforcementBonus;
   }
 
   @HostListener('mouseout')

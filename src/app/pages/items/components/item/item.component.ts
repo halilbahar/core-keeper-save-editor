@@ -24,6 +24,7 @@ export class ItemComponent {
   enhancementProgess?: number;
   durabilityBarColor?: string;
   isItemInvalid: boolean;
+  isReinforced: boolean;
 
   constructor(
     private itemDataService: ItemDataService,
@@ -51,6 +52,7 @@ export class ItemComponent {
     this.durabilityProgress = null;
     this.enhancementProgess = null;
     this.durabilityBarColor = null;
+    this.isReinforced = false;
 
     this.itemData = this.itemDataService.getData(objectID);
     // If itemData is null and the objectID is not 0. If it is zero itemData is also null
@@ -62,6 +64,7 @@ export class ItemComponent {
         this.enhancementProgess =
           this.durabilityProgress - 100 <= 100 ? this.durabilityProgress - 100 : 100;
         this.durabilityProgress = 100;
+        this.isReinforced = true;
       }
 
       if (this) this.durabilityBarColor = this.mapColor(this.durabilityProgress);
