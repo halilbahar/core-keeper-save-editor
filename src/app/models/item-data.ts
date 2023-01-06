@@ -15,6 +15,7 @@ export interface ItemData {
 export interface ItemDamage {
   range: [number, number];
   isRange: boolean;
+  reinforcementBonus?: number;
 }
 
 export interface ConditionWhenEquipped {
