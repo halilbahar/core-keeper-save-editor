@@ -21,7 +21,7 @@ export class ItemComponent {
 
   itemData: ItemData;
   durabilityProgress?: number;
-  enhancementProgess?: number;
+  reinforcementProgress?: number;
   durabilityBarColor?: string;
   isItemInvalid: boolean;
   isReinforced: boolean;
@@ -50,7 +50,7 @@ export class ItemComponent {
     this._placeholder = placeholder;
     this._isSelected = isSelected;
     this.durabilityProgress = null;
-    this.enhancementProgess = null;
+    this.reinforcementProgress = null;
     this.durabilityBarColor = null;
     this.isReinforced = false;
 
@@ -61,7 +61,7 @@ export class ItemComponent {
       this.durabilityProgress = (amount / this.itemData.initialAmount) * 100;
 
       if (this.durabilityProgress > 100) {
-        this.enhancementProgess =
+        this.reinforcementProgress =
           this.durabilityProgress - 100 <= 100 ? this.durabilityProgress - 100 : 100;
         this.durabilityProgress = 100;
         this.isReinforced = true;

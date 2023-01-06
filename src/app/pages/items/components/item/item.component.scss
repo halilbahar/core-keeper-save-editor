@@ -37,7 +37,7 @@
   }
 
   .durability-progress,
-  .enhancement-progress {
+  .reinforcement-progress {
     @apply w-full bg-black absolute pointer-events-none;
     height: calc(1.5px * var(--factor));
     width: calc(100% - calc(4px * var(--factor)));
@@ -50,7 +50,7 @@
     }
   }
 
-  .enhancement-progress {
+  .reinforcement-progress {
     bottom: calc(3px * var(--factor));
 
     & > * {
