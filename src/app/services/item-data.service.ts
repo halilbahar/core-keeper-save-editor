@@ -42,7 +42,7 @@ export class ItemDataService {
     const rarityColor = this.getRarityColor(item.rarity);
     const whenEquipped = item.whenEquipped;
     const conditionsWhenEquipped = whenEquipped
-      ? this.conditionDataService.transformConditionIdsToLabel(whenEquipped, 'item')
+      ? this.conditionDataService.transformConditionIdsToLabel(whenEquipped, 'item', true)
       : undefined;
     const setBonus = item.setBonusId ? this.getSetBonusInformation(item.setBonusId) : undefined;
 
