@@ -25,7 +25,6 @@ export class ConditionDataService {
   ): [string, boolean, string | undefined][] {
     const conditionStrings: [string, boolean, string | undefined][] = [];
 
-    conditions.forEach(condition => console.log(condition));
     for (let condition of conditions) {
       const conditionLabel = this.conditionLabels[condition.id];
       const conditionStringTemplate = conditionLabel.description;
