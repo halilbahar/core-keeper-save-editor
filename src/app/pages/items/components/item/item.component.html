@@ -4,7 +4,10 @@
   cdkDrag
   [cdkDragData]="this.itemData"
   [cdkDragDisabled]="!this.drag"
-  [appItemTooltip]="this.objectID"
+  [appItemTooltip]="{
+    objectId: this.objectID,
+    displayReinforcementBonus: this.isReinforced
+  }"
   [class.hidden]="this.hide"
   (cdkDragStarted)="this.selectedItemService.$selectedItem.next(-1)"
   style="--index:{{ this.itemData?.iconIndex }}; --individual-scale: {{ this.scale }};">
@@ -15,20 +18,23 @@
       {{ this.amount }}
     </div>
   </div>
-  <div
-    *ngIf="this.durabilityProgress"
-    class="durability-progress w-full bg-black absolute pointer-events-none">
+  <div *ngIf="this.reinforcementProgress" class="reinforcement-progress">
+    <div [style.width.%]="this.reinforcementProgress"></div>
+  </div>
+  <div *ngIf="this.durabilityProgress" class="durability-progress">
     <div
       [style.width.%]="this.durabilityProgress"
-      [style.backgroundColor]="this.durabilityBarColor"
-      class="bg-red-600 h-full"></div>
+      [style.backgroundColor]="this.durabilityBarColor"></div>
   </div>
 </div>
 <img
   cdkDrag
   [cdkDragData]="{ objectID: this.objectID }"
   (cdkDragStarted)="this.selectedItemService.$selectedItem.next(-1)"
-  [appItemTooltip]="this.objectID"
+  [appItemTooltip]="{
+    objectId: this.objectID,
+    displayReinforcementBonus: this.isReinforced
+  }"
   [class.hidden]="this.hide"
   class="h-full"
   *ngIf="this.isItemInvalid"

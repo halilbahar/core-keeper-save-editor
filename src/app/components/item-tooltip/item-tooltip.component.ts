@@ -12,6 +12,7 @@ export class ItemTooltipComponent implements OnInit {
   itemDetail: ItemDetail;
   isInvalidItem: boolean;
   @Input() objectId: number;
+  @Input() displayReinforcementBonus: boolean;
 
   @HostBinding('class.tooltip') tooltip = true;
 

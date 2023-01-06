@@ -21,8 +21,10 @@ export class ItemComponent {
 
   itemData: ItemData;
   durabilityProgress?: number;
+  reinforcementProgress?: number;
   durabilityBarColor?: string;
   isItemInvalid: boolean;
+  isReinforced: boolean;
 
   constructor(
     private itemDataService: ItemDataService,
@@ -48,14 +50,24 @@ export class ItemComponent {
     this._placeholder = placeholder;
     this._isSelected = isSelected;
     this.durabilityProgress = null;
+    this.reinforcementProgress = null;
     this.durabilityBarColor = null;
+    this.isReinforced = false;
 
     this.itemData = this.itemDataService.getData(objectID);
     // If itemData is null and the objectID is not 0. If it is zero itemData is also null
     this.isItemInvalid = this.itemData == null && objectID !== 0;
     if (amount && this.itemData?.initialAmount > 1) {
       this.durabilityProgress = (amount / this.itemData.initialAmount) * 100;
-      this.durabilityBarColor = this.mapColor(this.durabilityProgress);
+
+      if (this.durabilityProgress > 100) {
+        this.reinforcementProgress =
+          this.durabilityProgress - 100 <= 100 ? this.durabilityProgress - 100 : 100;
+        this.durabilityProgress = 100;
+        this.isReinforced = true;
+      }
+
+      if (this) this.durabilityBarColor = this.mapColor(this.durabilityProgress);
     }
 
     this.updateStyles();

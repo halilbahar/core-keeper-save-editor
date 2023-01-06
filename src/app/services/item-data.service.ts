@@ -42,9 +42,15 @@ export class ItemDataService {
     const rarityColor = this.getRarityColor(item.rarity);
     const whenEquipped = item.whenEquipped;
     const conditionsWhenEquipped = whenEquipped
-      ? this.conditionDataService.transformConditionIdsToLabel(whenEquipped, 'item')
+      ? this.conditionDataService.transformConditionIdsToLabel(whenEquipped, 'item', true)
       : undefined;
     const setBonus = item.setBonusId ? this.getSetBonusInformation(item.setBonusId) : undefined;
+
+    if (damage) {
+      damage.reinforcementBonus = Math.round(
+        (damage.range[0] + (damage.range[1] - damage.range[0]) / 2) * 0.15
+      );
+    }
 
     return {
       objectId,

@@ -36,14 +36,25 @@
       calc(1px * var(--factor)) calc(1px * var(--factor)) 0 #000;
   }
 
-  .durability-progress {
+  .durability-progress,
+  .reinforcement-progress {
+    @apply w-full bg-black absolute pointer-events-none;
     height: calc(1.5px * var(--factor));
     width: calc(100% - calc(4px * var(--factor)));
     left: calc(2px * var(--factor));
-    bottom: calc(2px * var(--factor));
+    bottom: calc(1.5px * var(--factor));
 
     & > * {
+      @apply h-full;
       min-width: calc(1px * var(--factor));
+    }
+  }
+
+  .reinforcement-progress {
+    bottom: calc(3px * var(--factor));
+
+    & > * {
+      background-color: #e568d8;
     }
   }
 }

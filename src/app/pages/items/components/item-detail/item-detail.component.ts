@@ -16,6 +16,7 @@ export class ItemDetailComponent implements OnInit {
   inventorySlot: InventorySlot;
   itemIndex: number;
   rarityLabel: string;
+  isReinforced: boolean;
 
   constructor(
     private characterService: CharacterService,
@@ -43,6 +44,9 @@ export class ItemDetailComponent implements OnInit {
             this.inventorySlot = inventorySlot;
             this.itemIndex = index;
             this.rarityLabel = ItemRarity[this.itemDetail.rarity];
+            this.isReinforced =
+              !this.itemDetail.isStackable &&
+              this.inventorySlot.amount > this.itemDetail.initialAmount;
           }
         } else {
           this.reset();
@@ -64,12 +68,14 @@ export class ItemDetailComponent implements OnInit {
     const { isStackable, initialAmount } = this.itemDetail;
     const maxAmount = isStackable ? 999 : initialAmount;
 
-    if (Number.isNaN(amount) || amount <= 0 || amount > maxAmount) {
+    if (Number.isNaN(amount) || amount <= 0 || amount > (isStackable ? maxAmount : maxAmount * 2)) {
       // We can't cancel this event. So have to reset the value manually
       traget.value = '' + this.inventorySlot.amount;
     } else {
       this.inventorySlot.amount = amount;
     }
+    this.isReinforced =
+      !this.itemDetail.isStackable && this.inventorySlot.amount > this.itemDetail.initialAmount;
   }
 
   /**

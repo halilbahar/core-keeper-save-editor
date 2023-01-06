@@ -9,8 +9,8 @@ export interface ItemDetail {
   isStackable: number;
   rarity: ItemRarity;
   rarityColor: string;
-  conditionsWhenEquipped?: [string, boolean][];
+  conditionsWhenEquipped?: [string, boolean, string | undefined][];
   conditionsWhenEaten?: string[];
-  damage?: { range: [number, number]; isRange: boolean };
+  damage?: { range: [number, number]; isRange: boolean; reinforcementBonus?: number };
   setBonus?: { conditions: string[]; pieces: string[] };
 }

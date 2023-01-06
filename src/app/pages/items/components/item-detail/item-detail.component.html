@@ -19,12 +19,16 @@
   <p class="font-semibold" *ngIf="this.itemDetail.damage">
     {{ this.itemDetail.damage.range[0] }}-{{ this.itemDetail.damage.range[1] }}
     {{ this.itemDetail.damage.isRange ? 'range' : 'melee' }} damage
+    <span *ngIf="this.isReinforced" [style.color]="'#00ff00'"
+      >(+{{ this.itemDetail.damage.reinforcementBonus }})</span
+    >
   </p>
   <p
     class="font-semibold"
     *ngFor="let condition of this.itemDetail.conditionsWhenEquipped"
     [style.color]="condition[1] ? '#00ff00' : 'inherit'">
     {{ condition[0] }}
+    <span *ngIf="this.isReinforced" [style.color]="'#00ff00'">{{ condition[2] }}</span>
   </p>
   <ng-container *ngIf="this.itemDetail.setBonus as setBonus">
     <p class="font-semibold" style="color: #fdfb2c" *ngFor="let condition of setBonus.conditions">
@@ -33,7 +37,8 @@
     <p class="font-semibold" *ngFor="let piece of setBonus.pieces">{{ piece }}</p>
   </ng-container>
   <p class="text-xl">{{ this.itemDetail.description }}</p>
-  <div class="mt-4" *ngIf="this.itemDetail.isStackable || this.itemDetail.initialAmount !== 1">
+  <div class="mt-4" *ngIf="this.itemDetail.isStackable || this.itemDetail.initialAmount > 1">
+    {{ this.itemDetail.isStackable ? 'Amount' : 'Durability' }}
     <input
       type="number"
       class="appearance-none"
