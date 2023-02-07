@@ -1,7 +1,4 @@
-<app-card
-  class="!grid gap-2"
-  style="grid-template-columns: 1fr 1fr"
-  (mouseenter)="updateEquippedItems()">
+<app-card class="!grid gap-2" style="grid-template-columns: 1fr 1fr">
   <app-item
     *ngFor="let item of this.equipmentSlots; let i = index"
     [options]="{

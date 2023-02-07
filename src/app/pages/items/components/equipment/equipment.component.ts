@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { InventorySlot } from '~models';
-import { CharacterService, DragNDropService, ItemSetService, SelectedItemService } from "~services";
+import { CharacterService, DragNDropService, SelectedItemService } from '~services';
 
 @UntilDestroy()
 @Component({
@@ -20,7 +20,6 @@ export class EquipmentComponent implements OnInit {
     private characterService: CharacterService,
     private selectedItemService: SelectedItemService,
     public dragNDropService: DragNDropService,
-    private itemSetService: ItemSetService
   ) {}
 
   ngOnInit(): void {
@@ -35,8 +34,6 @@ export class EquipmentComponent implements OnInit {
     this.selectedItemService.$selectedItem
       .pipe(untilDestroyed(this))
       .subscribe(index => (this.indexToSelect = index));
-
-    this.updateEquippedItems();
   }
 
   /**
@@ -47,9 +44,5 @@ export class EquipmentComponent implements OnInit {
     const currentIndex = this.selectedItemService.$selectedItem.value;
     const newIndex = currentIndex === index ? -1 : index;
     this.selectedItemService.$selectedItem.next(newIndex);
-  }
-
-  updateEquippedItems(): void {
-    this.itemSetService.updateEquippedItems(this.equipmentSlots);
   }
 }

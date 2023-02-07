@@ -21,16 +21,12 @@
   </p>
   <ng-container *ngIf="this.itemDetail.setBonus as setBonus">
     <div class="font-semibold" *ngFor="let condition of setBonus.conditions">
-      <p *ngIf="this.checkActiveSetBonuses(condition)" style="color: #fdfb2c">
-        {{ condition }}
-      </p>
-      <p *ngIf="!this.checkActiveSetBonuses(condition)" style="color: #5e5500">
+      <p [style.color]="this.checkActiveSetBonuses(condition) ? '#fdfb2c' : '#5e5500'">
         {{ condition }}
       </p>
     </div>
     <div class="font-semibold" *ngFor="let piece of setBonus.pieces">
-      <p *ngIf="this.checkActivePieces(piece)">{{ piece }}</p>
-      <p *ngIf="!this.checkActivePieces(piece)" style="color: #808080">{{ piece }}</p>
+      <p [style.color]="!this.checkActivePieces(piece) ? '#808080' : null">{{ piece }}</p>
     </div>
   </ng-container>
   <p class="text-gray-500">{{ this.itemDetail.description }}</p>
