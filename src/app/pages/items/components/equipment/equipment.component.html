@@ -11,9 +11,9 @@
     cdkDropList
     [cdkDropListData]="item"
     [cdkDropListEnterPredicate]="this.dragNDropService.equipmentEnterPredicate()"
-    (cdkDropListDropped)="this.dragNDropService.onDrop($event)"
+    (cdkDropListDropped)="this.dragNDropService.onDrop($event); onEquipItem()"
     (cdkDropListEntered)="this.dragNDropService.onEnter($event)"
-    (cdkDropListExited)="this.dragNDropService.onExit($event)"
+    (cdkDropListExited)="this.dragNDropService.onExit($event); onEquipItem()"
     (click)="this.onItemClick(51 + i)"
     id="inventory-{{ 51 + i }}"></app-item>
 </app-card>

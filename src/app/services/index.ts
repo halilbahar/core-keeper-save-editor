@@ -8,3 +8,4 @@ export * from './skill-talent.service';
 export * from './selected-item.service';
 export * from './condition-data.service';
 export * from './extracted-data.service';
+export * from './item-set.service';

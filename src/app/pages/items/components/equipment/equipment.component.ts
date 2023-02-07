@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { InventorySlot } from '~models';
-import { CharacterService, DragNDropService, SelectedItemService } from '~services';
+import { CharacterService, DragNDropService, ItemSetService, SelectedItemService } from "~services";
 
 @UntilDestroy()
 @Component({
@@ -19,7 +19,8 @@ export class EquipmentComponent implements OnInit {
   constructor(
     private characterService: CharacterService,
     private selectedItemService: SelectedItemService,
-    public dragNDropService: DragNDropService
+    public dragNDropService: DragNDropService,
+    private itemSetService: ItemSetService
   ) {}
 
   ngOnInit(): void {
@@ -34,15 +35,21 @@ export class EquipmentComponent implements OnInit {
     this.selectedItemService.$selectedItem
       .pipe(untilDestroyed(this))
       .subscribe(index => (this.indexToSelect = index));
+
+    this.onEquipItem();
   }
 
   /**
-   * Event handler for the on click event on items. If the same invetory slot gets clicked again, deselect by sending a value of -1.
+   * Event handler for the on click event on items. If the same inventory slot gets clicked again, deselect by sending a value of -1.
    * @param index of the inventory slot
    */
   onItemClick(index: number): void {
     const currentIndex = this.selectedItemService.$selectedItem.value;
     const newIndex = currentIndex === index ? -1 : index;
     this.selectedItemService.$selectedItem.next(newIndex);
+  }
+
+  onEquipItem(): void {
+    this.itemSetService.getActiveSets(this.equipmentSlots);
   }
 }

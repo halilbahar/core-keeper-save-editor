@@ -94,7 +94,7 @@ export class ItemDataService {
    * @param setBonusId of the setBonus
    * @returns condition label and pieces
    */
-  private getSetBonusInformation(setBonusId: number): { conditions: string[]; pieces: string[] } {
+  public getSetBonusInformation(setBonusId: number): { conditions: string[]; pieces: string[] } {
     const setBonusData = this.setBonus[setBonusId];
 
     const conditions = setBonusData.data.map(data => {
