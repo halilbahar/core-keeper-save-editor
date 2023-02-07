@@ -1,7 +1,7 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 
 import { ItemDetail } from '~models';
-import { ItemDataService } from '~services';
+import { ItemDataService, ItemSetService } from '~services';
 
 @Component({
   selector: 'app-item-tooltip',
@@ -16,10 +16,19 @@ export class ItemTooltipComponent implements OnInit {
 
   @HostBinding('class.tooltip') tooltip = true;
 
-  constructor(private itemDataService: ItemDataService) {}
+  constructor(private itemDataService: ItemDataService, private itemSetService: ItemSetService) {}
 
   ngOnInit(): void {
     this.itemDetail = this.itemDataService.getItemDetail(this.objectId);
     this.isInvalidItem = this.itemDetail == null;
+  }
+
+
+  public checkActiveSetBonuses(condition: string) {
+    return this.itemSetService.activeConditions.includes(condition);
+  }
+
+  public checkActivePieces(piece: string) {
+    return this.itemSetService.activePieces.includes(piece);
   }
 }
