@@ -36,7 +36,7 @@ export class EquipmentComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe(index => (this.indexToSelect = index));
 
-    this.onEquipItem();
+    this.updateEquippedItems();
   }
 
   /**
@@ -49,7 +49,7 @@ export class EquipmentComponent implements OnInit {
     this.selectedItemService.$selectedItem.next(newIndex);
   }
 
-  onEquipItem(): void {
-    this.itemSetService.getActiveSets(this.equipmentSlots);
+  updateEquippedItems(): void {
+    this.itemSetService.updateEquippedItems(this.equipmentSlots);
   }
 }

@@ -1,4 +1,7 @@
-<app-card class="!grid gap-2" style="grid-template-columns: 1fr 1fr">
+<app-card
+  class="!grid gap-2"
+  style="grid-template-columns: 1fr 1fr"
+  (mouseenter)="updateEquippedItems()">
   <app-item
     *ngFor="let item of this.equipmentSlots; let i = index"
     [options]="{
@@ -11,9 +14,9 @@
     cdkDropList
     [cdkDropListData]="item"
     [cdkDropListEnterPredicate]="this.dragNDropService.equipmentEnterPredicate()"
-    (cdkDropListDropped)="this.dragNDropService.onDrop($event); onEquipItem()"
+    (cdkDropListDropped)="this.dragNDropService.onDrop($event)"
     (cdkDropListEntered)="this.dragNDropService.onEnter($event)"
-    (cdkDropListExited)="this.dragNDropService.onExit($event); onEquipItem()"
+    (cdkDropListExited)="this.dragNDropService.onExit($event)"
     (click)="this.onItemClick(51 + i)"
     id="inventory-{{ 51 + i }}"></app-item>
 </app-card>

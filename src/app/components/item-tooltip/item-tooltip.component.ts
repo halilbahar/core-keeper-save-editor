@@ -23,7 +23,6 @@ export class ItemTooltipComponent implements OnInit {
     this.isInvalidItem = this.itemDetail == null;
   }
 
-
   public checkActiveSetBonuses(condition: string) {
     return this.itemSetService.activeConditions.includes(condition);
   }

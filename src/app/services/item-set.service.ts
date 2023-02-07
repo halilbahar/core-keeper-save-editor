@@ -10,16 +10,20 @@ import { ItemDataService } from './item-data.service';
 export class ItemSetService {
   activeConditions: string[] = [];
   activePieces: string[] = [];
+  equippedItems: ItemData[] = [];
   constructor(private itemDataService: ItemDataService) {}
-  public getActiveSets(equipmentSlots: InventorySlot[]) {
-    const equippedItems = this.getEquippedItems(equipmentSlots);
-    const setIds = this.getUniqueSets(equippedItems);
+
+  public updateEquippedItems(equipmentSlots: InventorySlot[]) {
+    this.equippedItems = this.getEquippedItems(equipmentSlots);
+    const setIds = this.getUniqueSets(this.equippedItems);
+    this.activeConditions = [];
+    this.activePieces = [];
 
     for (let i = 0; i < setIds.length; i++) {
       let counter = 0;
       let setBonusInformation = this.itemDataService.getSetBonusInformation(setIds[i]);
 
-      for (const equippedItem of equippedItems) {
+      for (const equippedItem of this.equippedItems) {
         if (setBonusInformation.pieces.includes(equippedItem.name)) {
           counter++;
           this.activePieces.push(equippedItem.name);
