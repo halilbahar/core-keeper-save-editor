@@ -22,14 +22,9 @@ divide_by_ten = [
 ]
 
 
-def get_skill_talent_ids() -> dict:
-    return util.get_enum('./dump/CoreKeeper/ExportedProject/Assets/MonoScript/Pug.Base/SkillTalentID.cs')
-
-
 if __name__ == '__main__':
     translations = util.get_translations()
-    skill_talent_ids_by_name = {v: k for k, v in get_skill_talent_ids().items()}
-    skill_talent_id_to_translation = {}
+    skill_talent_name_to_translation = {}
 
     talent_icons = {}
     with open('./dump/CoreKeeper/ExportedProject/Assets/Texture2D/talent_icons.png.meta', 'r') as file:
@@ -52,7 +47,7 @@ if __name__ == '__main__':
         translation_value = translation['value']
         if term.startswith('SkillTalents/'):
             _, skill_talent_name = term.split('/')
-            skill_talent_id_to_translation[skill_talent_ids_by_name[skill_talent_name]] = translation_value
+            skill_talent_name_to_translation[skill_talent_name] = translation_value
 
     # Create out/talents folder if it does not exist
     os.makedirs('out/talents/image', exist_ok=True)
@@ -64,20 +59,20 @@ if __name__ == '__main__':
 
     doc = UnityDocument.load_yaml('./dump/CoreKeeper/ExportedProject/Assets/Resources/SkillTalentsTable.asset')
     mono_behaviour = doc.get(class_name='MonoBehaviour')
+    icon_index = 0
     for skill_talent_tree in mono_behaviour.skillTalentTrees:
         skill_id = skill_talent_tree['skillID']
         for talent in skill_talent_tree['skillTalents']:
-            skill_talent_id = talent['skillTalentID']
-            name = skill_talent_id_to_translation[skill_talent_id]
+            name = skill_talent_name_to_translation[talent['name']]
             increment = talent['conditionValuePerPoint']
             conditoin_id = talent['givesCondition']
             tenth = divide_by_ten[skill_id][len(talent_data[skill_id])] == 1
             talent_data[skill_id].append({
-                'talentId': skill_talent_id,
                 'name': name,
                 'increment': increment,
                 'conditionId': conditoin_id,
-                'tenth': tenth
+                'tenth': tenth,
+                'iconIndex': icon_index
             })
 
             icon_id = talent['icon']['fileID']
@@ -92,7 +87,8 @@ if __name__ == '__main__':
 
             area = (cropped_x, cropped_y, cropped_x2, cropped_y2)
             cropped_image = icons_image.crop(area)
-            cropped_image.save(os.path.join('out/talents/image/', str(skill_talent_id) + '.png'))
+            cropped_image.save(os.path.join('out/talents/image/', str(icon_index) + '.png'))
+            icon_index += 1
 
     # Create json
     with open('out/talents/talent-data.json', 'w') as file:
