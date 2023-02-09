@@ -60,40 +60,40 @@ if __name__ == '__main__':
     condition_results = {}
 
     # Now that we have the ids -> text we can loop over the conditionsTable
-    for condition in mono_behaviour.conditions:
-        condition_id = condition['Id']
-        effect_id = condition['effect']
-        # Ignore Null, ApplySnare, ImmuneToDamageAfterLogin
-        # if condition_id == 0 or condition_id == 26:
-        if condition_id in (0, 26, 187):
-            continue
+    for conditions_category in mono_behaviour.conditionCategories:
+        for condition in conditions_category['conditions']:
+            condition_id = condition['Id']
+            effect_id = condition['effect']
+            # Ignore Null, ApplySnare, ImmuneToDamageAfterLogin, Charmed, ImmuneToCharm
+            if condition_id in (0, 26, 187, 215, 213):
+                continue
 
-        id_to_use_same_desc = condition['useSameDescAsId']
-        if id_to_use_same_desc != 0:
-            condition_description = condition_id_to_translation[id_to_use_same_desc]
-        else:
-            condition_description = condition_id_to_translation[condition_id]
+            id_to_use_same_desc = condition['useSameDescAsId']
+            if id_to_use_same_desc != 0:
+                condition_description = condition_id_to_translation[id_to_use_same_desc]
+            else:
+                condition_description = condition_id_to_translation[condition_id]
 
-        # We will use result like in chmod with the binary numbers
-        # x2 x1
-        # x1 indicates whether this conditions needs to be divided for items
-        # x2 indicates whether this conditions needs to be divided for skills
-        # 00 = 0 -> no division for both
-        # 01 = 1 -> Only divide for items
-        # 10 = 2 -> Only divide for skills
-        # 11 = 3 -> divide for both
-        result = 0
-        if effect_id_needs_to_be_divided(effect_id):
-            result += 1
-        # For now don't add the 2 and hardcode it into talent-data
-        # if condition_id_needs_to_be_divided(condition_id, effect_id):
-        #     result += 2
+            # We will use result like in chmod with the binary numbers
+            # x2 x1
+            # x1 indicates whether this conditions needs to be divided for items
+            # x2 indicates whether this conditions needs to be divided for skills
+            # 00 = 0 -> no division for both
+            # 01 = 1 -> Only divide for items
+            # 10 = 2 -> Only divide for skills
+            # 11 = 3 -> divide for both
+            result = 0
+            if effect_id_needs_to_be_divided(effect_id):
+                result += 1
+            # For now don't add the 2 and hardcode it into talent-data
+            # if condition_id_needs_to_be_divided(condition_id, effect_id):
+            #     result += 2
 
-        condition_description = condition_description.replace("{0}", "{0:%d}" % result)
-        condition_results[condition_id] = {
-            'description': condition_description,
-            'isUnique': condition['isUnique'] == 1
-        }
+            condition_description = condition_description.replace("{0}", "{0:%d}" % result)
+            condition_results[condition_id] = {
+                'description': condition_description,
+                'isUnique': condition['isUnique'] == 1
+            }
 
     os.makedirs('out/conditions', exist_ok=True)
 
