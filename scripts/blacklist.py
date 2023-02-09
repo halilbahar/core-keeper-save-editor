@@ -154,6 +154,8 @@ ITEM_BLACKLIST = [
     5501,  # GiantMushroom
     9245,  # SnowballProjectile
     # 0.5.1.2
+    9229, # CupidArrowProjectile
+    # 0.5.2.1
 ]
 
 TEXTURE_WHOLE_IMAGE_BLACKLIST = [
