@@ -12,8 +12,7 @@
       "~enums": ["./src/app/enums/index.ts"],
       "~services": ["./src/app/services/index.ts"],
       "~env": ["./src/environments/environment.ts"],
-      "~data": ["./src/app/data/index.ts"],
-      "~config": ["./src/app/config/index.ts"]
+      "~data": ["./src/app/data/index.ts"]
     },
     "forceConsistentCasingInFileNames": true,
     "strict": false,
