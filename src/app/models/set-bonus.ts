@@ -15,3 +15,8 @@ export interface ConditionData {
   value: number;
   valueMultiplier: number;
 }
+
+export interface SetBonusDetail {
+  pieces: { name: string; isHighlighted: boolean }[];
+  conditions: { label: string; isHighlighted: boolean }[];
+}

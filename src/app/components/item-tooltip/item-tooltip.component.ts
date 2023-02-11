@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 
-import { ItemDetail } from '~models';
+import { ItemDetail, SetBonusDetail } from '~models';
 import { ItemDataService, ItemSetService } from '~services';
 
 @Component({
@@ -11,6 +11,7 @@ import { ItemDataService, ItemSetService } from '~services';
 export class ItemTooltipComponent implements OnInit {
   itemDetail: ItemDetail;
   isInvalidItem: boolean;
+  setBonusDetail: SetBonusDetail;
   @Input() objectId: number;
   @Input() displayReinforcementBonus: boolean;
 
@@ -21,14 +22,6 @@ export class ItemTooltipComponent implements OnInit {
   ngOnInit(): void {
     this.itemDetail = this.itemDataService.getItemDetail(this.objectId);
     this.isInvalidItem = this.itemDetail == null;
-    this.itemSetService.highlightBonus(this.itemDetail.objectId, this.itemDetail.setBonus);
-  }
-
-  public checkActiveSetBonuses(condition: string) {
-    return this.itemSetService.activeConditions.includes(condition);
-  }
-
-  public checkActivePieces(piece: string) {
-    return this.itemSetService.activePieces.includes(piece);
+    this.setBonusDetail = this.itemSetService.getSetBonusDetail(this.itemDetail.objectId);
   }
 }

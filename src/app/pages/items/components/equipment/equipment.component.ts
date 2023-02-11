@@ -19,7 +19,7 @@ export class EquipmentComponent implements OnInit {
   constructor(
     private characterService: CharacterService,
     private selectedItemService: SelectedItemService,
-    public dragNDropService: DragNDropService,
+    public dragNDropService: DragNDropService
   ) {}
 
   ngOnInit(): void {
