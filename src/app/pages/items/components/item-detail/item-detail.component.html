@@ -23,6 +23,9 @@
       >(+{{ this.itemDetail.damage.reinforcementBonus }})</span
     >
   </p>
+  <p class="font-semibold" *ngIf="this.itemDetail.cooldown">
+    {{ this.itemDetail.cooldown }} attacks per second
+  </p>
   <p
     class="font-semibold"
     *ngFor="let condition of this.itemDetail.conditionsWhenEquipped"
