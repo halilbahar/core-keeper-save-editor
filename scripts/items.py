@@ -70,6 +70,7 @@ def get_objectinfo_monobehaviour() -> [dict]:
         object_id = prefab_objectinfo['objectID']
         object_type = prefab_objectinfo['objectType']
         file_id = prefab_objectinfo['icon']['fileID']
+        # 900 -> Creature, 6000 -> PlayerType, file_id == 0 -> not found
         if object_type in (900, 6000) or file_id == 0 or object_id in blacklist.ITEM_BLACKLIST:
             continue
 
@@ -95,6 +96,12 @@ def get_objectinfo_monobehaviour() -> [dict]:
         if len(monobehaviour_damage) > 0:
             prefab_objectinfo['damage'] = monobehaviour_damage[0].damage
             prefab_objectinfo['isRange'] = monobehaviour_damage[0].isRange
+
+        monobehaviour_cooldown = prefab_doc.filter(class_names=('MonoBehaviour',), attributes=('cooldown',))
+        if len(monobehaviour_cooldown) > 1:
+            logging.warning('Multiple Coolodnw MonoBehaviour found in %s', prefab_path)
+        if len(monobehaviour_cooldown) > 0:
+            prefab_objectinfo['cooldown'] = monobehaviour_cooldown[0].cooldown
 
         monobehaviour_turns_into_food = prefab_doc.filter(class_names=('MonoBehaviour',), attributes=('turnsIntoFood',))
         if len(monobehaviour_turns_into_food) > 1:
@@ -281,7 +288,12 @@ if __name__ == '__main__':
                 'isRange': is_range == 1
             }
 
-        # Add setBonusId if this items belongs to one
+        # Add damage if there is a 'damage' property
+        cooldown = objectinfo.get('cooldown')
+        if cooldown is not None:
+            single_data['cooldown'] = str(round(1 / cooldown, 2))
+
+        # Add setBonusId if these items belongs to one
         set_bonus_id = set_bonus_ids.get(object_id)
         if set_bonus_id is not None:
             single_data['setBonusId'] = set_bonus_id
