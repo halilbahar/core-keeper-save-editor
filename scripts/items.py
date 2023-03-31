@@ -291,7 +291,7 @@ if __name__ == '__main__':
         # Add damage if there is a 'damage' property
         cooldown = objectinfo.get('cooldown')
         if cooldown is not None:
-            single_data['cooldown'] = str(round(1 / cooldown, 2))
+            single_data['cooldown'] = round(1 / cooldown, 2)
 
         # Add setBonusId if these items belongs to one
         set_bonus_id = set_bonus_ids.get(object_id)
