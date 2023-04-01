@@ -1,5 +1,5 @@
 ---
-name: Missing item report
+name: Missing items(s) report
 about: Report the absence of an item
 title: ''
 labels: missing-item
