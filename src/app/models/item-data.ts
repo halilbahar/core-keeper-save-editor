@@ -8,6 +8,7 @@ export interface ItemData {
   isStackable: number;
   iconIndex: number;
   damage?: ItemDamage;
+  cooldown?: number;
   whenEquipped?: ConditionWhenEquipped[];
   setBonusId?: number;
 }

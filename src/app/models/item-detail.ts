@@ -12,4 +12,5 @@ export interface ItemDetail {
   conditionsWhenEquipped?: [string, boolean, string | undefined][];
   conditionsWhenEaten?: string[];
   damage?: { range: [number, number]; isRange: boolean; reinforcementBonus?: number };
+  cooldown?: number;
 }

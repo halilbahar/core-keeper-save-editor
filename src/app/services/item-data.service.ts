@@ -38,7 +38,7 @@ export class ItemDataService {
       return null;
     }
     const paddedObjectId = objectId.toString().padStart(4, '0');
-    const { name, description, rarity, initialAmount, isStackable, damage } = item;
+    const { name, description, rarity, initialAmount, isStackable, damage, cooldown } = item;
     const rarityColor = this.getRarityColor(item.rarity);
     const whenEquipped = item.whenEquipped;
     const conditionsWhenEquipped = whenEquipped
@@ -61,7 +61,8 @@ export class ItemDataService {
       rarity,
       rarityColor,
       conditionsWhenEquipped,
-      damage
+      damage,
+      cooldown
     };
   }
 
