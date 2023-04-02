@@ -89,6 +89,7 @@ input[type='text'],
 input[type='number']:not(.current-level),
 select {
   @apply appearance-none outline-none border leading-7;
+  font-family: Arial, Helvetica, sans-serif;
   padding-left: 5px;
   background-color: #32220d;
   border: solid;
