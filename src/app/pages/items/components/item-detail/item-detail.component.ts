@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ItemRarity } from '~enums';
-import { InventorySlot, ItemData, ItemDetail } from '~models';
-import { CharacterService, ItemDataService, SelectedItemService } from '~services';
+import { InventorySlot, ItemDetail, SetBonusDetail } from '~models';
+import { CharacterService, ItemDataService, ItemSetService, SelectedItemService } from '~services';
 
 @UntilDestroy()
 @Component({
@@ -14,6 +14,7 @@ import { CharacterService, ItemDataService, SelectedItemService } from '~service
 export class ItemDetailComponent implements OnInit {
   itemDetail: ItemDetail;
   inventorySlot: InventorySlot;
+  setBonusDetail: SetBonusDetail;
   itemIndex: number;
   rarityLabel: string;
   isReinforced: boolean;
@@ -21,12 +22,13 @@ export class ItemDetailComponent implements OnInit {
   constructor(
     private characterService: CharacterService,
     private itemDataService: ItemDataService,
-    private selectedItemService: SelectedItemService
+    private selectedItemService: SelectedItemService,
+    private itemSetService: ItemSetService
   ) {}
 
   ngOnInit(): void {
     this.selectedItemService.$selectedItem.pipe(untilDestroyed(this)).subscribe(index => {
-      // We we have a null index (initial state) don't do anything
+      // We have a null index (initial state) don't do anything
       if (index == null) {
         return;
       }
@@ -42,6 +44,7 @@ export class ItemDetailComponent implements OnInit {
           // Item may not exist in the item-data
           if (this.itemDetail != null) {
             this.inventorySlot = inventorySlot;
+            this.setBonusDetail = this.itemSetService.getSetBonusDetail(inventorySlot.objectID);
             this.itemIndex = index;
             this.rarityLabel = ItemRarity[this.itemDetail.rarity];
             this.isReinforced =

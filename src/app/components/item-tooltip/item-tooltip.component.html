@@ -8,8 +8,8 @@
   <p class="font-semibold" *ngIf="this.itemDetail.damage">
     {{ this.itemDetail.damage.range[0] }}-{{ this.itemDetail.damage.range[1] }}
     {{ this.itemDetail.damage.isRange ? 'range' : 'melee' }} damage
-    <span *ngIf="this.displayReinforcementBonus" [style.color]="'#00ff00'"
-      >(+{{ this.itemDetail.damage.reinforcementBonus }})</span
+    <span *ngIf="this.displayReinforcementBonus" [style.color]="'#00ff00'">
+      (+{{ this.itemDetail.damage.reinforcementBonus }})</span
     >
   </p>
   <p class="font-semibold" *ngIf="this.itemDetail.cooldown">
@@ -22,12 +22,18 @@
     {{ condition[0] }}
     <span *ngIf="this.displayReinforcementBonus" [style.color]="'#00ff00'">{{ condition[2] }}</span>
   </p>
-  <ng-container *ngIf="this.itemDetail.setBonus as setBonus">
-    <p class="font-semibold" style="color: #fdfb2c" *ngFor="let condition of setBonus.conditions">
-      {{ condition }}
-    </p>
-    <p class="font-semibold" *ngFor="let piece of setBonus.pieces">{{ piece }}</p>
-  </ng-container>
+  <p
+    class="font-semibold"
+    [style.color]="condition.isHighlighted ? '#fdfb2c' : '#726b00'"
+    *ngFor="let condition of this.setBonusDetail?.conditions">
+    {{ condition.label }}
+  </p>
+  <p
+    [style.color]="piece.isHighlighted ? null : '#939393'"
+    class="font-semibold"
+    *ngFor="let piece of this.setBonusDetail?.pieces">
+    {{ piece.name }}
+  </p>
   <p class="text-gray-500">{{ this.itemDetail.description }}</p>
 </ng-container>
 <ng-container *ngIf="this.isInvalidItem">

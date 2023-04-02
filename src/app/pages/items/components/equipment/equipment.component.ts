@@ -37,7 +37,7 @@ export class EquipmentComponent implements OnInit {
   }
 
   /**
-   * Event handler for the on click event on items. If the same invetory slot gets clicked again, deselect by sending a value of -1.
+   * Event handler for the on click event on items. If the same inventory slot gets clicked again, deselect by sending a value of -1.
    * @param index of the inventory slot
    */
   onItemClick(index: number): void {

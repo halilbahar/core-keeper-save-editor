@@ -33,12 +33,18 @@
     {{ condition[0] }}
     <span *ngIf="this.isReinforced" [style.color]="'#00ff00'">{{ condition[2] }}</span>
   </p>
-  <ng-container *ngIf="this.itemDetail.setBonus as setBonus">
-    <p class="font-semibold" style="color: #fdfb2c" *ngFor="let condition of setBonus.conditions">
-      {{ condition }}
-    </p>
-    <p class="font-semibold" *ngFor="let piece of setBonus.pieces">{{ piece }}</p>
-  </ng-container>
+  <p
+    class="font-semibold"
+    [style.color]="condition.isHighlighted ? '#fdfb2c' : '#aca101'"
+    *ngFor="let condition of this.setBonusDetail?.conditions">
+    {{ condition.label }}
+  </p>
+  <p
+    [style.color]="piece.isHighlighted ? null : '#b7b6b6'"
+    class="font-semibold"
+    *ngFor="let piece of this.setBonusDetail?.pieces">
+    {{ piece.name }}
+  </p>
   <p class="text-xl">{{ this.itemDetail.description }}</p>
   <div class="mt-4" *ngIf="this.itemDetail.isStackable || this.itemDetail.initialAmount > 1">
     {{ this.itemDetail.isStackable ? 'Amount' : 'Durability' }}
