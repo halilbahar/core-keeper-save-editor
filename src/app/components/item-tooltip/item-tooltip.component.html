@@ -3,7 +3,7 @@
     <h3 [ngStyle]="{ color: this.itemDetail.rarityColor }">
       {{ this.itemDetail.name }}
     </h3>
-    <span class="text-gray-400">#{{ this.itemDetail.paddedObjectId }}</span>
+    <span class="text-base text-gray-400">#{{ this.itemDetail.paddedObjectId }}</span>
   </div>
   <p *ngIf="this.itemDetail.damage">
     {{ this.itemDetail.damage.range[0] }}-{{ this.itemDetail.damage.range[1] }}
