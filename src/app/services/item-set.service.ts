@@ -48,8 +48,8 @@ export class ItemSetService {
       pieces.push({ name, isHighlighted: false });
     }
 
-    // remove redundant items
-    // https://stackoverflow.com/questions/15125920/how-to-get-distinct-values-from-an-array-of-objects-in-javascript/58429784#58429784
+    // remove duplicates like rings
+    // https://stackoverflow.com/a/58429784/11125147
     result.pieces = [...new Map(pieces.map(item => [item['name'], item])).values()];
     const wearingPieces = result.pieces.filter(piece => piece.isHighlighted).length;
 
