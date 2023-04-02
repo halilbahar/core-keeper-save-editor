@@ -5,32 +5,27 @@
     </h3>
     <span class="text-gray-400">#{{ this.itemDetail.paddedObjectId }}</span>
   </div>
-  <p class="font-semibold" *ngIf="this.itemDetail.damage">
+  <p *ngIf="this.itemDetail.damage">
     {{ this.itemDetail.damage.range[0] }}-{{ this.itemDetail.damage.range[1] }}
     {{ this.itemDetail.damage.isRange ? 'range' : 'melee' }} damage
     <span *ngIf="this.displayReinforcementBonus" [style.color]="'#00ff00'">
       (+{{ this.itemDetail.damage.reinforcementBonus }})</span
     >
   </p>
-  <p class="font-semibold" *ngIf="this.itemDetail.cooldown">
-    {{ this.itemDetail.cooldown }} attacks per second
-  </p>
+  <p *ngIf="this.itemDetail.cooldown">{{ this.itemDetail.cooldown }} attacks per second</p>
   <p
-    class="font-semibold"
     *ngFor="let condition of this.itemDetail.conditionsWhenEquipped"
     [style.color]="condition[1] ? '#00ff00' : 'inherit'">
     {{ condition[0] }}
     <span *ngIf="this.displayReinforcementBonus" [style.color]="'#00ff00'">{{ condition[2] }}</span>
   </p>
   <p
-    class="font-semibold"
     [style.color]="condition.isHighlighted ? '#fdfb2c' : '#726b00'"
     *ngFor="let condition of this.setBonusDetail?.conditions">
     {{ condition.label }}
   </p>
   <p
     [style.color]="piece.isHighlighted ? null : '#939393'"
-    class="font-semibold"
     *ngFor="let piece of this.setBonusDetail?.pieces">
     {{ piece.name }}
   </p>

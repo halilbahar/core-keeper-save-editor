@@ -14,7 +14,7 @@
   }
 
   &.active {
-    @apply border-white text-white;
+    @apply border-white text-white font-bold;
 
     span {
       @apply scale-110;

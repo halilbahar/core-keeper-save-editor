@@ -9,43 +9,38 @@
         <h3 class="text-xl title-shadow" [ngStyle]="{ color: this.itemDetail.rarityColor }">
           {{ this.itemDetail.name }}
         </h3>
-        <span class="text-xl text-gray-300">#{{ this.itemDetail.paddedObjectId }}</span>
+        <span class="text-gray-300">#{{ this.itemDetail.paddedObjectId }}</span>
       </div>
-      <h4 class="text-md title-shadow" [ngStyle]="{ color: this.itemDetail.rarityColor }">
+      <h4 class="title-shadow" [ngStyle]="{ color: this.itemDetail.rarityColor }">
         {{ this.rarityLabel }}
       </h4>
     </div>
   </div>
-  <p class="font-semibold" *ngIf="this.itemDetail.damage">
+  <p *ngIf="this.itemDetail.damage">
     {{ this.itemDetail.damage.range[0] }}-{{ this.itemDetail.damage.range[1] }}
     {{ this.itemDetail.damage.isRange ? 'range' : 'melee' }} damage
     <span *ngIf="this.isReinforced" [style.color]="'#00ff00'"
       >(+{{ this.itemDetail.damage.reinforcementBonus }})</span
     >
   </p>
-  <p class="font-semibold" *ngIf="this.itemDetail.cooldown">
-    {{ this.itemDetail.cooldown }} attacks per second
-  </p>
+  <p *ngIf="this.itemDetail.cooldown">{{ this.itemDetail.cooldown }} attacks per second</p>
   <p
-    class="font-semibold"
     *ngFor="let condition of this.itemDetail.conditionsWhenEquipped"
     [style.color]="condition[1] ? '#00ff00' : 'inherit'">
     {{ condition[0] }}
     <span *ngIf="this.isReinforced" [style.color]="'#00ff00'">{{ condition[2] }}</span>
   </p>
   <p
-    class="font-semibold"
     [style.color]="condition.isHighlighted ? '#fdfb2c' : '#aca101'"
     *ngFor="let condition of this.setBonusDetail?.conditions">
     {{ condition.label }}
   </p>
   <p
     [style.color]="piece.isHighlighted ? null : '#b7b6b6'"
-    class="font-semibold"
     *ngFor="let piece of this.setBonusDetail?.pieces">
     {{ piece.name }}
   </p>
-  <p class="text-xl">{{ this.itemDetail.description }}</p>
+  <p>{{ this.itemDetail.description }}</p>
   <div class="mt-4" *ngIf="this.itemDetail.isStackable || this.itemDetail.initialAmount > 1">
     {{ this.itemDetail.isStackable ? 'Amount' : 'Durability' }}
     <input

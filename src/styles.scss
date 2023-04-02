@@ -9,13 +9,13 @@
 @font-face {
   font-family: 'default';
   font-weight: 400;
-  src: url('assets/fonts/GnuUnifontFull-Pm9P.ttf') format('truetype');
+  src: url('assets/fonts/CKSE-400.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'default';
   font-weight: 700;
-  src: url('assets/fonts/LomoCopy-LT-Std-Mezzo_28688.ttf') format('truetype');
+  src: url('assets/fonts/CKSE-700.ttf') format('truetype');
 }
 
 @font-face {
@@ -88,7 +88,7 @@ cdk-drop-list-dragging :not(.cdk-drag-placeholder) {
 input[type='text'],
 input[type='number']:not(.current-level),
 select {
-  @apply appearance-none outline-none border;
+  @apply appearance-none outline-none border leading-7;
   padding-left: 5px;
   background-color: #32220d;
   border: solid;
