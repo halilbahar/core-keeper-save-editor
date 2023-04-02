@@ -37,7 +37,7 @@ export class TalentTooltipComponent {
         [
           {
             id: this.talent.conditionId,
-            value: pointsToUse * this.talent.increment * multiplierToUse
+            value: +(pointsToUse * this.talent.increment * multiplierToUse).toFixed(2)
           }
         ],
         'skill'
