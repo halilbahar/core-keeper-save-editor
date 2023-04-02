@@ -21,42 +21,44 @@
     [(ngModel)]="this.hasSoulsUnlocked"
     (change)="this.onEnableSoulsChange($event)" />
   <ng-container *ngIf="this.hasSoulsUnlocked">
-    <label for="azeos-soul" class="soul-label">
+    <label for="azeos-soul" class="soul-label col-span-2">
       <img src="assets/souls/azeos_{{ this.hasAzeosUnlocked ? 2 : 1 }}.png" alt="Soul of Azeos" />
       <span>Soul of Azeos</span>
+      <input
+        id="azeos-soul"
+        type="checkbox"
+        class="soul-checkbox"
+        [(ngModel)]="this.hasAzeosUnlocked"
+        (change)="this.onSoulsChange($event, 1)" />
     </label>
-    <input
-      id="azeos-soul"
-      type="checkbox"
-      class="soul-checkbox"
-      [(ngModel)]="this.hasAzeosUnlocked"
-      (change)="this.onSoulsChange($event, 1)" />
 
-    <label for="omoroth-soul" class="soul-label">
+    <label for="omoroth-soul" class="soul-label col-span-2">
       <img
         src="assets/souls/omoroth_{{ this.hasOmorothUnlocked ? 2 : 1 }}.png"
         alt="Soul of Omoroth" />
       <span>Soul of Omoroth</span>
+      <input
+        id="omoroth-soul"
+        type="checkbox"
+        class="soul-checkbox"
+        [(ngModel)]="this.hasOmorothUnlocked"
+        (change)="this.onSoulsChange($event, 2)" />
     </label>
-    <input
-      id="omoroth-soul"
-      type="checkbox"
-      class="soul-checkbox"
-      [(ngModel)]="this.hasOmorothUnlocked"
-      (change)="this.onSoulsChange($event, 2)" />
 
-    <label for="scarab-soul" class="soul-label">
+    <label for="scarab-soul" class="soul-label col-span-2">
       <img
         src="assets/souls/ra_akar_{{ this.hasScarabUnlocked ? 2 : 1 }}.png"
         alt="Soul of Scarab" />
       <span>Soul of Ra-Akar</span>
+      <input
+        id="scarab-soul"
+        type="checkbox"
+        class="soul-checkbox"
+        [(ngModel)]="this.hasScarabUnlocked"
+        (change)="this.onSoulsChange($event, 3)" />
     </label>
-    <input
-      id="scarab-soul"
-      type="checkbox"
-      class="soul-checkbox"
-      [(ngModel)]="this.hasScarabUnlocked"
-      (change)="this.onSoulsChange($event, 3)" />
   </ng-container>
-  <button (click)="this.resetCharacter()">Reset character</button>
+  <div class="col-span-2">
+    <button class="px-4 pb-2" (click)="this.resetCharacter()">Reset character</button>
+  </div>
 </app-card>
