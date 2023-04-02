@@ -1,6 +1,6 @@
 {
   "name": "core-keeper-save-editor",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
