@@ -3,6 +3,8 @@ name: Continuous Delivery
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
     tags:
       - '*'
 
@@ -21,20 +23,11 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build:github.io
-      - name: Archive artifact
-        shell: bash
-        run: |
-          tar \
-            --dereference --hard-dereference \
-            --directory dist/core-keeper-save-editor/ \
-            -cvf ${{ runner.temp }}/artifact.tar \
-            .
       - name: Upload artifact
-        uses: actions/upload-artifact@main
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: github-pages
-          path: ${{ runner.temp }}/artifact.tar
-          retention-days: 1
+          path: dist/core-keeper-save-editor/
   deploy:
     needs: build
     permissions:
@@ -47,4 +40,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
