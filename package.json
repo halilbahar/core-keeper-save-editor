@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:github.io": "ng build --base-href /core-keeper-save-editor",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
